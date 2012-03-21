@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <include layout="@layout/actionbar_layout" />
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="vertical" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical"
+            android:padding="8dip" >
+
+            <!-- 用户名 -->
+            <EditText
+                android:id="@+id/register_username"
+                style="@style/FormItem"
+                android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_"
+                android:hint="@string/register_username" />
+            <TextView
+                android:id="@+id/register_username_label"
+                style="@style/FormLabel"
+                android:text="@string/register_username_label" />
+
+            <!-- 密码 -->
+            <EditText
+                android:id="@+id/register_password"
+                style="@style/FormItem"
+                android:password="true"
+                android:hint="@string/register_password" />
+            <TextView
+                android:id="@+id/register_password_label"
+                style="@style/FormLabel"
+                android:text="@string/register_password_label" />
+
+            <!-- 为了体验，重复密码在发送post时自动从密码复制，这里用户不需要输入重复密码 -->
+            
+            <!-- 关联学号 -->
+            <EditText
+                android:id="@+id/register_studentId"
+                style="@style/FormItem"
+                android:inputType="number"
+                android:hint="@string/register_studentId" />
+            <TextView
+                android:id="@+id/register_studentId_label"
+                style="@style/FormLabel"
+                android:text="@string/register_studentId_label" />
+
+            <!-- 数字广外密码 -->
+            <EditText
+                android:id="@+id/register_mygdufs_pwd"
+                style="@style/FormItem"
+                android:inputType="textVisiblePassword"
+                android:hint="@string/register_mygdufs_pwd" />
+            <TextView
+                android:id="@+id/register_mygdufs_pwd_label"
+                style="@style/FormLabel"
+                android:text="@string/register_mygdufs_pwd_label" />
+
+            <!-- 按钮：注册、退出 -->
+            <LinearLayout
+                style="@style/FormItem"
+                android:orientation="horizontal">
+                <Button
+                    android:id="@+id/register_login"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/register_login" />
+
+                <Button
+                    android:id="@+id/register_submit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/register_submit" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

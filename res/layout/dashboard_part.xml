@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="6dip"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/part_title"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="6dip"
+        android:textSize="12dip"
+        android:text="@string/splitline_title" />
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dip"
+        android:background="@color/split_line" />
+    
+    <GridView
+        android:id="@+id/part_content"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:columnWidth="70dip"
+        android:gravity="bottom"
+        android:horizontalSpacing="10dip"
+        android:numColumns="auto_fit"
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="10dip" >
+    </GridView>
+
+</LinearLayout>

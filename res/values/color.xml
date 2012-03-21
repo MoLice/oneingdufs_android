@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 颜色资源 -->
+    
+    <!-- 广外蓝：用于标题性质的文字 -->
+    <color name="gdufs_blue">#284288</color>
+    <!-- 广外红：用于错误提醒 -->
+    <color name="gdufs_red">#df0024</color>
+    <!-- 分割线 -->
+    <color name="split_line">#d2deff</color>
+    <!-- 背景色 -->
+    <color name="window_background">#f8f9fe</color>
+    <!-- 重要文字 -->
+    <color name="strong_text">#29549f</color>
+    <color name="light_text">#2f96b4</color>
+    <!-- 表单 -->
+    <color name="form_label">#878787</color>
+    <color name="form_warning">#c09853</color>
+    <color name="form_error">@color/gdufs_red</color>
+</resources>

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <include layout="@layout/actionbar_layout" />
+    
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:fadeScrollbars="true"
+        android:scrollbarFadeDuration="2"
+        android:scrollbars="vertical">
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:padding="8dip"
+            android:orientation="vertical">
+            
+            <!-- 昵称、学号 -->
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="8dip">
+                <TextView
+                    android:id="@+id/user_info_username"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"/>
+                <TextView
+                    android:id="@+id/user_info_studentId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:textSize="18sp"/>
+            </RelativeLayout>
+            
+            <TextView
+                style="@style/FormLabel"
+                android:textColor="@color/form_warning"
+                android:gravity="right"
+                android:text="*所有字段均非必填"/>
+            
+            <!-- 邮箱 -->
+            <EditText
+                android:id="@+id/user_info_email"
+                style="@style/FormItem"
+                android:inputType="textEmailAddress"
+                android:hint="@string/user_info_email"/>
+            <TextView
+                android:id="@+id/user_info_email_label"
+                style="@style/FormLabel"
+                android:text="@string/user_info_email_label"/>
+            
+            <!-- 真实姓名 -->
+            <EditText
+                android:id="@+id/user_info_truename"
+                style="@style/FormItem"
+                android:hint="@string/user_info_truename"/>
+            <TextView
+                android:id="@+id/user_info_truename_label"
+                style="@style/FormLabel"
+                android:text="@string/user_info_truename_label"/>
+            
+            <!-- 手机 -->
+            <!-- TODO 自定义 -->
+            <EditText
+                android:id="@+id/user_info_telphone"
+                style="@style/FormItem"
+                android:inputType="phone"
+                android:hint="@string/user_info_telphone"/>
+            <TextView
+                android:id="@+id/user_info_telphone_label"
+                style="@style/FormLabel"
+                android:text="@string/user_info_telphone_label"/>
+            
+            <!-- 短号 -->
+            <EditText
+                android:id="@+id/user_info_cornet"
+                style="@style/FormItem"
+                android:inputType="phone"
+                android:hint="@string/user_info_cornet"/>
+            <TextView
+                android:id="@+id/user_info_cornet_label"
+                style="@style/FormLabel"
+                android:text="@string/user_info_cornet_label"/>
+            
+            <!-- QQ -->
+            <EditText
+                android:id="@+id/user_info_qq"
+                style="@style/FormItem"
+                android:inputType="number"
+                android:hint="@string/user_info_qq"/>
+            <TextView
+                android:id="@+id/user_info_qq_label"
+                style="@style/FormLabel"
+                android:text="@string/user_info_qq_label"/>
+            
+            <LinearLayout
+                style="@style/FormItem"
+                android:orientation="horizontal">
+                <Button
+                    android:id="@+id/user_info_cancel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/user_info_cancel" />
+                <Button
+                    android:id="@+id/user_info_submit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:enabled="false"
+                    android:text="@string/user_info_submit" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

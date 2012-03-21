@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hello">Hello World, OneInGDUFS!</string>
+    <string name="app_name">One in GDUFS</string>
+    
+    <!-- Dashboard Button -->
+        <!-- 按钮默认文字 -->
+    <string name="dashboard_default">功能</string>
+        <!-- 分割线默认文字 -->
+    <string name="splitline_title"></string>
+        <!-- 校园生活 -->
+    <string name="dashboard_life">校园生活</string>
+    <string name="dashboard_water">订水</string>
+    <string name="dashboard_fix">报修</string>
+    <string name="dashboard_card">校园卡</string>
+    <string name="dashboard_lost">失物招领</string>
+    <string name="dashboard_gdufslife">后勤留言</string>
+        <!-- 行政消息 -->
+    <string name="dashboard_administration">行政消息</string>
+    <string name="dashboard_calendar">校历</string>
+    <string name="dashboard_telephone">常用电话</string>
+    <string name="dashboard_headmaster">校长信箱</string>
+        <!-- 在校学习 -->
+    <string name="dashboard_study">在校学习</string>
+    <string name="dashboard_syllabus">我的课表</string>
+    <string name="dashboard_library">图书馆</string>
+    <string name="dashboard_activity">活动讲座</string>
+        <!-- 用户中心 -->
+    <string name="dashboard_user">用户中心</string>
+    <string name="dashboard_class">我的班级</string>
+    <string name="dashboard_message">消息中心</string>
+    <string name="dashboard_todo">我的日程</string>
+    <string name="dashboard_info">个人信息</string>
+    
+    <!-- 登录界面 login -->
+    <string name="login_title">用户登录</string>
+    <string name="login_username">账号（昵称、学号或手机）</string>
+    <string name="login_password">密码</string>
+    <string name="login_submit">登录</string>
+    <string name="login_register">注册</string>
+    <string name="login_failed">登录失败，请稍后重试</string>
+    
+    <!-- 注册界面 register -->
+    <string name="register_title">注册账号</string>
+    <string name="register_username">昵称</string>
+    <string name="register_username_label">唯一的固定昵称，4~20个字符</string>
+    <string name="register_username_error">只能使用a-Z、0-9及_，4~20个字符</string>
+    <string name="register_password">密码</string>
+    <string name="register_password_label">至少6位</string>
+    <string name="register_password_error">过于简单，请尽量使用复杂组合并不少于6位</string>
+    <string name="register_studentId">关联学号</string>
+    <string name="register_studentId_label">你的数字广外账号，用于身份识别，会被保密</string>
+    <string name="register_studentId_error">请输入一个学号</string>
+    <string name="register_mygdufs_pwd">数字广外密码</string>
+    <string name="register_mygdufs_pwd_label">你的数字广外密码，用于验证是否本人</string>
+    <string name="register_mygdufs_pwd_error">请输入数字广外密码</string>
+    <string name="register_login">登录</string>
+    <string name="register_submit">注册</string>
+    
+        <!-- 用户中心-个人信息 -->
+    <string name="user_info_title">个人信息</string>
+    <string name="user_info_email">example@example.com</string>
+    <string name="user_info_email_label">你的常用邮箱</string>
+    <string name="user_info_email_error">不是合法的邮箱地址</string>
+    <string name="user_info_truename">真实姓名</string>
+    <string name="user_info_truename_label">添加真实姓名将会让认识你的人更快地找到你</string>
+    <string name="user_info_truename_error">不是合法的中文姓名</string>
+    <string name="user_info_telphone">手机</string>
+    <string name="user_info_telphone_label">可通过右边按钮快速插入本机号码</string>
+    <string name="user_info_telphone_error">必须为11位数字</string>
+    <string name="user_info_cornet">短号</string>
+    <string name="user_info_cornet_label"></string>
+    <string name="user_info_cornet_error">小心别太长哦</string>
+    <string name="user_info_qq">QQ</string>
+    <string name="user_info_qq_label"></string>
+    <string name="user_info_qq_error">QQ号码是少于10位的数字</string>
+    <string name="user_info_cancel">返回</string>
+    <string name="user_info_submit">保存</string>
+
+</resources>
