@@ -19,6 +19,13 @@ public interface IDataStorager {
 	public IDataStorager set(String key, String value);
 	public IDataStorager set(String key, Boolean value);
 	public IDataStorager set(String key, int value);
+	
+	/**
+	 * 删除存储的key条目，若不存在该key则什么都不做，执行完毕后需要调用save()才会生效
+	 * @param key 要删除的条目名
+	 * @return IDataStorager对象，方便链式调用
+	 */
+	public IDataStorager del(String key);
 	/**
 	 * 在set()方法后调用，将添加的数据保存起来，否则添加的数据将丢失
 	 */

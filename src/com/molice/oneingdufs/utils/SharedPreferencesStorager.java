@@ -69,5 +69,13 @@ public class SharedPreferencesStorager implements IDataStorager {
 	public void save() {
 		editor.commit();
 	}
+
+	@Override
+	public IDataStorager del(String key) {
+		if(preferences.contains(key)) {
+			editor.remove(key);
+		}
+		return this;
+	}
 	
 }

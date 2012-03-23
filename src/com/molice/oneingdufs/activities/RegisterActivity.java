@@ -8,6 +8,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import com.molice.oneingdufs.R;
+import com.molice.oneingdufs.androidpn.Constants;
 import com.molice.oneingdufs.interfaces.OnHttpRequestListener;
 import com.molice.oneingdufs.utils.ClientToServer;
 import com.molice.oneingdufs.utils.FormValidator;
@@ -77,9 +78,9 @@ public class RegisterActivity extends Activity {
 				if(validator.isFormModified()) {
 					if(validator.isFormCorrect()) {
 						JSONObject input = validator.getInput();
-						// 添加重复密码字段
+						// 添加XMPP用户名
 						try {
-							input.put("password_re", input.opt("password"));
+							input.put("apn_username", storager.get(Constants.XMPP_USERNAME, ""));
 						} catch (Exception e) {
 							Log.d("JSON错误", "RegisterActivity, e=" + e.toString());
 						}

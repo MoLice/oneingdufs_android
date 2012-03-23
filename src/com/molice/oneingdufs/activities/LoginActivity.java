@@ -71,7 +71,6 @@ public class LoginActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-				// TODO 在这里对登录表单的输入进行验证，假如失败则弹出提示
 				// 发起服务器连接，准备登录
 				ClientToServer client = new ClientToServer(LoginActivity.this);
 				// 添加http请求监听器，在请求的不同阶段进行操作
