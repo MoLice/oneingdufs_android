@@ -12,10 +12,8 @@
         android:layout_marginLeft="6dip"
         android:textSize="12dip"
         android:text="@string/splitline_title" />
-    <View
-        android:layout_width="fill_parent"
-        android:layout_height="1dip"
-        android:background="@color/split_line" />
+    
+    <View style="@style/SplitLine"/>
     
     <GridView
         android:id="@+id/part_content"

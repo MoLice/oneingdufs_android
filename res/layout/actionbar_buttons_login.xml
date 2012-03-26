@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@style/ActionBarButtonWrapper">
-
-    <Button
-        android:id="@+id/actionbar_login"
-        android:layout_width="wrap_content"
-        android:layout_height="fill_parent"
-        android:text="@string/login_title" />
-
-</LinearLayout>
+    <!-- 未登录状态，显示登录按钮 -->
+<Button xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/actionbar_login"
+    style="@style/ActionBarButtonItem"
+    android:text="@string/login_title" />

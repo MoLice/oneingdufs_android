@@ -10,40 +10,51 @@ import org.json.JSONObject;
 import com.molice.oneingdufs.R;
 import com.molice.oneingdufs.androidpn.Constants;
 import com.molice.oneingdufs.interfaces.OnHttpRequestListener;
+import com.molice.oneingdufs.layouts.ActionBarController;
+import com.molice.oneingdufs.layouts.AppMenu;
 import com.molice.oneingdufs.utils.ClientToServer;
 import com.molice.oneingdufs.utils.FormValidator;
+import com.molice.oneingdufs.utils.ProjectConstants;
 import com.molice.oneingdufs.utils.SharedPreferencesStorager;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * 注册Activity<br />
  * TODO 判断是否已登录，若已登录则给用户弹出选择：要么注销登录然后注册，要么退出注册并返回
  */
 public class RegisterActivity extends Activity {
-	private Button register_login;
+	private Button register_back;
 	private Button register_submit;
 	
 	private JSONArray form;
 	private FormValidator validator;
 	private SharedPreferencesStorager storager;
+	private AppMenu appMenu;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register);
+        
         // 设置标题栏
-        TextView currentActivity = (TextView) findViewById(R.id.actionbar_currentActivity);
-		currentActivity.setText(R.string.register_title);
+        ActionBarController.setTitle(this, R.string.register_title);
 		
-		register_login = (Button) findViewById(R.id.register_login);
+		register_back = (Button) findViewById(R.id.register_back);
 		register_submit = (Button) findViewById(R.id.register_submit);
+		
+		storager = new SharedPreferencesStorager(this);
+		appMenu = new AppMenu(this);
 		
 		form = new JSONArray();
 		// 添加username
@@ -59,14 +70,11 @@ public class RegisterActivity extends Activity {
 		// 开启失去焦点时自动验证
 		validator.addOnFocusChangeValidate();
 		
-		// 响应登录按钮，跳转到@{link LoginActivity}并finish()@{link RegisterActivity}
-		register_login.setOnClickListener(new OnClickListener() {
-			
+		// 响应返回按钮，判断是否已修改并弹出提示
+		register_back.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Intent i = new Intent(getApplicationContext(), LoginActivity.class);
-				startActivity(i);
-				finish();
+				validator.checkBackIfFormModified();
 			}
 		});
 		
@@ -80,7 +88,7 @@ public class RegisterActivity extends Activity {
 						JSONObject input = validator.getInput();
 						// 添加XMPP用户名
 						try {
-							input.put("apn_username", storager.get(Constants.XMPP_USERNAME, ""));
+							input.putOpt("apn_username", storager.get(Constants.XMPP_USERNAME, ""));
 						} catch (Exception e) {
 							Log.d("JSON错误", "RegisterActivity, e=" + e.toString());
 						}
@@ -89,17 +97,53 @@ public class RegisterActivity extends Activity {
 						// 添加http请求监听器，在请求的不同阶段进行操作
 						client.setOnRequestListener(httpRequestListener);
 						// 将表单数据添加到http请求
-						client.post(ClientToServer.URL_REGISTER, input, 0);
+						client.post(ProjectConstants.URL_REGISTER, input, 0);
 					} else {
 						Log.d("表单验证", "失败");
-						validator.alertFormMsgDialog(null, null);
+						ProjectConstants.alertDialog(RegisterActivity.this, "输入错误", "请按照提示修改", true);
 					}
 				} else {
 					// 提示没有改动
-					validator.alertFormToast("无修改");
+					Toast.makeText(RegisterActivity.this, "无修改", Toast.LENGTH_SHORT);
 				}
 			}
 		});
+    }
+    
+    @Override
+    public void onConfigurationChanged(Configuration config) {
+        super.onConfigurationChanged(config);
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+    	appMenu.onCreateOptionsMenu(menu);
+    	return super.onCreateOptionsMenu(menu);
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+    	Log.d("MainActivity", "onOptionsItemSelected被调用");
+    	return appMenu.onOptionsItemSelected(item);
+    }
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+    	if(storager.get("isLogin", false)) {
+    		// 显示登录组，隐藏未登录组
+    		menu.setGroupVisible(AppMenu.NOTLOGIN, false);
+    		menu.setGroupVisible(AppMenu.ISLOGIN, true);
+    	} else {
+    		// 显示未登录组，隐藏登录组
+    		menu.setGroupVisible(AppMenu.NOTLOGIN, true);
+    		menu.setGroupVisible(AppMenu.ISLOGIN, false);
+    	}
+    	return super.onPrepareOptionsMenu(menu);
+    }
+    
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event)	{
+    	if(keyCode == KeyEvent.KEYCODE_BACK) {
+    		validator.checkBackIfFormModified();
+    	}
+    	return super.onKeyDown(keyCode, event);
     }
     
     private OnHttpRequestListener httpRequestListener = new OnHttpRequestListener() {
@@ -127,8 +171,7 @@ public class RegisterActivity extends Activity {
 					.set("isLogin", true)
 					.save();
 					// 跳转到MainActivity
-					Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-					startActivity(intent);
+					startActivity(new Intent(getApplicationContext(), MainActivity.class));
 					finish();
 				} else {
 					// 失败
@@ -139,7 +182,7 @@ public class RegisterActivity extends Activity {
 						// 调用FormValidator实例将表单错误信息显示到label上
 						validator.updateFormMessageFromServer(formErrors);
 					} else {
-						validator.alertFormMsgDialog("注册失败", result.optString("resultMsg"));
+						ProjectConstants.alertDialog(RegisterActivity.this, "注册失败", result.optString("resultMsg"), true);
 					}
 				}
 				break;

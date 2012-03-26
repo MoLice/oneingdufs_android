@@ -4,6 +4,13 @@
     <string name="hello">Hello World, OneInGDUFS!</string>
     <string name="app_name">One in GDUFS</string>
     
+    <!-- global 全局通用 -->
+    <string name="cancel">取消</string>
+    <string name="back">返回</string>
+    <string name="sure">确定</string>
+    <string name="save">保存</string>
+    <string name="submit">提交</string>
+    <string name="refresh">刷新</string>
     <!-- Dashboard Button -->
         <!-- 按钮默认文字 -->
     <string name="dashboard_default">功能</string>
@@ -55,10 +62,23 @@
     <string name="register_mygdufs_pwd">数字广外密码</string>
     <string name="register_mygdufs_pwd_label">你的数字广外密码，用于验证是否本人</string>
     <string name="register_mygdufs_pwd_error">请输入数字广外密码</string>
-    <string name="register_login">登录</string>
+    <string name="register_back">返回</string>
     <string name="register_submit">注册</string>
     
-        <!-- 用户中心-个人信息 -->
+    <!-- Menu 菜单 -->
+    <string name="menu_login">登录</string>
+    <string name="menu_register">注册</string>
+    <string name="menu_logout">注销</string>
+    <string name="menu_close">退出</string>
+    <string name="menu_user">账号管理</string>
+    <string name="menu_setting">设置</string>
+    <string name="menu_about">关于</string>
+    <string name="menu_helpus">反馈</string>
+    
+    <!-- 用户中心-账号管理 -->
+    <string name="user_home_title">账号管理</string>
+    
+    <!-- 用户中心-个人信息 -->
     <string name="user_info_title">个人信息</string>
     <string name="user_info_email">example@example.com</string>
     <string name="user_info_email_label">你的常用邮箱</string>
@@ -67,7 +87,7 @@
     <string name="user_info_truename_label">添加真实姓名将会让认识你的人更快地找到你</string>
     <string name="user_info_truename_error">不是合法的中文姓名</string>
     <string name="user_info_telphone">手机</string>
-    <string name="user_info_telphone_label">可通过右边按钮快速插入本机号码</string>
+    <string name="user_info_telphone_label">将本机号码关联可使用更多功能</string>
     <string name="user_info_telphone_error">必须为11位数字</string>
     <string name="user_info_cornet">短号</string>
     <string name="user_info_cornet_label"></string>
@@ -77,5 +97,47 @@
     <string name="user_info_qq_error">QQ号码是少于10位的数字</string>
     <string name="user_info_cancel">返回</string>
     <string name="user_info_submit">保存</string>
+    
+    <!-- 用户中心-在校相关 -->
+    <string name="user_atschool_title">在校相关</string>
+    <string name="user_atschool_building_prompt">住几栋</string>
+    <string name="user_atschool_building_label">请选择楼号</string>
+    <string name="user_atschool_building_error">请选择楼号</string>
+    <string name="user_atschool_layer_prompt">楼层</string>
+    <string name="user_atschool_layer_label">请选择楼层</string>
+    <string name="user_atschool_layer_error">请选择楼层</string>
+    <string name="user_atschool_room_prompt">宿舍号</string>
+    <string name="user_atschool_room_label">请选择宿舍号</string>
+    <string name="user_atschool_room_error">请选择宿舍号</string>
+    <string name="user_atschool_cancel">返回</string>
+    <string name="user_atschool_submit">保存</string>
+    
+    <!-- 校园生活 -->
+    <string name="life_roomAddress">宿舍：</string>
+    <!-- 订水 -->
+    <string name="life_water_title">订水</string>
+    <string name="life_water_number_label">请选择桶数</string>
+    <string name="life_water_time_label">请选择送水时段</string>
+    <string name="life_water_time_info">*今天已停止送水预约，你的预约将在明天生效</string>
+    
+    <!-- 报修 -->
+    <string name="life_fix_title">宿舍报修</string>
+    <string name="life_fix_content">报修内容说明</string>
+    <string name="life_fix_content_label">物品名称、损坏情况等</string>
+    <string name="life_fix_content_error">请填写报修内容</string>
+    <string name="life_fix_time_label">请选择预约时间段</string>
+    <string name="life_fix_time_error">请选择预约时间段</string>
+    <string name="life_fix_phone">联系电话</string>
+    <string name="life_fix_phone_label">请填写联系电话</string>
+    <string name="life_fix_phone_info">已自动填入本机号码，可自行更改</string>
+    <string name="life_fix_phone_error">请填写手机号码或短号</string>
+        
+    <!-- 校园卡 -->
+    <string name="life_card_title">我的校园卡</string>
+    <string name="life_card_cardId">卡号</string>
+    <string name="life_card_balance">余额</string>
+    <string name="life_card_lasttime">最后一次消费时间</string>
+    <string name="life_card_lastspend">最后一次消费金额</string>
+    <string name="life_card_lastposition">最后一次消费地点</string>
 
 </resources>

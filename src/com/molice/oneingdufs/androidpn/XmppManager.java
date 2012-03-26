@@ -34,10 +34,13 @@ import org.jivesoftware.smack.packet.IQ;
 import org.jivesoftware.smack.packet.Packet;
 import org.jivesoftware.smack.packet.Registration;
 import org.jivesoftware.smack.provider.ProviderManager;
+import org.json.JSONObject;
+
+import com.molice.oneingdufs.utils.ClientToServer;
+import com.molice.oneingdufs.utils.ProjectConstants;
+import com.molice.oneingdufs.utils.SharedPreferencesStorager;
 
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.os.Handler;
 import android.util.Log;
 
@@ -59,7 +62,7 @@ public class XmppManager {
 
     private NotificationService.TaskTracker taskTracker;
 
-    private SharedPreferences sharedPrefs;
+    private SharedPreferencesStorager sharedPrefs;
 
     private String xmppHost;
 
@@ -89,12 +92,12 @@ public class XmppManager {
         context = notificationService;
         taskSubmitter = notificationService.getTaskSubmitter();
         taskTracker = notificationService.getTaskTracker();
-        sharedPrefs = notificationService.getSharedPreferences();
+        sharedPrefs = new SharedPreferencesStorager(notificationService);
 
-        xmppHost = sharedPrefs.getString(Constants.XMPP_HOST, "localhost");
-        xmppPort = sharedPrefs.getInt(Constants.XMPP_PORT, 5222);
-        username = sharedPrefs.getString(Constants.XMPP_USERNAME, "");
-        password = sharedPrefs.getString(Constants.XMPP_PASSWORD, "");
+        xmppHost = sharedPrefs.get(Constants.XMPP_HOST, "localhost");
+        xmppPort = sharedPrefs.get(Constants.XMPP_PORT, 5222);
+        username = sharedPrefs.get(Constants.XMPP_USERNAME, "");
+        password = sharedPrefs.get(Constants.XMPP_PASSWORD, "");
 
         connectionListener = new PersistentConnectionListener(this);
         notificationPacketListener = new NotificationPacketListener(this);
@@ -183,6 +186,9 @@ public class XmppManager {
         return handler;
     }
 
+    /**
+     * 在与服务器失去连接的情况下进行重新注册并重连，会创建新的用户名和密码
+     */
     public void reregisterAccount() {
         removeAccount();
         submitLoginTask();
@@ -216,7 +222,7 @@ public class XmppManager {
         Log.d(LOGTAG, "runTask()...done");
     }
 
-    private String newRandomUUID() {
+    private String newXMPPUsername() {
         String uuidRaw = UUID.randomUUID().toString();
         return uuidRaw.replaceAll("-", "");
     }
@@ -231,8 +237,10 @@ public class XmppManager {
     }
 
     private boolean isRegistered() {
-        return sharedPrefs.contains(Constants.XMPP_USERNAME)
-                && sharedPrefs.contains(Constants.XMPP_PASSWORD);
+    	Log.d("55555XmppManager#isRegistered#username", String.valueOf(sharedPrefs.isExist(Constants.XMPP_USERNAME)));
+    	Log.d("55555XmppManager#isRegistered#password", String.valueOf(sharedPrefs.isExist(Constants.XMPP_PASSWORD)));
+        return sharedPrefs.isExist(Constants.XMPP_USERNAME)
+                && sharedPrefs.isExist(Constants.XMPP_PASSWORD);
     }
 
     private void submitConnectTask() {
@@ -269,11 +277,13 @@ public class XmppManager {
         Log.d(LOGTAG, "addTask(runnable)... done");
     }
 
+    /**
+     * 删除本地存储的用户名和密码，由{@link #reregisterAccount()}方法调用
+     */
     private void removeAccount() {
-        Editor editor = sharedPrefs.edit();
-        editor.remove(Constants.XMPP_USERNAME);
-        editor.remove(Constants.XMPP_PASSWORD);
-        editor.commit();
+        sharedPrefs.del(Constants.XMPP_USERNAME)
+        .del(Constants.XMPP_PASSWORD)
+        .save();
     }
 
     /**
@@ -311,10 +321,6 @@ public class XmppManager {
                     ProviderManager.getInstance().addIQProvider("notification",
                             "androidpn:iq:notification",
                             new NotificationIQProvider());
-                    // 自定义Provider {@link MessageIQProvider}来处理自定义的IQ Packet {@link MessageIQProvider}
-                    // 消息体XML namespace="oneingdufs:iq:message"
-                    // 消息体XML的标签名element="message"，也即<element></element>
-                    //ProviderManager.getInstance().addIQProvider("message", "oneingdufs:iq:message", new MessageIQProvider());
 
                 } catch (XMPPException e) {
                     Log.e(LOGTAG, "XMPP connection failed", e);
@@ -344,9 +350,10 @@ public class XmppManager {
             Log.i(LOGTAG, "RegisterTask.run()...");
 
             if (!xmppManager.isRegistered()) {
+            	Log.d("444RegisterTask#run()", "还没注册，需要重新生成username");
             	// username、password在这里产生
-                final String newUsername = newRandomUUID();
-                final String newPassword = newRandomUUID();
+                final String newUsername = newXMPPUsername();
+                final String newPassword = newXMPPUsername();
 
                 Registration registration = new Registration();
 
@@ -378,16 +385,14 @@ public class XmppManager {
                                 Log.d(LOGTAG, "username=" + newUsername);
                                 Log.d(LOGTAG, "password=" + newPassword);
 
-                                Editor editor = sharedPrefs.edit();
-                                editor.putString(Constants.XMPP_USERNAME,
-                                        newUsername);
-                                editor.putString(Constants.XMPP_PASSWORD,
-                                        newPassword);
-                                editor.commit();
-                                Log
-                                        .i(LOGTAG,
-                                                "Account registered successfully");
+                                sharedPrefs.set(Constants.XMPP_USERNAME, newUsername)
+                                	.set(Constants.XMPP_PASSWORD, newPassword)
+                                	.save();
+                                Log.d("XmppManager#run()", "sharedPrefs.XMPP_USERNAME" + String.valueOf(sharedPrefs.isExist(Constants.XMPP_USERNAME)));
+                                Log.i(LOGTAG, "Account registered successfully");
                                 xmppManager.runTask();
+                            } else {
+                            	Log.d("XmppManager#run()", "!!!!!!!!!!!!!!!!!!");
                             }
                         }
                     }
@@ -425,15 +430,21 @@ public class XmppManager {
 
         public void run() {
             Log.i(LOGTAG, "LoginTask.run()...");
+            Log.d("5555LoginTask#run()", "进入LoginTask#run()");
 
             if (!xmppManager.isAuthenticated()) {
                 Log.d(LOGTAG, "username=" + username);
                 Log.d(LOGTAG, "password=" + password);
 
                 try {
+                	// 在这里登录并更新用户名、密码到应用服务器
                     xmppManager.getConnection().login(
                             xmppManager.getUsername(),
                             xmppManager.getPassword(), XMPP_RESOURCE_NAME);
+                    if(sharedPrefs.isExist("isLogin") && sharedPrefs.get("isLogin", false)) {
+                    	// 用户已登录但XMPP需要重连，则在登录状态下更新XMPP用户名
+                    	updateAPNUsername(xmppManager);
+                    }
                     Log.d(LOGTAG, "Loggedn in successfully");
 
                     // connection listener
@@ -479,6 +490,17 @@ public class XmppManager {
             }
 
         }
+    }
+    
+    private void updateAPNUsername(XmppManager xmppManager) {
+    	ClientToServer client = new ClientToServer(context);
+    	JSONObject data = new JSONObject();
+    	try {
+			data.putOpt("username", xmppManager.getUsername());
+		} catch (Exception e) {
+			Log.e("异常", "XmppManager.updateAPNUsername, e=" + e.toString());
+		}
+    	client.post(ProjectConstants.URL_UPDATEAPNUSERNAME, data, 0);
     }
 
 }

@@ -36,12 +36,6 @@ import com.molice.oneingdufs.interfaces.OnHttpRequestListener;
  * @author MoLice
  */
 public class ClientToServer implements IClientToServer {
-	
-	public final static String URL_SERVER = "http://10.0.2.2:8000/api";
-	public final static String URL_LOGIN = "/home/login/";
-	public final static String URL_REGISTER = "/home/register/";
-	public final static String URL_LOGOUT = "/home/logout/";
-	
 	public DefaultHttpClient client;
 	private HttpParams httpParams;
 	private OnHttpRequestListener requestListener;
@@ -83,6 +77,7 @@ public class ClientToServer implements IClientToServer {
 				UrlEncodedFormEntity entity = new UrlEncodedFormEntity(result, HTTP.UTF_8);
 				return entity;
 			} catch (Exception e) {
+				Log.d("UrlEncodedFormEntity异常", "requestDataFormatter, e=" + e.toString());
 			}
 		}
 		return null;
@@ -95,33 +90,33 @@ public class ClientToServer implements IClientToServer {
 	private void checkCookie(HttpRequestBase method) {
 		// 如果请求头部已经在beforeSend里被添加了Cookie了，则检查该Cookie内是否存在sessionid或csrftoken
 		if(method.containsHeader("Cookie")) {
-			String cookie = method.getHeaders("Cookie")[0].getValue();
+			StringBuilder cookie = new StringBuilder(method.getHeaders("Cookie")[0].getValue());
 			if(cookie.indexOf("csrftoken") == -1) {
 				// 设置了Cookie但没添加csrftoken，则将csrftoken添加上去
-				cookie = cookie + "csrftoken=" + csrftoken + ";";
+				cookie.append("csrftoken=").append(csrftoken).append(";");
 				method.setHeader("X-CSRFToken", csrftoken);
 			}
 			if(storager.isExist("sessionid") && cookie.indexOf("sessionid") == -1) {
 				// 如果本地存储里存在sessionid且在beforeSend里添加的Cookie不包含sessionid，则将sessionid添加到Cookie内
-				cookie = cookie + "sessionid=" + storager.get("sessionid", "") + ";";
+				cookie.append("sessionid=").append(storager.get("sessionid", "")).append(";");
 			}
-			method.setHeader("Cookie", cookie);
+			method.setHeader("Cookie", cookie.toString());
 		} else {
 			// 在beforeSend里并没有主动添加Cookie，则将本地存储里的sessionid和csrftoken添加到Cookie
-			String cookie = "csrftoken=" + csrftoken + ";";
+			StringBuilder cookie = new StringBuilder("csrftoken=").append(csrftoken).append(";");
 			method.setHeader("X-CSRFToken", csrftoken);
 			if(storager.isExist("sessionid")) {
-				cookie = cookie + "sessionid=" + storager.get("sessionid", "") + ";";
+				cookie.append("sessionid=").append(storager.get("sessionid", "")).append(";");
 			}
-			method.setHeader("Cookie", cookie);
+			method.setHeader("Cookie", cookie.toString());
 		}
 	}
 	
 	@Override
 	public void get(String url, JSONObject data, int requestCode) {
 		// 如果是相对地址，自动添加上域名
-		if(url.length() < 4 || url.substring(0, 4) != "http") {
-			url = ClientToServer.URL_SERVER + url;
+		if(!url.startsWith("http://")) {
+			url = ProjectConstants.URL_HOST + url;
 		}
 		// 如果需要传参，则将参数添加到url尾部
 		if(data != null) {
@@ -151,6 +146,7 @@ public class ClientToServer implements IClientToServer {
 				}
 			} else {
 				// 请求失败，调用事件监听函数
+				Log.d("ClientToServer", "onFailed, status=" + String.valueOf(response.getStatusLine().getStatusCode()) + ", responseText=" + EntityUtils.toString(response.getEntity()));
 				if(requestListener != null) {
 					requestListener.onFailed(requestCode, this, httpGet, response);
 				}
@@ -180,8 +176,8 @@ public class ClientToServer implements IClientToServer {
 	@Override
 	public void post(String url, JSONObject data, int requestCode) {
 		// 如果是相对地址，自动添加上域名
-		if(url.length() < 4 || url.substring(0, 4) != "http") {
-			url = ClientToServer.URL_SERVER + url;
+		if(!url.startsWith("http://")) {
+			url = ProjectConstants.URL_HOST + url;
 		}
 		HttpPost httpPost = new HttpPost(url);
 		UrlEncodedFormEntity postData = (UrlEncodedFormEntity) requestDataFormatter("post", data);
@@ -197,6 +193,8 @@ public class ClientToServer implements IClientToServer {
 		
 		httpPost.setParams(httpParams);
 		httpPost.setEntity(postData);
+		Log.d("发送前", "Cookie:" + httpPost.getHeaders("Cookie")[0].getValue());
+		Log.d("发送前", "X-CSRFToken:" + httpPost.getHeaders("X-CSRFToken")[0].getValue());
 		try {
 			HttpResponse response = client.execute(httpPost);
 			if(response.getStatusLine().getStatusCode() == 200) {
@@ -205,12 +203,14 @@ public class ClientToServer implements IClientToServer {
 				String result = null;
 				if(entity != null) {
 					result = EntityUtils.toString(entity);
+					Log.d("发送成功", result);
 				}
 				// 请求成功，调用事件监听函数
 				if(requestListener != null) {
 					requestListener.onSuccess(requestCode, this, httpPost, response, new JSONObject(result));
 				}
 			} else {
+				Log.d("ClientToServer", "onFailed, status=" + String.valueOf(response.getStatusLine().getStatusCode()) + ", responseText=" + EntityUtils.toString(response.getEntity()));
 				if(requestListener != null) {
 					requestListener.onFailed(requestCode, this, httpPost, response);
 				}
@@ -262,16 +262,18 @@ public class ClientToServer implements IClientToServer {
 	@Override
 	public String getCsrfToken() {
 		if(!storager.isExist("csrftoken")) {
-			HttpGet httpGet = new HttpGet(ClientToServer.URL_SERVER + "/api/getcsrftoken/");
+			HttpGet httpGet = new HttpGet(ProjectConstants.URL_HOST + ProjectConstants.URL_GETCSRFTOKEN);
 			try {
 				HttpResponse response = client.execute(httpGet);
 				if(response.getStatusLine().getStatusCode() == 200) {
 					csrftoken = cookiesToJSON(response.getHeaders("Set-Cookie")[0].getValue()).optString("csrftoken", "");
 					storager.set("csrftoken", csrftoken).save();
 				} else {
+					Log.d("status", String.valueOf(response.getStatusLine().getStatusCode()));
 					return "";
 				}
 			} catch (Exception e) {
+				Log.d("e=", e.toString());
 				return "";
 			}
 		}

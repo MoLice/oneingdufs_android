@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+    
+    <include layout="@layout/actionbar"/>
+    <!-- 卡号 -->
+    <TextView
+        style="@style/LinearFormHeader"
+        android:text="@string/life_card_cardId"/>
+    <TextView
+        android:id="@+id/life_card_cardId"
+        style="@style/LinearFormContent"
+        android:text="17482"/>
+    
+    <!-- 余额 -->
+    <TextView
+        style="@style/LinearFormHeader"
+        android:text="@string/life_card_balance"/>
+    <TextView
+        android:id="@+id/life_card_balance"
+        style="@style/LinearFormContent"
+        android:text="￥100.00"/>
+    
+    <!-- 最后一次消费时间 -->
+    <TextView
+        style="@style/LinearFormHeader"
+        android:text="@string/life_card_lasttime"/>
+    <TextView
+        android:id="@+id/life_card_lasttime"
+        style="@style/LinearFormContent"
+        android:text="2012-03-26 20:14:01"/>
+    
+    <!-- 最后一次消费金额 -->
+    <TextView
+        style="@style/LinearFormHeader"
+        android:text="@string/life_card_lastspend"/>
+    <TextView
+        android:id="@+id/life_card_lastspend"
+        style="@style/LinearFormContent"
+        android:text="￥10.00"/>
+    
+    <!-- 最后一次消费地点 -->
+    <TextView
+        style="@style/LinearFormHeader"
+        android:text="@string/life_card_lastposition"/>
+    <TextView
+        android:id="@+id/life_card_lastposition"
+        style="@style/LinearFormContent"
+        android:text="二饭"/>
+</LinearLayout>

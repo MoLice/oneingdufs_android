@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+    
+    <include layout="@layout/actionbar"/>
+    
+    <LinearLayout
+        style="@style/FormWrapper">
+        
+        <!-- 宿舍号 -->
+        <TextView
+            android:id="@+id/life_fix_roomAddress"
+            style="@style/FormTextItem"
+            android:text="@string/life_roomAddress"/>
+        
+        <View
+            style="@style/SplitLine"
+            android:layout_marginTop="12dip"/>
+        
+        <!-- 报修内容 -->
+        <EditText
+            android:id="@+id/life_fix_content"
+            style="@style/FormItem"
+            android:inputType="textMultiLine"
+            android:minLines="3"
+            android:gravity="top"
+            android:hint="@string/life_fix_content"/>
+        <TextView
+            android:id="@+id/life_fix_content_label"
+            style="@style/FormLabel"
+            android:text="@string/life_fix_content_label"/>
+        
+        <!-- 预约时间 -->
+        <EditText
+            android:id="@+id/life_fix_time"
+            style="@style/FormItem"
+            android:editable="false"
+            android:text="11:00-20:00"/>
+        <TextView
+            android:id="@+id/life_fix_time_label"
+            style="@style/FormLabel"
+            android:text="@string/life_fix_time_label"/>
+        
+        <!-- 联系电话 -->
+        <EditText
+            android:id="@+id/life_fix_phone"
+            style="@style/FormItem"
+            android:inputType="phone"
+            android:hint="@string/life_fix_phone"/>
+        <TextView
+            android:id="@+id/life_fix_phone_label"
+            style="@style/FormLabel"
+            android:text="@string/life_fix_phone_label"/>
+        
+        <LinearLayout
+            style="@style/FormItem"
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/life_fix_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/back"/>
+            <Button
+                android:id="@+id/life_fix_submit"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:text="@string/submit"/>"
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

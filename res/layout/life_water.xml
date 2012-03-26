@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <include layout="@layout/actionbar" />
+    
+    <LinearLayout
+        style="@style/FormWrapper">
+        
+        <!-- 宿舍号 -->
+        <TextView
+            android:id="@+id/life_water_roomAddress"
+            style="@style/FormTextItem"
+            android:text="@string/life_roomAddress"/>
+        
+        <View
+            style="@style/SplitLine"
+            android:layout_marginTop="12dip"/>
+        
+        <!-- 桶数 -->
+        <Spinner
+            android:id="@+id/life_water_number"
+            style="@style/FormItem"
+            android:entries="@array/life_water_number"/>
+        <TextView
+            android:id="@+id/life_water_number_label"
+            style="@style/FormLabel"
+            android:text="@string/life_water_number_label"/>
+        
+        <!-- 时间段 -->
+        <EditText
+            android:id="@+id/life_water_time"
+            style="@style/FormItem"
+            android:editable="false"
+            />
+        <TextView
+            android:id="@+id/life_water_time_label"
+            style="@style/FormLabel"
+            android:text="@string/life_water_time_label"/>
+        
+        <!-- 按钮 -->
+        <LinearLayout
+            style="@style/FormItem"
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/life_water_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/back"/>
+            <Button
+                android:id="@+id/life_water_submit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/submit"/>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

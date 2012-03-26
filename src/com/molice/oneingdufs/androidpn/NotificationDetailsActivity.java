@@ -15,10 +15,10 @@
  */
 package com.molice.oneingdufs.androidpn;
 
+import com.molice.oneingdufs.utils.SharedPreferencesStorager;
+
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
@@ -50,11 +50,10 @@ public class NotificationDetailsActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        SharedPreferences sharedPrefs = this.getSharedPreferences(
-                Constants.SHARED_PREFERENCE_NAME, Context.MODE_PRIVATE);
-        callbackActivityPackageName = sharedPrefs.getString(
+        SharedPreferencesStorager sharedPrefs = new SharedPreferencesStorager(this);
+        callbackActivityPackageName = sharedPrefs.get(
                 Constants.CALLBACK_ACTIVITY_PACKAGE_NAME, "");
-        callbackActivityClassName = sharedPrefs.getString(
+        callbackActivityClassName = sharedPrefs.get(
                 Constants.CALLBACK_ACTIVITY_CLASS_NAME, "");
 
         Intent intent = getIntent();

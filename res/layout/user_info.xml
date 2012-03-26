@@ -4,7 +4,7 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
-    <include layout="@layout/actionbar_layout" />
+    <include layout="@layout/actionbar" />
     
     <ScrollView
         android:layout_width="fill_parent"
@@ -13,10 +13,7 @@
         android:scrollbarFadeDuration="2"
         android:scrollbars="vertical">
         <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:padding="8dip"
-            android:orientation="vertical">
+            style="@style/FormWrapper">
             
             <!-- 昵称、学号 -->
             <RelativeLayout
@@ -36,6 +33,11 @@
                     android:textSize="18sp"/>
             </RelativeLayout>
             
+            <View
+                style="@style/SplitLine"
+                android:layout_marginTop="8dip"
+                android:layout_marginBottom="4dip"/>
+                
             <TextView
                 style="@style/FormLabel"
                 android:textColor="@color/form_warning"
@@ -111,7 +113,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:enabled="false"
                     android:text="@string/user_info_submit" />
             </LinearLayout>
         </LinearLayout>

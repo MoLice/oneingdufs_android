@@ -5,12 +5,25 @@
     |- ~Compat
     |- ~TextView
     |- ~ButtonWrapper
+    |- ~ButtonItem
 |- Dashboard 仪表盘
     |- ~Button
 |- FooterBar 底部常用跳转
+|- SplitLine 分割线
 |- Form
+    |- ~Wrapper 用于LinearLayout
     |- ~Item
+    |- ~TextItem
     |- ~Label 文本框下方的说明文字
+|- LinearForm
+    |- ~Item 子元素，一个横条
+    |- ~Header 标题
+    |- ~Content 内容
+|- Table
+    |- ~Item 用于TableLayout的子元素
+    |- ~TextItem 用于TextView元素
+    |- ~TextItemGL 文本元素文字左对齐
+    |- ~TextItemGR 文本元素文字右对齐
 -->
     <style name="ActionBarCompat">
         <item name="android:layout_width">fill_parent</item>
@@ -36,6 +49,11 @@
         <item name="android:divider">@color/split_line</item>
     </style>
     
+    <style name="ActionBarButtonItem">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">fill_parent</item>
+    </style>
+    
     <style name="DashboardButton">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
@@ -54,6 +72,20 @@
         <item name="android:background">#dedede</item>
     </style>
     
+    <style name="SplitLine">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">1dip</item>
+        <item name="android:background">@color/split_line</item>
+    </style>
+        
+    <style name="FormWrapper">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingLeft">8dip</item>
+        <item name="android:paddingRight">8dip</item>
+        <item name="android:orientation">vertical</item>
+    </style>    
+    
     <style name="FormItem">
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">wrap_content</item>
@@ -61,9 +93,52 @@
         <item name="android:textColorHint">@color/strong_text</item>
     </style>
     
+    <style name="FormTextItem" parent="@style/FormItem">
+        <item name="android:textSize">18sp</item>
+    </style>
+    
     <style name="FormLabel" parent="@style/FormItem">
         <item name="android:layout_marginTop">0dip</item>
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/form_label</item>
+    </style>
+    
+    <style name="LinearFormItem">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingTop">8dip</item>
+        <item name="android:paddingRight">8dip</item>
+        <item name="android:paddingBottom">8dip</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+    
+    <style name="LinearFormHeader" parent="@style/LinearFormItem">
+        <item name="android:paddingLeft">8dip</item>
+        <item name="android:background">@color/split_line</item>
+        <item name="android:textColor">#000000</item>
+    </style>
+    
+    <style name="LinearFormContent" parent="@style/LinearFormItem">
+        <item name="android:paddingLeft">28dip</item>
+        <item name="android:background">#ffffff</item>
+        <item name="android:textColor">@color/strong_text</item>
+    </style>
+    
+    <style name="TableItem">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">8dip</item>
+    </style>
+    
+    <style name="TableTextItem" parent="@style/TableItem">
+        <item name="android:textSize">18sp</item>
+    </style>
+    
+    <style name="TableTextItemGL" parent="@style/TableTextItem">
+        <item name="android:gravity">left</item>
+    </style>
+    
+    <style name="TableTextItemGR" parent="@style/TableTextItem">
+        <item name="android:gravity">right</item>
     </style>
 </resources>

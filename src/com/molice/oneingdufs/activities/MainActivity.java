@@ -1,33 +1,41 @@
 package com.molice.oneingdufs.activities;
 
 import com.molice.oneingdufs.R;
-import com.molice.oneingdufs.utils.DashboardPart;
+import com.molice.oneingdufs.androidpn.ServiceManager;
+import com.molice.oneingdufs.layouts.AppMenu;
+import com.molice.oneingdufs.layouts.DashboardPart;
+import com.molice.oneingdufs.layouts.ActionBarController;
+import com.molice.oneingdufs.utils.ProjectConstants;
 import com.molice.oneingdufs.utils.SharedPreferencesStorager;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.RelativeLayout.LayoutParams;
 
 /**
  * 应用主页<br />
+ * 启动AndroidPN服务{@link #startNotificationService()}<br/>
  * R.layout.main
+ * 
+ * @author MoLice (sf.molice@gmail.com)
+ * @date 2012-2-14
  */
 public class MainActivity extends Activity {
 	
 	private LinearLayout main_wrapper;
-	private RelativeLayout actionbar;
 	
 	private SharedPreferencesStorager storager;
+	private AppMenu appMenu;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -36,10 +44,9 @@ public class MainActivity extends Activity {
         
         // 获取R.layout.main中的父容器LinearLayout，用于addDashboardPart引用
         main_wrapper =(LinearLayout) findViewById(R.id.main_wrapper);
-        // 获取R.layout.actionbar_layout中的父容器RelativeLayout，用于setActionBarButtons引用
-        actionbar = (RelativeLayout) findViewById(R.id.actionbar);
         
         storager = new SharedPreferencesStorager(this);
+        appMenu = new AppMenu(this);
         
         // 检测应用及系统基本信息是否存储正确
         // TODO 待应用增加了首次安装后的教学界面后，将此段代码迁移到该界面，实现每次安装只运行一次的目的
@@ -53,6 +60,10 @@ public class MainActivity extends Activity {
             		.append(";display=width:").append(getWindowManager().getDefaultDisplay().getWidth()).append(",height:").append(getWindowManager().getDefaultDisplay().getHeight()).append(";");
             	storager.set("baseInfo", baseInfo.toString()).save();
             }
+            // 如果不存在本机号码phoneNumber则重新获取并存储
+            if(!storager.isExist("phoneNumber")) {
+            	storager.set("phoneNumber", ProjectConstants.getPhoneNumber(this));
+            }
 		} catch (Exception e) {
 			Log.d("BaseInfo存储错误", e.toString());
 		}
@@ -60,11 +71,11 @@ public class MainActivity extends Activity {
         // 添加校园生活
         addDashboardPart(R.string.dashboard_life, new Object[][] {
         		// 订水
-        		{null, R.string.dashboard_water, HomeActivity.class},
+        		{null, R.string.dashboard_water, LifeWaterActivity.class},
         		// 报修
-        		{null, R.string.dashboard_fix, LifeActivity.class},
+        		{null, R.string.dashboard_fix, LifeFixActivity.class},
         		// 校园卡
-        		{null, R.string.dashboard_card, null},
+        		{null, R.string.dashboard_card, LifeCardActivity.class},
         		// 失物招领
         		{null, R.string.dashboard_lost, null},
         		// 后勤留言
@@ -74,7 +85,7 @@ public class MainActivity extends Activity {
         // 添加个人中心
         addDashboardPart(R.string.dashboard_user, new Object[][] {
         		// 我的班级
-        		{null, R.string.dashboard_class, RegisterActivity.class},
+        		{null, R.string.dashboard_class, null},
         		// 消息中心
         		{null, R.string.dashboard_message, null},
         		// 我的日程
@@ -82,11 +93,15 @@ public class MainActivity extends Activity {
         		// 个人中心
         		{null, R.string.dashboard_info, UserInfoActivity.class},
         });
+        
+        // 启动AndroidPN服务
+        //startNotificationService();
     }
     
     @Override
     public void onNewIntent(Intent intent) {
     	super.onNewIntent(intent);
+    	Log.d("MainActivity#onNewIntent", "被调用了");
     }
     
     @Override
@@ -95,17 +110,49 @@ public class MainActivity extends Activity {
     	// 判断是否已登录，根据不同状态改变ActionBar右边的操作按钮
         if(!storager.get("isLogin", false)) {
             // 将ActionBar右边的操作按钮设置为登录按钮
-            View actionbar_buttons = setActionBarButtons(R.layout.actionbar_buttons_login);
+            View actionbar_buttons = ActionBarController.setActionBarButtons(this, R.layout.actionbar_buttons_login);
             Button actionbar_login = (Button) actionbar_buttons.findViewById(R.id.actionbar_login);
             actionbar_login.setOnClickListener(new OnClickListener() {
-    			
     			@Override
     			public void onClick(View v) {
     				Intent i = new Intent(getApplicationContext(), LoginActivity.class);
     				startActivity(i);
     			}
     		});
+        } else {
+        	ActionBarController.setActionBarButtons(this, R.layout.actionbar_buttons_main);
         }
+    }
+    
+    @Override
+    public void onConfigurationChanged(Configuration config) {
+        super.onConfigurationChanged(config);
+    }
+    
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+    	appMenu.onCreateOptionsMenu(menu);
+    	return super.onCreateOptionsMenu(menu);
+    }
+    
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+    	if(storager.get("isLogin", false)) {
+    		// 显示登录组，隐藏未登录组
+    		menu.setGroupVisible(AppMenu.NOTLOGIN, false);
+    		menu.setGroupVisible(AppMenu.ISLOGIN, true);
+    	} else {
+    		// 显示未登录组，隐藏登录组
+    		menu.setGroupVisible(AppMenu.NOTLOGIN, true);
+    		menu.setGroupVisible(AppMenu.ISLOGIN, false);
+    	}
+    	return super.onPrepareOptionsMenu(menu);
+    }
+    
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+    	Log.d("MainActivity", "onOptionsItemSelected被调用");
+    	return appMenu.onOptionsItemSelected(item);
     }
     
     /**
@@ -119,17 +166,11 @@ public class MainActivity extends Activity {
     }
     
     /**
-     * 将actionbar buttons布局添加到当前界面的actionbar中
-     * @param buttons_layout 要添加的actionbar buttons layout
-     * @return 使用LayoutInflater生成的View，也即参数buttons_layout对应的layout
+     * 启动AndroidPN服务
      */
-    private View setActionBarButtons(int buttons_layout) {
-    	LayoutInflater inflater = LayoutInflater.from(this);
-    	View action_buttons = inflater.inflate(buttons_layout, null);
-    	LayoutParams params = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.FILL_PARENT);
-    	params.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-    	params.addRule(RelativeLayout.CENTER_VERTICAL);
-    	actionbar.addView(action_buttons, params);
-    	return action_buttons;
+    private void startNotificationService() {
+    	ServiceManager serviceManager = new ServiceManager(this);
+    	serviceManager.setNotificationIcon(R.drawable.ic_launcher);
+    	serviceManager.startService();
     }
 }

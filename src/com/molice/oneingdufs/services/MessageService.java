@@ -1,7 +1,7 @@
 package com.molice.oneingdufs.services;
 
 import com.molice.oneingdufs.R;
-import com.molice.oneingdufs.activities.LifeActivity;
+import com.molice.oneingdufs.activities.MainActivity;
 
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -38,7 +38,7 @@ public class MessageService extends Service {
         messageNotification.defaults = Notification.DEFAULT_SOUND;
         messageNotificatioManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
  
-        messageIntent = new Intent(this, LifeActivity.class);
+        messageIntent = new Intent(this, MainActivity.class);
         messagePendingIntent = PendingIntent.getActivity(this,0,messageIntent,0);
  
         //¿ªÆôÏß³Ì

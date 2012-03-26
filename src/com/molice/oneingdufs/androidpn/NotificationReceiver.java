@@ -22,12 +22,12 @@ import android.util.Log;
 
 /** 
  * Broadcast receiver that handles push notification messages from the server.
- * This should be registered as receiver in AndroidManifest.xml. 
+ * This should be registered as receiver in AndroidManifest.xml. <br/>
+ * <strong>需要在{@link NotificationService#registerReceiver(android.content.BroadcastReceiver, android.content.IntentFilter) registerReceiver()}方法内注册为一个receiver</strong>
  * 
  * @author Sehwan Noh (devnoh@gmail.com)
  */
 public final class NotificationReceiver extends BroadcastReceiver {
-
     private static final String LOGTAG = LogUtil
             .makeLogTag(NotificationReceiver.class);
 

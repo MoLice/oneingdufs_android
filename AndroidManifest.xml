@@ -4,19 +4,10 @@
     android:versionCode="1"
     android:versionName="1.00" >
 
-    <uses-sdk android:minSdkVersion="7" />
-    <!-- 添加网络访问权限 -->
-    <uses-permission android:name="android.permission.INTERNET" />
-    
     <application
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/gdufsTheme">
-        
-        <service
-            android:name=".services.MessageService"
-            android:process=":message"></service>
-        
         <activity
             android:label="@string/app_name"
             android:launchMode="singleTask"
@@ -24,31 +15,77 @@
             android:screenOrientation="portrait">
             <intent-filter >
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <!-- 注册 RegisterActivity -->
         <activity
             android:name=".activities.RegisterActivity"
+            android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"></activity>
         <!-- 登录 LoginActivity -->
         <activity
             android:name=".activities.LoginActivity"
+            android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"></activity>
-        <!-- 用户中心 HomeActivity -->
-        <activity
-            android:name=".activities.HomeActivity"
-            android:screenOrientation="portrait"></activity>
+        
         <!-- 校园生活 LifeActivity -->
+            <!-- 校园生活-订水 -->
         <activity
-            android:name=".activities.LifeActivity"
+            android:name=".activities.LifeWaterActivity"
+            android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"></activity>
+            <!-- 校园生活-报修 -->
+        <activity
+            android:name=".activities.LifeFixActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait"></activity>
+            <!-- 校园生活-校园卡 -->
+        <activity
+            android:name=".activities.LifeCardActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait"></activity>
+        
         <!-- 用户中心 -->
-            <!-- 用户中心-个人信息 UserInfoActivity -->
+        <activity
+            android:name=".activities.UserHomeActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait"></activity>
+            <!-- 用户中心-个人信息 -->
         <activity
             android:name=".activities.UserInfoActivity"
+            android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"></activity>
+            <!-- 用户中心-在校相关 UserAtSchoolActivity -->
+        <activity
+            android:name=".activities.UserAtSchoolActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait"></activity>
+        <!-- 关于 -->
+        <activity
+            android:name=".activities.AboutActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait"></activity>
+        
+        <!-- AndroidPN Service -->
+        <service
+            android:enabled="true"
+            android:name=".androidpn.NotificationService"
+            android:label="消息推送服务">
+            <intent-filter>
+                <!-- 和NotificationService.SERVICE_NAME保持一致 -->
+                <action android:name="com.molice.oneingdufs.androidpn.NotificationService" />
+            </intent-filter>
+        </service>
     </application>
+    
+    <uses-sdk android:minSdkVersion="7" />
+    <!-- 添加网络访问、手机状态、网络状态、振动权限 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
 
 </manifest>

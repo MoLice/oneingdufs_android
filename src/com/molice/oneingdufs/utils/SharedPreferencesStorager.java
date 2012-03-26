@@ -3,6 +3,7 @@ package com.molice.oneingdufs.utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.util.Log;
 
 import com.molice.oneingdufs.interfaces.IDataStorager;
 
@@ -15,7 +16,7 @@ public class SharedPreferencesStorager implements IDataStorager {
 	// SharedPreferences编辑器
 	private Editor editor;
 	// 设定SharedPreferences文件名
-	private final String FILENAME = "SETTING_Infos";
+	private final String FILENAME = "oneingdufs_storager";
 	
 	public SharedPreferencesStorager(Context context) {
 		preferences = context.getSharedPreferences(FILENAME, 0);
@@ -62,6 +63,7 @@ public class SharedPreferencesStorager implements IDataStorager {
 
 	@Override
 	public Boolean isExist(String key) {
+		Log.d("SharedPreferencesStorager#isExist(), key=" + key, String.valueOf(preferences.contains(key)));
 		return preferences.contains(key);
 	}
 
@@ -75,7 +77,7 @@ public class SharedPreferencesStorager implements IDataStorager {
 		if(preferences.contains(key)) {
 			editor.remove(key);
 		}
+		Log.d("SharedPreferencesStorager#del,contains(" + key + ")", String.valueOf(preferences.contains(key)));
 		return this;
 	}
-	
 }

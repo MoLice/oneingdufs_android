@@ -16,8 +16,8 @@ import android.view.View.OnFocusChangeListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.molice.oneingdufs.R;
 import com.molice.oneingdufs.interfaces.IFormValidator;
@@ -36,12 +36,14 @@ public class FormValidator implements IFormValidator {
 	private JSONArray form;
 	// 错误存储列表
 	private JSONObject errorlist;
-	// 存储input原始值的字符集，用于判断表单是否发生变动
+	// 存储input原始值的字符集，用于判断表单是否发生变动，若表单提交后仍可能停留在当前视图，则需要调用{@link #updateOriInputsValue()}对其进行更新，以正确响应用户再次的修改
 	private JSONObject oriInputsValue;
 	// 错误时label显示的颜色
 	private int color_error;
 	// label默认显示的颜色
 	private int color_label;
+	// 本地存储
+	private SharedPreferencesStorager storager;
 	
 	/**
 	 * @param activity 显示该表单的Activity实例，用于在类中进行findViewById()、getResources()操作
@@ -67,6 +69,7 @@ public class FormValidator implements IFormValidator {
 		this.oriInputsValue = new JSONObject();
 		// 初始化form数据，替换其中的资源标识符
 		this.form = initData(form);
+		this.storager = new SharedPreferencesStorager(this.activity);
 	}
 	/**
 	 * 遍历所有input和label
@@ -80,24 +83,39 @@ public class FormValidator implements IFormValidator {
 		int length = form.length();
 		for(int i=0; i<length; i++) {
 			JSONObject formData = form.optJSONObject(i);
-			EditText input = (EditText) activity.findViewById(formData.optInt("input"));
+			View view = activity.findViewById(formData.optInt("input"));
 			TextView label = (TextView) activity.findViewById(formData.optInt("input_label"));
 			String label_text = resources.getString(formData.optInt("label_text"));
 			String error_message = resources.getString(formData.optInt("error_message"));
 			InputData inputData = new InputData();
 			inputData.index = i;
 			inputData.input_name = formData.optString("input_name");
-			input.setTag(inputData);
+			view.setTag(inputData);
 			label.setTag(inputData);
+			
+			Spinner inputS = null;
+			EditText inputE = null;
+			
+			if(view instanceof Spinner) {
+				inputS = (Spinner) view;
+
+			} else {
+				inputE = (EditText) view;
+			}
 			try {
-				formData.putOpt("input", input);
+				if(inputS != null) {
+					formData.putOpt("input", inputS);
+					oriInputsValue.putOpt(formData.optString("input_name"), inputS.getSelectedItem().toString());
+				} else if(inputE != null) {
+					formData.putOpt("input", inputE);
+					oriInputsValue.putOpt(formData.optString("input_name"), inputE.getText().toString());
+				}
 				formData.putOpt("input_label", label);
 				formData.putOpt("label_text", label_text);
 				formData.putOpt("error_message", error_message);
-				oriInputsValue.putOpt(formData.optString("input_name"), input.getText().toString());
 				form.put(i, formData);
 			} catch (Exception e) {
-				Log.d("JSON错误", "initData, i=" + String.valueOf(i) + " e=" + e.toString());
+				Log.d("JSON错误", "FormValidator#initData, i=" + String.valueOf(i) + ", e=" + e.toString());
 			}
 		}
 		return form;
@@ -127,8 +145,37 @@ public class FormValidator implements IFormValidator {
 	}
 	
 	/**
+	 * 若表单已修改，则在用户按返回键的时候弹出提示，确认是否返回
+	 * @param keyCode
+	 * @param event
+	 * @return 在onKeyDown中对返回值进行判断，若为true，则onKeyDown应该return super.onKeyDown(keyCode, event);若为false，则onKeyDown应该return false;
+	 */
+	public void checkBackIfFormModified() {
+		if(isFormModified()) {
+			new AlertDialog.Builder(activity)
+				.setMessage("若返回将会丢失已填数据，确定返回吗？")
+				.setPositiveButton("确定", new OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						dialog.dismiss();
+						activity.finish();
+					}
+				})
+				.setNegativeButton("取消", new OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						dialog.cancel();
+					}
+				})
+				.show();
+		} else {
+			activity.finish();
+		}
+	}
+	
+	/**
 	 * 用于请求结束且因服务端表单验证失败而导致请求失败的情况下，根据服务端返回的错误信息更新界面<br />
-	 * 在initData()内已经将InputData通过setTag()添加到label内，因此此处根据input_name来查找label（findViewWithTag()是Android2.2及以上的）<br />
+	 * 在initData()内已经将InputData通过setTag()添加到label内，因此此处根据input_name来查找label（因为tag是一个对象，所以不适合用findViewWithTag）<br />
 	 * <strong>注意：使用本方法的前提是layout必须严格按照模板来做，EditText、TextView均为同一个LinearLayou的直接子元素</strong>
 	 * @param formErrors 服务端返回的表单错误提示信息
 	 */
@@ -145,8 +192,8 @@ public class FormValidator implements IFormValidator {
 			childCount = viewParent.getChildCount();
 			for(int i=0; i<childCount; i++) {
 				View child = viewParent.getChildAt(i);
-				if(child instanceof Button || child instanceof EditText) {
-					// 因为Button、EditText均继承自TextView，所以先排除
+				if(child instanceof Button || child instanceof EditText || child instanceof Spinner) {
+					// 因为Button、EditText、Spinner均继承自TextView，所以先排除，只要对TextView操作
 				} else if(child instanceof TextView) {
 					TextView label = (TextView) viewParent.getChildAt(i);
 					InputData inputData = (InputData) child.getTag();
@@ -160,34 +207,7 @@ public class FormValidator implements IFormValidator {
 				}
 			}
 		}
-		alertFormMsgDialog(null, null);
-	}
-	/**
-	 * 弹出Toast提示，并在短时间内自动消失
-	 * @param message 提示内容，若为null则显示“请检查输入”
-	 */
-	public void alertFormToast(String message) {
-		if(message == null) message = "请检查输入";
-		Toast.makeText(activity.getApplicationContext(), message, Toast.LENGTH_SHORT).show();
-	}
-	/**
-	 * 弹出对话框，且只拥有一个“确定”按钮，按下按钮则关闭对话框
-	 * @param title　对话框标题，若为null则默认“输入错误”
-	 * @param message 对话框内容，若为null则默认“请按提示修改”
-	 */
-	public void alertFormMsgDialog(String title, String message) {
-		if(title == null) title = "输入错误";
-		if(message == null) message = "请按提示修改";
-		new AlertDialog.Builder(activity)
-		.setTitle(title)
-		.setMessage(message)
-		.setPositiveButton("确定", new OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				dialog.dismiss();
-			}
-		})
-		.show();
+		ProjectConstants.alertDialog(activity, "输入错误", "请按照提示修改", true);
 	}
 	
 	@Override
@@ -221,9 +241,11 @@ public class FormValidator implements IFormValidator {
 	public boolean isFormModified() {
 		JSONObject currentInput = getInput();
 		@SuppressWarnings("unchecked")
-		Iterator<String> iterator = currentInput.keys();
+		Iterator<String> iterator = oriInputsValue.keys();
 		while(iterator.hasNext()) {
-			if(!currentInput.optString(iterator.next()).equals(oriInputsValue.optString(iterator.next()))) {
+			String key = iterator.next();
+			if(!currentInput.optString(key).equals(oriInputsValue.optString(key))) {
+				Log.d("FormValidator#isFormModified", "不匹配，当前key=" + key + ", value=" + currentInput.optString(key) + "," + oriInputsValue.optString(key));
 				return true;
 			}
 		}
@@ -249,8 +271,13 @@ public class FormValidator implements IFormValidator {
 	
 	@Override
 	public boolean isInputCorrect(View input, TextView label, String input_name, String rex, String label_text, String error_message) {
-		EditText _input = (EditText) input;
-		if(_input.getText().toString().matches(rex)) {
+		String value = null;
+		if(input instanceof Spinner) {
+			value = ((Spinner) input).getSelectedItem().toString();
+		} else if(input instanceof EditText) {
+			value = ((EditText) input).getText().toString();
+		}
+		if(value.matches(rex)) {
 			// 验证通过
 			updateFormMessage(label, input_name, label_text, false);
 			return true;
@@ -288,27 +315,74 @@ public class FormValidator implements IFormValidator {
 	@Override
 	public JSONObject getInput() {
 		int length = form.length();
-		EditText input = null;
 		JSONObject result = new JSONObject();
 		for(int i=0; i<length; i++) {
 			JSONObject inputData = form.optJSONObject(i);
-			input = (EditText) inputData.opt("input");
-			try {
-				result.put(inputData.optString("input_name"), input.getText().toString());
-			} catch (Exception e) {
-				Log.d("JSON错误", "getInput，e=" + e.toString());
+			if(inputData.opt("input") instanceof Spinner) {
+				// Spinner
+				Spinner input = (Spinner) inputData.opt("input");
+				try {
+					result.put(inputData.optString("input_name"), input.getSelectedItem().toString());
+				} catch (Exception e) {
+					Log.d("JSON错误", "FormValidator#getInput, i=" + String.valueOf(i) + ", e=" + e.toString());
+				}
+			} else {
+				// EditText
+				EditText input = (EditText) inputData.opt("input");
+				try {
+					result.put(inputData.optString("input_name"), input.getText().toString());
+				} catch (Exception e) {
+					Log.d("JSON错误", "FormValidator#getInput, i=" + String.valueOf(i) + ", e=" + e.toString());
+				}
 			}
 		}
 		
 		return result;
 	}
+	
+	/**
+	 * 若表单提交后仍可能停留在当前视图，则需要调用该方法对{@link #oriInputsValue}进行更新，以正确响应用户再次的修改
+	 */
+	public void updateOriInputsValue() {
+		oriInputsValue = getInput();
+	}
 
 	
 	/**
 	 * 从本地存储里读取表单数据并显示出来
+	 * @param prefix 当前表单的前缀，包括下划线_，例如info_
 	 */
-	public void setInputFromLocalStorage() {
-		
+	public void setInputFromLocalStorage(String prefix) {
+		int length = form.length();
+		for(int i=0; i<length; i++) {
+			JSONObject inputData = form.optJSONObject(i);
+			String input_name = inputData.optString("input_name");
+			if(storager.isExist(prefix + input_name)) {
+				if(inputData.opt("input") instanceof Spinner) {
+					Spinner spinner = (Spinner) inputData.opt("input");
+					// Spinner类型的控件，在保存数据的时候就已经将其SelectedItem的索引存入Tag里
+					spinner.setSelection(new Integer(String.valueOf(spinner.getTag())), true);
+				} else {
+					EditText text = (EditText) inputData.opt("input");
+					text.setText(storager.get(prefix + input_name, ""));
+				}
+			}
+		}
+	}
+	
+	/**
+	 * 将表单数据保存到本地
+	 * @param prefix 当前表单的前缀，包括下划线_，例如info_
+	 */
+	public void setInputToLocalStorager(String prefix) {
+		JSONObject input = getInput();
+		@SuppressWarnings("unchecked")
+		Iterator<String> iterator = input.keys();
+		while(iterator.hasNext()) {
+			String key = iterator.next().toString();
+			String value = input.optString(key);
+			storager.set(prefix + key, value).save();
+		}
 	}
 	
 	/**
@@ -318,5 +392,5 @@ public class FormValidator implements IFormValidator {
 		int index;
 		String input_name;
 	}
-
+	
 }

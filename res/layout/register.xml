@@ -4,7 +4,7 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
-    <include layout="@layout/actionbar_layout" />
+    <include layout="@layout/actionbar" />
 
     <ScrollView
         android:layout_width="fill_parent"
@@ -12,10 +12,8 @@
         android:scrollbars="vertical" >
 
         <LinearLayout
-            android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:orientation="vertical"
-            android:padding="8dip" >
+            style="@style/FormWrapper">
 
             <!-- 用户名 -->
             <EditText
@@ -68,11 +66,11 @@
                 style="@style/FormItem"
                 android:orientation="horizontal">
                 <Button
-                    android:id="@+id/register_login"
+                    android:id="@+id/register_back"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/register_login" />
+                    android:text="@string/register_back" />
 
                 <Button
                     android:id="@+id/register_submit"

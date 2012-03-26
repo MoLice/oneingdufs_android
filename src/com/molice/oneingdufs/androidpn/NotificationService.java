@@ -20,13 +20,13 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
+import com.molice.oneingdufs.utils.SharedPreferencesStorager;
+
 import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.os.IBinder;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
@@ -44,7 +44,8 @@ public class NotificationService extends Service {
     private static final String LOGTAG = LogUtil
             .makeLogTag(NotificationService.class);
 
-    public static final String SERVICE_NAME = "org.androidpn.client.NotificationService";
+    // 需和AndroidManifest.xml里的service filter一致
+    public static final String SERVICE_NAME = "com.molice.oneingdufs.androidpn.NotificationService";
 
     private TelephonyManager telephonyManager;
 
@@ -66,7 +67,7 @@ public class NotificationService extends Service {
 
     private XmppManager xmppManager;
 
-    private SharedPreferences sharedPrefs;
+    private SharedPreferencesStorager sharedPrefs;
 
     private String deviceId;
 
@@ -86,27 +87,23 @@ public class NotificationService extends Service {
         // wifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
         // connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 
-        sharedPrefs = getSharedPreferences(Constants.SHARED_PREFERENCE_NAME,
-                Context.MODE_PRIVATE);
+        sharedPrefs = new SharedPreferencesStorager(this);
         // Get deviceId
         deviceId = telephonyManager.getDeviceId();
         // Log.d(LOGTAG, "deviceId=" + deviceId);
-        Editor editor = sharedPrefs.edit();
-        editor.putString(Constants.DEVICE_ID, deviceId);
-        editor.commit();
+        sharedPrefs.set(Constants.DEVICE_ID, deviceId).save();
 
         // If running on an emulator
         if (deviceId == null || deviceId.trim().length() == 0
                 || deviceId.matches("0+")) {
-            if (sharedPrefs.contains("EMULATOR_DEVICE_ID")) {
-                deviceId = sharedPrefs.getString(Constants.EMULATOR_DEVICE_ID,
-                        "");
+            if (sharedPrefs.isExist(Constants.EMULATOR_DEVICE_ID)) {
+                deviceId = sharedPrefs.get(Constants.EMULATOR_DEVICE_ID, "");
             } else {
                 deviceId = (new StringBuilder("EMU")).append(
                         (new Random(System.currentTimeMillis())).nextLong())
                         .toString();
-                editor.putString(Constants.EMULATOR_DEVICE_ID, deviceId);
-                editor.commit();
+                sharedPrefs.set(Constants.EMULATOR_DEVICE_ID, deviceId)
+                	.save();
             }
         }
         Log.d(LOGTAG, "deviceId=" + deviceId);
@@ -168,7 +165,7 @@ public class NotificationService extends Service {
         return xmppManager;
     }
 
-    public SharedPreferences getSharedPreferences() {
+    public SharedPreferencesStorager getSharedPreferences() {
         return sharedPrefs;
     }
 
@@ -258,6 +255,7 @@ public class NotificationService extends Service {
                     && task != null) {
                 result = notificationService.getExecutorService().submit(task);
             }
+            Log.d("333TaskSubmitter#submit", "result=" + result.toString());
             return result;
         }
 

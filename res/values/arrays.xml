@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 楼号 -->
+    <string-array name="user_atschool_building">
+        <item>楼号</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+    </string-array>
+    
+    <!-- 楼层 -->
+    <string-array name="user_atschool_layer">
+        <item>楼层</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+    </string-array>
+    
+    <!-- 宿舍号 只为显示文字提示，真正数据是动态从服务端获取的 -->
+    <string-array name="user_atschool_room">
+        <item>请先选择楼号和楼层</item>
+    </string-array>
+    
+    <!-- 订水桶数 -->
+    <string-array name="life_water_number">
+        <item>2桶</item>
+        <item>1桶</item>
+    </string-array>
+</resources>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <include layout="@layout/actionbar" />
+
+    <LinearLayout style="@style/FormWrapper" >
+
+        <!-- 昵称、学号 -->
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="8dip" >
+            <TextView
+                android:id="@+id/user_info_username"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp" />
+            <TextView
+                android:id="@+id/user_info_studentId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:textSize="18sp" />
+        </RelativeLayout>
+
+        <View
+            style="@style/SplitLine"
+            android:layout_marginBottom="8dip"
+            android:layout_marginTop="8dip" />
+        
+        <LinearLayout
+            style="@style/FormItem"
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/user_home_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="个人信息"/>
+            <Button
+                android:id="@+id/user_home_message"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="消息中心"/>
+        </LinearLayout>
+        <LinearLayout
+            style="@style/FormItem"
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/user_home_class"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="我的班级"/>
+            <Button
+                android:id="@+id/user_home_todo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="我的日程"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

@@ -22,9 +22,10 @@ package com.molice.oneingdufs.androidpn;
  */
 public class Constants {
 
-    public static final String SHARED_PREFERENCE_NAME = "client_preferences";
+	// 和SharedPreferencesStorager一致
+    public static final String SHARED_PREFERENCE_NAME = "oneingdufs_storager";
 
-    // PREFERENCE KEYS
+    // SharedPreference Key名
 
     public static final String CALLBACK_ACTIVITY_PACKAGE_NAME = "CALLBACK_ACTIVITY_PACKAGE_NAME";
 
@@ -41,8 +42,6 @@ public class Constants {
     public static final String XMPP_USERNAME = "XMPP_USERNAME";
 
     public static final String XMPP_PASSWORD = "XMPP_PASSWORD";
-
-    // public static final String USER_KEY = "USER_KEY";
 
     public static final String DEVICE_ID = "DEVICE_ID";
 
@@ -70,11 +69,13 @@ public class Constants {
 
     public static final String NOTIFICATION_URI = "NOTIFICATION_URI";
 
-    // INTENT ACTIONS
+    /**
+     * INTENT ACTIONS，这些都在{@link NotificationService#registerReceiver(android.content.BroadcastReceiver, android.content.IntentFilter) registerReceiver()}注册
+     */
 
-    public static final String ACTION_SHOW_NOTIFICATION = "org.androidpn.client.SHOW_NOTIFICATION";
+    public static final String ACTION_SHOW_NOTIFICATION = "com.molice.oneingdufs.SHOW_NOTIFICATION";
 
-    public static final String ACTION_NOTIFICATION_CLICKED = "org.androidpn.client.NOTIFICATION_CLICKED";
+    public static final String ACTION_NOTIFICATION_CLICKED = "com.molice.oneingdufs.NOTIFICATION_CLICKED";
 
     public static final String ACTION_NOTIFICATION_CLEARED = "org.androidpn.client.NOTIFICATION_CLEARED";
 
