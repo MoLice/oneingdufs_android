@@ -1,13 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    style="Theme.Dialog"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:orientation="vertical" >
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
 
-    <TextView
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="关于关于，换成弹出框主题" />
+        android:paddingBottom="50dip"
+        android:orientation="vertical"
+        android:layout_centerInParent="true"
+        >
+	    <ImageView
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:padding="8dip"
+	        android:src="@drawable/logo"/>
+	    <TextView
+	        android:layout_width="fill_parent"
+	        android:layout_height="fill_parent"
+	        android:gravity="center"
+	        android:textSize="19sp"
+	        android:textColor="@color/gdufs_blue"
+	        android:text="One in GDUFS" />
+	    <TextView
+	        android:layout_width="fill_parent"
+	        android:layout_height="fill_parent"
+	        android:paddingRight="7dip"
+	        android:gravity="right"
+	        android:textSize="10sp"
+	        android:text="version 0.80"/>
+    </LinearLayout>
+    
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:paddingBottom="10dip"
+        android:gravity="center"
+        android:textSize="10sp"
+        android:text="sf.molice@gmail.com"/>
 
-</LinearLayout>
+</RelativeLayout>

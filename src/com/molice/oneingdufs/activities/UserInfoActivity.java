@@ -57,6 +57,11 @@ public class UserInfoActivity extends Activity {
 		
 		storager = new SharedPreferencesStorager(this);
 		appMenu = new AppMenu(this);
+		
+		// 设置用户名、学号
+		info_username.setText(storager.get("username", ""));
+		info_studentId.setText(storager.get("studentId", ""));
+		
 		// 自动填充手机号码
 		info_telphone.setText(storager.get("phoneNumber", ""));
 		

@@ -29,6 +29,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 /**
  * 登录Activity<br />
@@ -79,6 +80,14 @@ public class LoginActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
+				storager.set("username", login_username.getText().toString())
+					.set("password", login_password.getText().toString())
+					.set("isLogin", true)
+					.save();
+				Toast.makeText(LoginActivity.this, "欢迎回来，" + storager.get("username", ""), Toast.LENGTH_LONG);
+				// 返回到某个Activity
+				callActivityAfterLogin("success");
+				/*
 				// 发起服务器连接，准备登录
 				ClientToServer client = new ClientToServer(LoginActivity.this);
 				// 添加http请求监听器，在请求的不同阶段进行操作
@@ -93,6 +102,7 @@ public class LoginActivity extends Activity {
 				}
 				// 发起post登录请求，请求标志位为0
 				client.post(ProjectConstants.URL_LOGIN, postData, 0);
+				*/
 			}
 		});
 		

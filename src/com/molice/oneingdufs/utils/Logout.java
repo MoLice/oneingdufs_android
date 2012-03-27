@@ -45,9 +45,19 @@ public class Logout {
 			.setPositiveButton("退出", new OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
+					/*
 					Log.d("退出登录", "真的发送了");
 					client.setOnRequestListener(listener);
 					client.post(ProjectConstants.URL_LOGOUT, new JSONObject(), 0);
+					*/
+					storager.del("sessionid")
+						.set("isLogin", false)
+						.save();
+					// 关闭对话框
+					sureLogout.dismiss();
+					Toast.makeText(context, "退出成功", Toast.LENGTH_SHORT).show();
+					// 跳转到首页
+					context.startActivity(new Intent(context.getApplicationContext(), MainActivity.class));
 				}
 			})
 			.setNegativeButton("取消", new OnClickListener() {

@@ -50,6 +50,7 @@ public final class R {
     }
     public static final class drawable {
         public static final int ic_launcher=0x7f020000;
+        public static final int logo=0x7f020001;
     }
     public static final class id {
         public static final int actionbar=0x7f090000;
@@ -124,21 +125,23 @@ public final class R {
         public static final int user_home_class=0x7f090049;
         public static final int user_home_info=0x7f090047;
         public static final int user_home_message=0x7f090048;
+        public static final int user_home_studentId=0x7f090046;
         public static final int user_home_todo=0x7f09004a;
-        public static final int user_info_cancel=0x7f090055;
-        public static final int user_info_cornet=0x7f090051;
-        public static final int user_info_cornet_label=0x7f090052;
-        public static final int user_info_email=0x7f09004b;
-        public static final int user_info_email_label=0x7f09004c;
-        public static final int user_info_qq=0x7f090053;
-        public static final int user_info_qq_label=0x7f090054;
-        public static final int user_info_studentId=0x7f090046;
-        public static final int user_info_submit=0x7f090056;
-        public static final int user_info_telphone=0x7f09004f;
-        public static final int user_info_telphone_label=0x7f090050;
-        public static final int user_info_truename=0x7f09004d;
-        public static final int user_info_truename_label=0x7f09004e;
-        public static final int user_info_username=0x7f090045;
+        public static final int user_home_username=0x7f090045;
+        public static final int user_info_cancel=0x7f090057;
+        public static final int user_info_cornet=0x7f090053;
+        public static final int user_info_cornet_label=0x7f090054;
+        public static final int user_info_email=0x7f09004d;
+        public static final int user_info_email_label=0x7f09004e;
+        public static final int user_info_qq=0x7f090055;
+        public static final int user_info_qq_label=0x7f090056;
+        public static final int user_info_studentId=0x7f09004c;
+        public static final int user_info_submit=0x7f090058;
+        public static final int user_info_telphone=0x7f090051;
+        public static final int user_info_telphone_label=0x7f090052;
+        public static final int user_info_truename=0x7f09004f;
+        public static final int user_info_truename_label=0x7f090050;
+        public static final int user_info_username=0x7f09004b;
     }
     public static final class layout {
         public static final int about=0x7f030000;

@@ -87,6 +87,7 @@ public class RegisterActivity extends Activity {
 					if(validator.isFormCorrect()) {
 						JSONObject input = validator.getInput();
 						// 添加XMPP用户名
+						/*
 						try {
 							input.putOpt("apn_username", storager.get(Constants.XMPP_USERNAME, ""));
 						} catch (Exception e) {
@@ -98,6 +99,14 @@ public class RegisterActivity extends Activity {
 						client.setOnRequestListener(httpRequestListener);
 						// 将表单数据添加到http请求
 						client.post(ProjectConstants.URL_REGISTER, input, 0);
+						*/
+						storager.set("username", input.optString("username"))
+							.set("studentId", input.optString("studentId"))
+							.set("isLogin", true)
+							.save();
+						// 跳转到MainActivity
+						startActivity(new Intent(getApplicationContext(), MainActivity.class));
+						finish();
 					} else {
 						Log.d("表单验证", "失败");
 						ProjectConstants.alertDialog(RegisterActivity.this, "输入错误", "请按照提示修改", true);

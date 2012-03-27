@@ -14,12 +14,12 @@
             android:layout_height="wrap_content"
             android:paddingBottom="8dip" >
             <TextView
-                android:id="@+id/user_info_username"
+                android:id="@+id/user_home_username"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="18sp" />
             <TextView
-                android:id="@+id/user_info_studentId"
+                android:id="@+id/user_home_studentId"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"

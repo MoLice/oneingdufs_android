@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.molice.oneingdufs"
     android:versionCode="1"
-    android:versionName="1.00" >
+    android:versionName="0.80" >
 
     <application
         android:icon="@drawable/ic_launcher"
