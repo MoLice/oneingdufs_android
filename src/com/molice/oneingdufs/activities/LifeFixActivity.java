@@ -14,6 +14,7 @@ import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.DialogInterface.OnCancelListener;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
@@ -96,6 +97,11 @@ public class LifeFixActivity extends Activity{
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						dialog.cancel();
+					}
+				})
+				.setOnCancelListener(new OnCancelListener() {
+					@Override
+					public void onCancel(DialogInterface dialog) {
 						finish();
 					}
 				})
