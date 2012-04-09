@@ -56,6 +56,14 @@ public class LoginActivity extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+		// 如果当前已登录，则屏蔽LoginActivity
+		storager = new SharedPreferencesStorager(this);
+		if(storager.get("isLogin", false)) {
+			Toast.makeText(this, "已登录", Toast.LENGTH_SHORT).show();
+			finish();
+		}
+		
 		setContentView(R.layout.login);
 		
 		// 设置标题栏
@@ -67,7 +75,6 @@ public class LoginActivity extends Activity {
 		login_submit = (Button) findViewById(R.id.login_submit);
 		login_register = (Button) findViewById(R.id.login_register);
 		
-		storager = new SharedPreferencesStorager(this);
 		appMenu = new AppMenu(this);
 		
 		// 如果本地已存储过，则自动填充用户名
@@ -80,13 +87,18 @@ public class LoginActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-				storager.set("username", login_username.getText().toString())
-					.set("password", login_password.getText().toString())
-					.set("isLogin", true)
-					.save();
-				Toast.makeText(LoginActivity.this, "欢迎回来，" + storager.get("username", ""), Toast.LENGTH_LONG);
-				// 返回到某个Activity
-				callActivityAfterLogin("success");
+				String username = login_username.getText().toString();
+				String password = login_password.getText().toString();
+				if(!username.equals("") && username.equals(storager.get("username", "")) && password.equals(storager.get("password", ""))) {
+					// 登录成功
+					storager.set("isLogin", true).save();
+					Toast.makeText(LoginActivity.this, "欢迎回来，" + storager.get("username", ""), Toast.LENGTH_LONG).show();
+					// 返回到某个Activity
+					callActivityAfterLogin("success");
+				} else {
+					// 登录失败
+					Toast.makeText(LoginActivity.this, "登录失败，请检查用户名、密码，或者重新注册", Toast.LENGTH_LONG).show();
+				}
 				/*
 				// 发起服务器连接，准备登录
 				ClientToServer client = new ClientToServer(LoginActivity.this);

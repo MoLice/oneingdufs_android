@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Tab2：失物列表 -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/common_lost_lost"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+    
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dip"
+        android:layout_marginBottom="6dip"
+        android:gravity="center"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="30dip"
+            android:orientation="vertical">
+	        <TextView
+	            android:id="@+id/common_lost_lost_byDatetime"
+	            android:layout_width="wrap_content"
+	            android:layout_height="fill_parent"
+	            android:paddingBottom="3dip"
+	            android:textColor="@color/green"
+	            android:textSize="16dip"
+	            android:text="@string/common_lost_lost_byDatetime"/>
+	        <View
+	            android:id="@+id/common_lost_lost_byDatetime_line"
+	            android:layout_width="fill_parent"
+	            android:layout_height="2dip"
+	            android:background="@color/green" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dip"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/common_lost_lost_byTag"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:paddingBottom="3dip"
+                android:textColor="@color/black_light"
+                android:textSize="16dip"
+                android:text="@string/common_lost_lost_byTag"/>
+            <View
+                android:id="@+id/common_lost_lost_byTag_line"
+                android:layout_width="fill_parent"
+                android:layout_height="2dip"
+                android:background="@color/black_light" />
+        </LinearLayout>
+    </LinearLayout>
+    
+    <View style="@style/SplitLine"/>
+
+    <ListView
+        android:id="@+id/common_lost_lostlist"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>

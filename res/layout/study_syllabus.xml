@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <include layout="@layout/actionbar"/>
+    
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="horizontal">
+        <!-- 左边：课程部分 -->
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:weightSum="13"
+            android:orientation="vertical">
+            <!-- 上午 -->
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="5"
+                android:orientation="horizontal">
+                <TextView
+                    style="@style/SyllabusNoon"
+                    android:background="@color/pink_light"
+                    android:text="上&#x000A;&#x000A;午"/>
+                <!-- 小节列 -->
+                <LinearLayout
+                    style="@style/SyllabusCutters">
+                    <TextView
+                        style="@style/SyllabusCutter"
+                        android:text="1"/>
+                    <TextView
+                        style="@style/SyllabusCutter"
+                        android:text="2"/>
+                    <TextView
+                        style="@style/SyllabusCutter"
+                        android:text="3"/>
+                    <TextView
+                        style="@style/SyllabusCutter"
+                        android:text="4"/>
+                    <TextView
+                        style="@style/SyllabusCutter"
+                        android:text="5"/>
+                </LinearLayout>
+                <!-- 课程列 -->
+                <LinearLayout
+                    android:id="@+id/study_syllabus_classes1"
+                    style="@style/SyllabusClasses"
+                    android:weightSum="5">
+                    <TextView
+					    style="@style/SyllabusClass"
+					    android:layout_weight="2"
+					    android:text=""/>
+                    <TextView
+                        style="@style/SyllabusClass"
+                        android:layout_weight="2"
+                        android:background="@color/pink_light"
+                        android:text=""/>
+                </LinearLayout>
+            </LinearLayout>
+            <!-- 下午 -->
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="4"
+                android:orientation="horizontal">
+                <TextView
+                    style="@style/SyllabusNoon"
+                    android:background="@color/green_light"
+                    android:text="下&#x000A;&#x000A;午"/>
+                <!-- 小节列 -->
+                <LinearLayout
+                    style="@style/SyllabusCutters">
+                    <TextView
+                        style="@style/SyllabusCutter"
+                        android:text="6"/>
+                    <TextView
+                        style="@style/SyllabusCutter"
+                        android:text="7"/>
+                    <TextView
+                        style="@style/SyllabusCutter"
+                        android:text="8"/>
+                    <TextView
+                        style="@style/SyllabusCutter"
+                        android:text="9"/>
+                </LinearLayout>
+                <!-- 课程列 -->
+                <LinearLayout
+                    android:id="@+id/study_syllabus_classes2"
+                    style="@style/SyllabusClasses"
+                    android:weightSum="4">
+                    <TextView
+                        style="@style/SyllabusClass"
+                        android:layout_weight="2"
+                        android:text=""/>
+                    <TextView
+                        style="@style/SyllabusClass"
+                        android:layout_weight="2"
+                        android:background="@color/green_light"
+                        android:text=""/>
+                </LinearLayout>
+            </LinearLayout>
+            <!-- 晚上 -->
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="4"
+                android:orientation="horizontal">
+                <TextView
+                    style="@style/SyllabusNoon"
+                    android:background="@color/blue_light"
+                    android:text="晚&#x000A;&#x000A;上"/>
+                <!-- 小节列 -->
+                <LinearLayout
+                    style="@style/SyllabusCutters">
+                    <TextView
+                        style="@style/SyllabusCutter"
+                        android:text="10"/>
+                    <TextView
+                        style="@style/SyllabusCutter"
+                        android:text="11"/>
+                    <TextView
+                        style="@style/SyllabusCutter"
+                        android:text="12"/>
+                    <TextView
+                        style="@style/SyllabusCutter"
+                        android:text="13"/>
+                </LinearLayout>
+                <!-- 课程列 -->
+                <LinearLayout
+                    android:id="@+id/study_syllabus_classes3"
+                    style="@style/SyllabusClasses"
+                    android:weightSum="4">
+                    <TextView
+                        style="@style/SyllabusClass"
+                        android:layout_weight="2"
+                        android:text=""/>
+                    <TextView
+                        style="@style/SyllabusClass"
+                        android:layout_weight="2"
+                        android:background="@color/blue_light"
+                        android:text=""/>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+        
+        <!-- 右边：星期几 -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:orientation="vertical">
+            <TextView android:id="@+id/study_syllabus_day1" style="@style/SyllabusDay" android:text="星期一" android:textColor="@color/red_light"/>
+            <TextView android:id="@+id/study_syllabus_day2" style="@style/SyllabusDay" android:text="星期二"/>
+            <TextView android:id="@+id/study_syllabus_day3" style="@style/SyllabusDay" android:text="星期三"/>
+            <TextView android:id="@+id/study_syllabus_day4" style="@style/SyllabusDay" android:text="星期四"/>
+            <TextView android:id="@+id/study_syllabus_day5" style="@style/SyllabusDay" android:text="星期五"/>
+            <TextView android:id="@+id/study_syllabus_day6" style="@style/SyllabusDay" android:text="星期六"/>
+            <TextView android:id="@+id/study_syllabus_day7" style="@style/SyllabusDay" android:text="星期日"/>
+        </LinearLayout>
+        <!-- 当前星期几 -->
+        <LinearLayout
+            android:layout_width="3dip"
+            android:layout_height="fill_parent"
+            android:orientation="vertical">
+            <View android:id="@+id/study_syllabus_line1" style="@style/SyllabusDayLine" android:background="@color/red_light"/>
+            <View android:id="@+id/study_syllabus_line2" style="@style/SyllabusDayLine"/>
+            <View android:id="@+id/study_syllabus_line3" style="@style/SyllabusDayLine"/>
+            <View android:id="@+id/study_syllabus_line4" style="@style/SyllabusDayLine"/>
+            <View android:id="@+id/study_syllabus_line5" style="@style/SyllabusDayLine"/>
+            <View android:id="@+id/study_syllabus_line6" style="@style/SyllabusDayLine"/>
+            <View android:id="@+id/study_syllabus_line7" style="@style/SyllabusDayLine"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

@@ -45,6 +45,14 @@ public class RegisterActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        
+		// 如果当前已登录，则屏蔽LoginActivity
+		storager = new SharedPreferencesStorager(this);
+		if(storager.get("isLogin", false)) {
+			Toast.makeText(this, "已登录", Toast.LENGTH_SHORT).show();
+			finish();
+		}
+		
         setContentView(R.layout.register);
         
         // 设置标题栏
@@ -53,7 +61,6 @@ public class RegisterActivity extends Activity {
 		register_back = (Button) findViewById(R.id.register_back);
 		register_submit = (Button) findViewById(R.id.register_submit);
 		
-		storager = new SharedPreferencesStorager(this);
 		appMenu = new AppMenu(this);
 		
 		form = new JSONArray();
@@ -101,9 +108,11 @@ public class RegisterActivity extends Activity {
 						client.post(ProjectConstants.URL_REGISTER, input, 0);
 						*/
 						storager.set("username", input.optString("username"))
+							.set("password", input.optString("password"))
 							.set("studentId", input.optString("studentId"))
 							.set("isLogin", true)
 							.save();
+						Toast.makeText(RegisterActivity.this, "注册成功，已登录", Toast.LENGTH_SHORT).show();
 						// 跳转到MainActivity
 						startActivity(new Intent(getApplicationContext(), MainActivity.class));
 						finish();

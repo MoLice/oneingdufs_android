@@ -9,27 +9,7 @@
     <LinearLayout style="@style/FormWrapper" >
 
         <!-- 昵称、学号 -->
-        <RelativeLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="8dip" >
-            <TextView
-                android:id="@+id/user_home_username"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="18sp" />
-            <TextView
-                android:id="@+id/user_home_studentId"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:textSize="18sp" />
-        </RelativeLayout>
-
-        <View
-            style="@style/SplitLine"
-            android:layout_marginBottom="8dip"
-            android:layout_marginTop="8dip" />
+        <include layout="@layout/user_title"/>
         
         <LinearLayout
             style="@style/FormItem"
@@ -39,29 +19,29 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="个人信息"/>
+                android:text="@string/user_home_info"/>
             <Button
                 android:id="@+id/user_home_message"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="消息中心"/>
+                android:text="@string/user_home_message"/>
         </LinearLayout>
         <LinearLayout
             style="@style/FormItem"
             android:orientation="horizontal">
             <Button
-                android:id="@+id/user_home_class"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="我的班级"/>
-            <Button
                 android:id="@+id/user_home_todo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="我的日程"/>
+                android:text="@string/user_home_todo"/>
+            <Button
+                android:id="@+id/user_home_class"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/user_home_relativeId"/>
         </LinearLayout>
     </LinearLayout>
 

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="6dip"
+    android:paddingRight="6dip"
+    android:layout_gravity="center_vertical"
+    android:descendantFocusability="blocksDescendants"
+    android:background="#ffffff"
+    android:orientation="horizontal" >
+    <!-- android:descendantFocusability="blocksDescendants"
+        屏蔽点击事件传递给子控件，以使ListView Item能接受点击 -->
+    
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:padding="4dip"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/checkbox_title"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dip"
+            android:textSize="18dip"
+            android:text="标题"/>
+        <TextView
+            android:id="@+id/checkbox_details"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14dip"
+            android:text="详情啊啊地方萨达发阿萨德飞阿"/>
+    </LinearLayout>
+
+    <CheckBox
+        android:id="@+id/checkbox_checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dip"
+        android:clickable="false"
+        android:focusable="false"
+        android:text="" />
+
+</LinearLayout>

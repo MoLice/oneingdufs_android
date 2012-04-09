@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:paddingTop="6dip"
+    android:paddingTop="8dip"
+    android:paddingBottom="12dip"
     android:orientation="vertical" >
 
     <TextView
@@ -19,12 +20,10 @@
         android:id="@+id/part_content"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:columnWidth="70dip"
+        android:columnWidth="65dip"
         android:gravity="bottom"
-        android:horizontalSpacing="10dip"
         android:numColumns="auto_fit"
-        android:stretchMode="columnWidth"
-        android:verticalSpacing="10dip" >
+        android:stretchMode="columnWidth">
     </GridView>
 
 </LinearLayout>

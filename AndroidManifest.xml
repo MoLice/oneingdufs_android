@@ -10,7 +10,8 @@
         android:theme="@style/gdufsTheme">
         <activity
             android:label="@string/app_name"
-            android:launchMode="singleTask"
+            android:launchMode="singleTop"
+            android:alwaysRetainTaskState="true"
             android:name=".activities.MainActivity"
             android:screenOrientation="portrait">
             <intent-filter >
@@ -18,52 +19,74 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <!-- 注册 RegisterActivity -->
+        <!-- 注册 -->
         <activity
             android:name=".activities.RegisterActivity"
+            android:launchMode="singleTop"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"></activity>
-        <!-- 登录 LoginActivity -->
+        <!-- 登录 -->
         <activity
             android:name=".activities.LoginActivity"
+            android:launchMode="singleTop"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait"></activity>
+        <!-- 在校学习 Study -->
+            <!-- 我的课表 -->
+        <activity
+            android:name=".activities.StudySyllabusActivity"
+            android:launchMode="singleTop"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"></activity>
         
-        <!-- 校园生活 LifeActivity -->
+        <!-- 校园生活 Life  -->
             <!-- 校园生活-订水 -->
         <activity
             android:name=".activities.LifeWaterActivity"
+            android:launchMode="singleTop"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"></activity>
             <!-- 校园生活-报修 -->
         <activity
             android:name=".activities.LifeFixActivity"
+            android:launchMode="singleTop"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"></activity>
             <!-- 校园生活-校园卡 -->
         <activity
             android:name=".activities.LifeCardActivity"
+            android:launchMode="singleTop"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait"></activity>
+        <!-- 公共消息 Common -->
+        <activity
+            android:name=".activities.CommonLostActivity"
+            android:launchMode="singleTop"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"></activity>
         
-        <!-- 用户中心 -->
+        <!-- 个人中心 UserHome -->
         <activity
             android:name=".activities.UserHomeActivity"
+            android:launchMode="singleTask"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"></activity>
-            <!-- 用户中心-个人信息 -->
+            <!-- 个人中心-个人信息 -->
         <activity
             android:name=".activities.UserInfoActivity"
+            android:launchMode="singleTop"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"></activity>
-            <!-- 用户中心-在校相关 UserAtSchoolActivity -->
+            <!-- 个人中心-宿舍住址 -->
         <activity
-            android:name=".activities.UserAtSchoolActivity"
+            android:name=".activities.UserRoomAddressActivity"
+            android:launchMode="singleTop"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"></activity>
         <!-- 关于 -->
         <activity
             android:name=".activities.AboutActivity"
+            android:launchMode="singleTop"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"></activity>
         

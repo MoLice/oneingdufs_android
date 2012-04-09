@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Tab1：拾获物品 -->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:fadeScrollbars="true"
+    android:scrollbarFadeDuration="2"
+    android:scrollbars="vertical">
+	<LinearLayout
+	    android:id="@+id/common_lost_pickup"
+	    style="@style/FormWrapper"
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent"
+	    android:orientation="vertical" >
+	    
+	    <!-- 相片 -->
+	    <ImageView
+	        android:id="@+id/common_lost_pickup_picture"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:maxWidth="120dip"
+	        android:maxHeight="90dip"
+	        android:layout_marginTop="12dip"
+	        android:layout_marginBottom="8dip"
+	        android:src="@drawable/addpicture"
+	        android:scaleType="fitCenter"/>
+        <TextView
+            style="@style/FormLabel"
+            android:text="@string/common_lost_pickup_picture_label"/>
+	    
+	    <!-- 物品类型 -->
+	    <LinearLayout
+	        style="@style/FormItem"
+	        android:orientation="horizontal">
+	        <EditText
+	            android:id="@+id/common_lost_pickup_tag"
+	            android:layout_width="fill_parent"
+	            android:layout_height="fill_parent"
+	            android:layout_weight="1"
+	            android:editable="false"
+	            android:textColorHint="@color/strong_text"
+	            android:hint="@string/common_lost_pickup_tag"/>
+	        <Button
+	            android:id="@+id/common_lost_pickup_tag_btn"
+	            android:layout_width="wrap_content"
+	            android:layout_height="fill_parent"
+	            android:text="@string/common_lost_pickup_tag_btn"/>
+	    </LinearLayout>
+	    <TextView
+	        android:id="@+id/common_lost_pickup_tag_label"
+	        style="@style/FormLabel"
+	        android:text="@string/common_lost_pickup_tag_label"/>
+	    
+	    <!-- 地点 -->
+	    <EditText
+	        android:id="@+id/common_lost_pickup_location"
+	        style="@style/FormItem"
+	        android:hint="@string/common_lost_pickup_location"/>
+	    <TextView
+	        android:id="@+id/common_lost_pickup_location_label"
+	        style="@style/FormLabel"
+	        android:text="@string/common_lost_pickup_location_label"/>
+	    
+	    <!-- 更多描述 -->
+	    <EditText
+	        android:id="@+id/common_lost_pickup_details"
+	        style="@style/FormItem"
+	        android:hint="@string/common_lost_pickup_details"/>
+	    <TextView
+	        android:id="@+id/common_lost_pickup_details_label"
+	        style="@style/FormLabel"
+	        android:text="@string/common_lost_pickup_details_label"/>
+	    
+	    <!-- 提醒不会泄露个人信息 -->
+	    <TextView
+	        style="@style/FormItem"
+	        android:textColor="@color/form_warning"
+	        android:text="@string/common_lost_pickup_explain"/>"
+	    
+	    <LinearLayout
+	        style="@style/FormItem"
+	        android:orientation="horizontal">
+	        <Button
+	            android:id="@+id/common_lost_pickup_cancel"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_weight="1"
+	            android:text="@string/cancel"/>
+	        <Button
+	            android:id="@+id/common_lost_pickup_submit"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_weight="1"
+	            android:text="@string/submit"/>
+	    </LinearLayout>
+	
+	</LinearLayout>
+</ScrollView>

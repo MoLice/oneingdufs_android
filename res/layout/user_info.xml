@@ -16,27 +16,7 @@
             style="@style/FormWrapper">
             
             <!-- 昵称、学号 -->
-            <RelativeLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:paddingBottom="8dip">
-                <TextView
-                    android:id="@+id/user_info_username"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="18sp"/>
-                <TextView
-                    android:id="@+id/user_info_studentId"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:textSize="18sp"/>
-            </RelativeLayout>
-            
-            <View
-                style="@style/SplitLine"
-                android:layout_marginTop="8dip"
-                android:layout_marginBottom="4dip"/>
+            <include layout="@layout/user_title"/>
                 
             <TextView
                 style="@style/FormLabel"
@@ -68,14 +48,14 @@
             <!-- 手机 -->
             <!-- TODO 自定义 -->
             <EditText
-                android:id="@+id/user_info_telphone"
+                android:id="@+id/user_info_phone"
                 style="@style/FormItem"
                 android:inputType="phone"
-                android:hint="@string/user_info_telphone"/>
+                android:hint="@string/user_info_phone"/>
             <TextView
-                android:id="@+id/user_info_telphone_label"
+                android:id="@+id/user_info_phone_label"
                 style="@style/FormLabel"
-                android:text="@string/user_info_telphone_label"/>
+                android:text="@string/user_info_phone_label"/>
             
             <!-- 短号 -->
             <EditText

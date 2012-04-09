@@ -21,24 +21,18 @@
     <string name="dashboard_water">订水</string>
     <string name="dashboard_fix">报修</string>
     <string name="dashboard_card">校园卡</string>
-    <string name="dashboard_lost">失物招领</string>
     <string name="dashboard_gdufslife">后勤留言</string>
-        <!-- 行政消息 -->
-    <string name="dashboard_administration">行政消息</string>
+        <!-- 公共消息 -->
+    <string name="dashboard_common">公共消息</string>
     <string name="dashboard_calendar">校历</string>
-    <string name="dashboard_telephone">常用电话</string>
-    <string name="dashboard_headmaster">校长信箱</string>
+    <string name="dashboard_telephones">常用电话</string>
+    <string name="dashboard_lost">失物招领</string>
         <!-- 在校学习 -->
     <string name="dashboard_study">在校学习</string>
     <string name="dashboard_syllabus">我的课表</string>
     <string name="dashboard_library">图书馆</string>
     <string name="dashboard_activity">活动讲座</string>
-        <!-- 用户中心 -->
-    <string name="dashboard_user">用户中心</string>
     <string name="dashboard_class">我的班级</string>
-    <string name="dashboard_message">消息中心</string>
-    <string name="dashboard_todo">我的日程</string>
-    <string name="dashboard_info">个人信息</string>
     
     <!-- 登录界面 login -->
     <string name="login_title">用户登录</string>
@@ -70,13 +64,17 @@
     <string name="menu_register">注册</string>
     <string name="menu_logout">注销</string>
     <string name="menu_close">退出</string>
-    <string name="menu_user">账号管理</string>
+    <string name="menu_user">个人中心</string>
     <string name="menu_setting">设置</string>
     <string name="menu_about">关于</string>
     <string name="menu_helpus">反馈</string>
     
-    <!-- 用户中心-账号管理 -->
-    <string name="user_home_title">账号管理</string>
+    <!-- 用户中心-个人中心 -->
+    <string name="user_home_title">个人中心</string>
+    <string name="user_home_info">个人信息</string>
+    <string name="user_home_message">消息中心</string>
+    <string name="user_home_todo">我的日程</string>
+    <string name="user_home_relativeId">账号关联</string>
     
     <!-- 用户中心-个人信息 -->
     <string name="user_info_title">个人信息</string>
@@ -86,9 +84,9 @@
     <string name="user_info_truename">真实姓名</string>
     <string name="user_info_truename_label">添加真实姓名将会让认识你的人更快地找到你</string>
     <string name="user_info_truename_error">不是合法的中文姓名</string>
-    <string name="user_info_telphone">手机</string>
-    <string name="user_info_telphone_label">将本机号码关联可使用更多功能</string>
-    <string name="user_info_telphone_error">必须为11位数字</string>
+    <string name="user_info_phone">手机</string>
+    <string name="user_info_phone_label">将本机号码关联可使用更多功能</string>
+    <string name="user_info_phone_error">必须为11位数字</string>
     <string name="user_info_cornet">短号</string>
     <string name="user_info_cornet_label"></string>
     <string name="user_info_cornet_error">小心别太长哦</string>
@@ -98,19 +96,17 @@
     <string name="user_info_cancel">返回</string>
     <string name="user_info_submit">保存</string>
     
-    <!-- 用户中心-在校相关 -->
-    <string name="user_atschool_title">在校相关</string>
-    <string name="user_atschool_building_prompt">住几栋</string>
-    <string name="user_atschool_building_label">请选择楼号</string>
-    <string name="user_atschool_building_error">请选择楼号</string>
-    <string name="user_atschool_layer_prompt">楼层</string>
-    <string name="user_atschool_layer_label">请选择楼层</string>
-    <string name="user_atschool_layer_error">请选择楼层</string>
-    <string name="user_atschool_room_prompt">宿舍号</string>
-    <string name="user_atschool_room_label">请选择宿舍号</string>
-    <string name="user_atschool_room_error">请选择宿舍号</string>
-    <string name="user_atschool_cancel">返回</string>
-    <string name="user_atschool_submit">保存</string>
+    <!-- 用户中心-宿舍住址 -->
+    <string name="user_roomaddress_title">宿舍住址</string>
+    <string name="user_roomaddress_building_prompt">住几栋</string>
+    <string name="user_roomaddress_building_label">请选择楼号</string>
+    <string name="user_roomaddress_building_error">请选择楼号</string>
+    <string name="user_roomaddress_layer_prompt">楼层</string>
+    <string name="user_roomaddress_layer_label">请选择楼层</string>
+    <string name="user_roomaddress_layer_error">请选择楼层</string>
+    <string name="user_roomaddress_room_prompt">宿舍号</string>
+    <string name="user_roomaddress_room_label">请选择宿舍号</string>
+    <string name="user_roomaddress_room_error">请选择宿舍号</string>
     
     <!-- 校园生活 -->
     <string name="life_roomAddress">宿舍：</string>
@@ -140,4 +136,17 @@
     <string name="life_card_lastspend">最后一次消费金额</string>
     <string name="life_card_lastposition">最后一次消费地点</string>
 
+    <!-- 公共消息 -->
+    <!-- 失物招领 -->
+    <string name="common_lost_pickup_picture_label">点击可为物品拍照，方便失主辨认</string>
+    <string name="common_lost_pickup_tag">标签</string>
+    <string name="common_lost_pickup_tag_btn">添加</string>
+    <string name="common_lost_pickup_tag_label">最多可添加3个物品标签</string>
+    <string name="common_lost_pickup_location">地点</string>
+    <string name="common_lost_pickup_location_label">捡到该物品的地点</string>
+    <string name="common_lost_pickup_details">更多描述</string>
+    <string name="common_lost_pickup_details_label">非必填</string>
+    <string name="common_lost_pickup_explain">*提交后，失主将会通过本软件与你联系，这不会泄露你的任何个人信息</string>
+    <string name="common_lost_lost_byDatetime">时间</string>
+    <string name="common_lost_lost_byTag">标签</string>
 </resources>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="horizontal" >
+    
+    <ImageView
+        android:id="@+id/common_lost_lostitem_img"
+        android:src="@drawable/logo"
+        android:layout_width="60dip"
+        android:layout_height="45dip"
+        android:layout_marginTop="4dip"
+        android:layout_marginBottom="4dip"/>
+    
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_margin="4dip">
+        
+        <!-- 标签 -->
+        <TextView
+            android:id="@+id/common_lost_lostitem_tag"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:textSize="16dip"
+            android:textColor="@color/gdufs_blue"
+            android:text="校园卡,二饭,白色"/>
+        
+        <!-- 地点 -->
+        <TextView
+            android:id="@+id/common_lost_lostitem_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/common_lost_lostitem_tag"
+            android:layout_alignParentLeft="true"
+            android:textSize="12dip"
+            android:textColor="@color/black"
+            android:text="二饭"/>
+        
+        <!-- 时间 -->
+        <TextView
+            android:id="@+id/common_lost_lostitem_datetime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/common_lost_lostitem_tag"
+            android:layout_toRightOf="@id/common_lost_lostitem_location"
+            android:layout_alignParentRight="true"
+            android:gravity="right"
+            android:textSize="12dip"
+            android:textColor="@color/black"
+            android:text="03-29 21:30"/>
+        
+        <!-- 详情 -->
+        <TextView
+            android:id="@+id/common_lost_lostitem_details"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/common_lost_lostitem_location"
+            android:textSize="12dip"
+            android:textColor="@color/black"
+            android:text="当时我也不知道咋地，然后就没有然后了，啦啦啦"/>
+    </RelativeLayout>
+</LinearLayout>

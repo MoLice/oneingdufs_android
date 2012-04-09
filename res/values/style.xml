@@ -24,6 +24,9 @@
     |- ~TextItem 用于TextView元素
     |- ~TextItemGL 文本元素文字左对齐
     |- ~TextItemGR 文本元素文字右对齐
+|- Syllabus 我的课表
+    |- ~Time 几点到几点
+    |- ~Day 星期几
 -->
     <style name="ActionBarCompat">
         <item name="android:layout_width">fill_parent</item>
@@ -140,5 +143,58 @@
     
     <style name="TableTextItemGR" parent="@style/TableTextItem">
         <item name="android:gravity">right</item>
+    </style>
+    
+    <!-- Syllabus 我的课表 -->
+        <!-- 上下午 TextView -->
+    <style name="SyllabusNoon">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">fill_parent</item>
+        <item name="android:paddingLeft">6dip</item>
+        <item name="android:paddingRight">6dip</item>
+        <item name="android:gravity">center</item>
+    </style>
+        <!-- 小节列容器 LinearLayout -->
+    <style name="SyllabusCutters">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">fill_parent</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+        <!-- 小节 TextView -->
+    <style name="SyllabusCutter">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:width">18dip</item>
+        <item name="android:gravity">center</item>
+    </style>
+        <!-- 课程列容器 LinearLayout -->
+    <style name="SyllabusClasses">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">fill_parent</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+        <!-- 课程内容 TextView -->
+    <style name="SyllabusClass">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">0dip</item>
+        <item name="android:gravity">center</item>
+        <item name="android:lineSpacingExtra">4dip</item>
+    </style>
+        <!-- 星期几 TextView -->
+    <style name="SyllabusDay">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:paddingLeft">10dip</item>
+        <item name="android:paddingRight">10dip</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/black_light</item>
+    </style>
+        <!-- 星期几标志线 View -->
+    <style name="SyllabusDayLine">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
     </style>
 </resources>

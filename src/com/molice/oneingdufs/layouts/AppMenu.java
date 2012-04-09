@@ -46,7 +46,7 @@ public class AppMenu {
 	
 	public void onCreateOptionsMenu(Menu menu) {
 		// 已登录组
-		// 账号管理
+		// 个人中心
 		menu.add(ISLOGIN, mUser, 0, R.string.menu_user);
 		// 软件设置
 		menu.add(ISLOGIN, mSetting, 1, R.string.menu_setting);
@@ -78,7 +78,7 @@ public class AppMenu {
 		int item_id = item.getItemId();
 		switch(item_id) {
 		case mUser:
-			// 账号管理
+			// 个人中心
 			context.startActivity(new Intent(context.getApplicationContext(), UserHomeActivity.class));
 			break;
 		case mSetting:

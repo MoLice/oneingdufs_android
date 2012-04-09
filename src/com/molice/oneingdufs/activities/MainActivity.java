@@ -10,9 +10,7 @@ import com.molice.oneingdufs.utils.SharedPreferencesStorager;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.content.res.Configuration;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -42,31 +40,19 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         
-        // 获取R.layout.main中的父容器LinearLayout，用于addDashboardPart引用
+        // 设置标题为第几周
+        ActionBarController.setTitle(this, "12周");
+        
+        // 获取R.layout.main中的主容器LinearLayout，用于addDashboardPart引用
         main_wrapper =(LinearLayout) findViewById(R.id.main_wrapper);
         
         storager = new SharedPreferencesStorager(this);
         appMenu = new AppMenu(this);
-        
         // 检测应用及系统基本信息是否存储正确
         // TODO 待应用增加了首次安装后的教学界面后，将此段代码迁移到该界面，实现每次安装只运行一次的目的
-        try {
-        	StringBuilder baseInfo = new StringBuilder(storager.get("baseInfo", ""));
-        	// 如果不存在baseInfo，或者存在但应用版本和当前应用版本不一致（可能是升级应用版本了），则重新存储
-            if(baseInfo.length() == 0 || !baseInfo.substring(baseInfo.indexOf("app_version=OneInGDUFS/") + 23, baseInfo.indexOf("app_version=OneInGDUFS/") + 27).equals(getPackageManager().getPackageInfo(getPackageName(), PackageManager.GET_CONFIGURATIONS).versionName)) {
-            	baseInfo.append("app_version=OneInGDUFS/").append(getPackageManager().getPackageInfo(getPackageName(), PackageManager.GET_CONFIGURATIONS).versionName)
-            		.append(";system_version=Android/").append(Build.VERSION.RELEASE)
-            		.append(";sdk=").append(Build.VERSION.SDK)
-            		.append(";display=width:").append(getWindowManager().getDefaultDisplay().getWidth()).append(",height:").append(getWindowManager().getDefaultDisplay().getHeight()).append(";");
-            	storager.set("baseInfo", baseInfo.toString()).save();
-            }
-            // 如果不存在本机号码phoneNumber则重新获取并存储
-            if(!storager.isExist("phoneNumber")) {
-            	storager.set("phoneNumber", ProjectConstants.getPhoneNumber(this));
-            }
-		} catch (Exception e) {
-			Log.d("BaseInfo存储错误", e.toString());
-		}
+        ProjectConstants.setBaseInfo(this);
+        // 如果不存在本机号码phoneNumber则重新获取并存储
+        ProjectConstants.setPhone(this, storager);
         
         // 添加校园生活
         addDashboardPart(R.string.dashboard_life, new Object[][] {
@@ -76,32 +62,34 @@ public class MainActivity extends Activity {
         		{null, R.string.dashboard_fix, LifeFixActivity.class},
         		// 校园卡
         		{null, R.string.dashboard_card, LifeCardActivity.class},
-        		// 失物招领
-        		{null, R.string.dashboard_lost, null},
         		// 后勤留言
         		{null, R.string.dashboard_gdufslife, null}
         });
         
-        // 添加个人中心
-        addDashboardPart(R.string.dashboard_user, new Object[][] {
+        // 添加在校学习
+        addDashboardPart(R.string.dashboard_study, new Object[][] {
+        		// 我的课表
+        		{null, R.string.dashboard_syllabus, StudySyllabusActivity.class},
+        		// 图书馆
+        		{null, R.string.dashboard_library, null},
         		// 我的班级
         		{null, R.string.dashboard_class, null},
-        		// 消息中心
-        		{null, R.string.dashboard_message, null},
-        		// 我的日程
-        		{null, R.string.dashboard_todo, null},
-        		// 个人中心
-        		{null, R.string.dashboard_info, UserInfoActivity.class},
+        });
+        
+        // 添加公共消息
+        addDashboardPart(R.string.dashboard_common, new Object[][] {
+        		// 校历
+        		{null, R.string.dashboard_calendar, null},
+        		// 常用电话
+        		{null, R.string.dashboard_telephones, null},
+        		// 活动讲座
+        		{null, R.string.dashboard_activity, null},
+        		// 失物招领
+        		{null, R.string.dashboard_lost, CommonLostActivity.class},
         });
         
         // 启动AndroidPN服务
         //startNotificationService();
-    }
-    
-    @Override
-    public void onNewIntent(Intent intent) {
-    	super.onNewIntent(intent);
-    	Log.d("MainActivity#onNewIntent", "被调用了");
     }
     
     @Override

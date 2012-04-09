@@ -10,11 +10,23 @@
     <color name="split_line">#d2deff</color>
     <!-- 背景色 -->
     <color name="window_background">#f8f9fe</color>
+    <color name="green">#9bbb59</color>
+    <color name="green_light">#c2d69b</color>
+    <color name="blue">#4f81bd</color>
+    <color name="blue_light">#95b3d7</color>
+    <color name="pink">#f79646</color>
+    <color name="pink_light">#fabf8f</color>
+    <color name="cyan">#4bacc6</color>
+    <color name="cyan_light">#b6dde8</color>
+    <color name="red">#c0504d</color>
+    <color name="red_light">#c0504d</color>
+    <color name="black">#7f7f7f</color>
+    <color name="black_light">#a6a6a6</color>
     <!-- 重要文字 -->
     <color name="strong_text">#29549f</color>
     <color name="light_text">#2f96b4</color>
     <!-- 表单 -->
     <color name="form_label">#878787</color>
     <color name="form_warning">#c09853</color>
-    <color name="form_error">@color/gdufs_red</color>
+    <color name="form_error">@color/red</color>
 </resources>

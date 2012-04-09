@@ -1,19 +1,37 @@
 package com.molice.oneingdufs.activities;
 
+import org.json.JSONObject;
+
 import android.app.Activity;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.molice.oneingdufs.R;
 import com.molice.oneingdufs.layouts.ActionBarController;
 import com.molice.oneingdufs.layouts.AppMenu;
+import com.molice.oneingdufs.utils.HttpConnectionHandler;
+import com.molice.oneingdufs.utils.HttpConnectionUtils;
 import com.molice.oneingdufs.utils.SharedPreferencesStorager;
 
+/**
+ * 个人中心首页，提供到个人信息、消息中心、我的日程、账号关联的链接<br/>
+ * R.layout.user_home
+ * 
+ * @author MoLice (sf.molice@gmail.com)
+ * @date 2012-3-28
+ */
 public class UserHomeActivity extends Activity {
+	private Button user_info;
+	
 	private TextView username;
 	private TextView studentId;
 	private SharedPreferencesStorager storager;
@@ -26,15 +44,36 @@ public class UserHomeActivity extends Activity {
         // 设置标题
         ActionBarController.setTitle(this, R.string.user_home_title);
         
+        user_info = (Button) findViewById(R.id.user_home_info);
+        
         // 设置用户名和学号
-        username = (TextView) findViewById(R.id.user_home_username);
-        studentId = (TextView) findViewById(R.id.user_home_studentId);
-        username.setText(storager.get("username", ""));
-        studentId.setText(storager.get("studentId", ""));
+        username = (TextView) findViewById(R.id.user_username);
+        studentId = (TextView) findViewById(R.id.user_studentId);
         
         storager = new SharedPreferencesStorager(this);
         appMenu = new AppMenu(this);
+        
+        username.setText(storager.get("username", ""));
+        studentId.setText(storager.get("studentId", ""));
+        
+        // 设置按钮的点击跳转
+        user_info.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				//startActivity(new Intent(getApplicationContext(), UserInfoActivity.class));
+				new HttpConnectionUtils(handler, storager).post("/test/", null);
+			}
+		});
+        
 	}
+	private Handler handler = new HttpConnectionHandler(this) {
+		@Override
+		protected void onSucceed(JSONObject result) {
+			super.onSucceed(result);
+			Log.d("测试结果", "UserHomeActivity#handler, result=" + result.toString());
+		}
+	};
     @Override
     public void onConfigurationChanged(Configuration config) {
         super.onConfigurationChanged(config);

@@ -1,7 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- 失物招领标签 -->
+    <string-array name="common_lost_tags">
+        <item>卡类</item>
+        <item>日常</item>
+        <item>包类</item>
+        <item>证件</item>
+        <item>数码</item>
+        <item>书籍</item>
+        <item>钥匙</item>
+        <item>其他</item>
+    </string-array>
+    <string-array name="common_lost_tags_details">
+        <item>校园卡、银行卡、羊城通...</item>
+        <item>水杯、雨伞、笔袋...</item>
+        <item>钱包、手袋...</item>
+        <item>身份证、学生证...</item>
+        <item>U盘、电子词典、手机...</item>
+        <item></item>
+        <item></item>
+        <item></item>
+    </string-array>
+    <!-- 宿舍住址 -->
     <!-- 楼号 -->
-    <string-array name="user_atschool_building">
+    <string-array name="user_roomaddress_building">
         <item>楼号</item>
         <item>1</item>
         <item>2</item>
@@ -19,7 +41,7 @@
     </string-array>
     
     <!-- 楼层 -->
-    <string-array name="user_atschool_layer">
+    <string-array name="user_roomaddress_layer">
         <item>楼层</item>
         <item>2</item>
         <item>3</item>
@@ -30,7 +52,7 @@
     </string-array>
     
     <!-- 宿舍号 只为显示文字提示，真正数据是动态从服务端获取的 -->
-    <string-array name="user_atschool_room">
+    <string-array name="user_roomaddress_room">
         <item>请先选择楼号和楼层</item>
     </string-array>
     
