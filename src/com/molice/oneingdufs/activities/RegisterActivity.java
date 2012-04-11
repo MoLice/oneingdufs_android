@@ -1,19 +1,15 @@
 package com.molice.oneingdufs.activities;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpRequestBase;
-import org.apache.http.conn.ConnectTimeoutException;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import com.molice.oneingdufs.R;
 import com.molice.oneingdufs.androidpn.Constants;
-import com.molice.oneingdufs.interfaces.OnHttpRequestListener;
 import com.molice.oneingdufs.layouts.ActionBarController;
 import com.molice.oneingdufs.layouts.AppMenu;
-import com.molice.oneingdufs.utils.ClientToServer;
 import com.molice.oneingdufs.utils.FormValidator;
+import com.molice.oneingdufs.utils.HttpConnectionHandler;
+import com.molice.oneingdufs.utils.HttpConnectionUtils;
 import com.molice.oneingdufs.utils.ProjectConstants;
 import com.molice.oneingdufs.utils.SharedPreferencesStorager;
 
@@ -94,28 +90,12 @@ public class RegisterActivity extends Activity {
 					if(validator.isFormCorrect()) {
 						JSONObject input = validator.getInput();
 						// 添加XMPP用户名
-						/*
 						try {
 							input.putOpt("apn_username", storager.get(Constants.XMPP_USERNAME, ""));
 						} catch (Exception e) {
 							Log.d("JSON错误", "RegisterActivity, e=" + e.toString());
 						}
-						// 发起服务器连接，准备注册
-						ClientToServer client = new ClientToServer(RegisterActivity.this);
-						// 添加http请求监听器，在请求的不同阶段进行操作
-						client.setOnRequestListener(httpRequestListener);
-						// 将表单数据添加到http请求
-						client.post(ProjectConstants.URL_REGISTER, input, 0);
-						*/
-						storager.set("username", input.optString("username"))
-							.set("password", input.optString("password"))
-							.set("studentId", input.optString("studentId"))
-							.set("isLogin", true)
-							.save();
-						Toast.makeText(RegisterActivity.this, "注册成功，已登录", Toast.LENGTH_SHORT).show();
-						// 跳转到MainActivity
-						startActivity(new Intent(getApplicationContext(), MainActivity.class));
-						finish();
+						new HttpConnectionUtils(connectionHandler, storager).post(ProjectConstants.URL_REGISTER, input);
 					} else {
 						Log.d("表单验证", "失败");
 						ProjectConstants.alertDialog(RegisterActivity.this, "输入错误", "请按照提示修改", true);
@@ -163,71 +143,35 @@ public class RegisterActivity extends Activity {
     	}
     	return super.onKeyDown(keyCode, event);
     }
-    
-    private OnHttpRequestListener httpRequestListener = new OnHttpRequestListener() {
-		
-		@Override
-		public void onTimeout(int requestCode, ClientToServer target,
-				HttpRequestBase method, ConnectTimeoutException e) {
-		}
-		
-		@Override
-		public void onSuccess(int requestCode, ClientToServer target,
-				HttpRequestBase method, HttpResponse response, JSONObject result) {
-			// TODO 判断服务端返回的信息，若注册成功，则返回sessionid，将sessionid存储起来，然后当前Activity finish，或者跳转到MainActivity
-			// TODO 若表单验证失败，则弹出提示框，显示错误信息
-			Log.d("请求返回结果", "result=" + result);
-			switch(requestCode) {
-			case 0:
-				if(result.optBoolean("success")) {
-					// 成功
-					Log.d("请求返回结果,成功, ", "resultMsg:" + result.optString("resultMsg"));
-					// TODO 这里将直接使用LoginActivity登录成功时的代码
-					storager
-					.set("username", result.optString("username"))
-					.set("sessionid", result.optString("sessionid"))
-					.set("isLogin", true)
-					.save();
-					// 跳转到MainActivity
-					startActivity(new Intent(getApplicationContext(), MainActivity.class));
-					finish();
-				} else {
-					// 失败
-					Log.d("请求返回结果,失败, ", "resultMsg:" + result.optString("resultMsg"));
-					// 表单验证失败
-					if(result.has("formErrors")) {
-						JSONObject formErrors = result.optJSONObject("formErrors");
-						// 调用FormValidator实例将表单错误信息显示到label上
-						validator.updateFormMessageFromServer(formErrors);
-					} else {
-						ProjectConstants.alertDialog(RegisterActivity.this, "注册失败", result.optString("resultMsg"), true);
-					}
-				}
-				break;
+    private HttpConnectionHandler connectionHandler = new HttpConnectionHandler(this) {
+    	@Override
+    	protected void onSucceed(JSONObject result) {
+    		super.onSucceed(result);
+    		// TODO 这里将直接使用LoginActivity登录成功时的代码
+			storager
+			.set("username", result.optString("username"))
+			.set("sessionid", result.optString("sessionid"))
+			.set("isLogin", true)
+			.save();
+			// 跳转到MainActivity
+			startActivity(new Intent(getApplicationContext(), MainActivity.class));
+			Toast.makeText(RegisterActivity.this, "欢迎你的到来，" + result.optString("username"), Toast.LENGTH_SHORT).show();
+			finish();
+    	}
+    	@Override
+    	protected void onFailed(JSONObject result) {
+    		super.onFailed(result);
+    		if(result.optString("resultMsg", "").matches("^\\d$")) {
+    			// 错误请求状态码
+    			Toast.makeText(RegisterActivity.this, result.optString("resultMsg", "") + "错误，请重试", Toast.LENGTH_SHORT).show();
+    		} else if(result.has("formErrors")) {
+				// 表单验证失败
+				JSONObject formErrors = result.optJSONObject("formErrors");
+				// 调用FormValidator实例将表单错误信息显示到label上
+				validator.updateFormMessageFromServer(formErrors);
+			} else {
+				ProjectConstants.alertDialog(RegisterActivity.this, "注册失败", result.optString("resultMsg"), true);
 			}
-		}
-		
-		@Override
-		public void onFailed(int requestCode, ClientToServer target,
-				HttpRequestBase method, HttpResponse response) {
-			Log.d("请求失败", "onFailed:" + String.valueOf(response.getStatusLine().getStatusCode()));
-		}
-		
-		@Override
-		public void onException(int requestCode, ClientToServer target,
-				HttpRequestBase method, Exception e) {
-			Log.d("请求失败", "onException");
-		}
-		
-		@Override
-		public void beforeSend(int requestCode, ClientToServer target,
-				HttpRequestBase method, HttpClient client) {
-		}
-		
-		@Override
-		public void afterSend(int requestCode, ClientToServer target,
-				HttpRequestBase method, HttpClient client) {
-			Log.d("请求结束", "afterSend");
-		}
-	};
+    	}
+    };
 }

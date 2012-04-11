@@ -6,6 +6,7 @@ import com.molice.oneingdufs.activities.LoginActivity;
 import com.molice.oneingdufs.activities.RegisterActivity;
 import com.molice.oneingdufs.activities.UserHomeActivity;
 import com.molice.oneingdufs.androidpn.ServiceManager;
+import com.molice.oneingdufs.utils.Debug;
 import com.molice.oneingdufs.utils.Logout;
 
 import android.app.Activity;
@@ -16,6 +17,7 @@ import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 /**
  * 根据登录状态的不同，生成Activity主Menu
@@ -39,6 +41,7 @@ public class AppMenu {
 	private final int mClose = 5;// 退出软件
 	private final int mRegister = 6;// 注册
 	private final int mLogin = 7;// 登录
+	private final int mClearData = 8;// 清空存储数据，调试用
 	
 	public AppMenu(Context context) {
 		this.context = context;
@@ -72,6 +75,10 @@ public class AppMenu {
 		menu.add(NOTLOGIN, mHelpUs, 4, R.string.menu_helpus);
 		// 退出
 		menu.add(NOTLOGIN, mClose, 5, R.string.menu_close);
+		
+		// 调试用，清空存储数据
+		menu.add(ISLOGIN, mClearData, 6, "清空用户数据");
+		menu.add(NOTLOGIN, mClearData, 6, "清空用户数据");
 	}
 	
 	public boolean onOptionsItemSelected(MenuItem item) {
@@ -105,7 +112,7 @@ public class AppMenu {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						Activity activity = (Activity) context;
-						//new ServiceManager(activity).stopService();
+						new ServiceManager(activity).stopService();
 						activity.finish();
 						System.exit(0);
 					}
@@ -125,6 +132,11 @@ public class AppMenu {
 		case mLogin:
 			// 登录
 			context.startActivity(new Intent(context.getApplicationContext(), LoginActivity.class));
+			break;
+		case mClearData:
+			// 清空数据
+			Debug.clearAllUserData(context);
+			Toast.makeText(context, "用户数据已清空", Toast.LENGTH_SHORT).show();
 			break;
 		}
 		

@@ -35,7 +35,7 @@
     <string name="dashboard_class">我的班级</string>
     
     <!-- 登录界面 login -->
-    <string name="login_title">用户登录</string>
+    <string name="login_title">登录</string>
     <string name="login_username">账号（昵称、学号或手机）</string>
     <string name="login_password">密码</string>
     <string name="login_submit">登录</string>
@@ -131,9 +131,9 @@
     <!-- 校园卡 -->
     <string name="life_card_title">我的校园卡</string>
     <string name="life_card_cardId">卡号</string>
-    <string name="life_card_balance">余额</string>
+    <string name="life_card_balance">余额（元）</string>
     <string name="life_card_lasttime">最后一次消费时间</string>
-    <string name="life_card_lastspend">最后一次消费金额</string>
+    <string name="life_card_lastspend">最后一次消费金额（元）</string>
     <string name="life_card_lastposition">最后一次消费地点</string>
 
     <!-- 公共消息 -->

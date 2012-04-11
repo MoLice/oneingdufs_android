@@ -96,7 +96,7 @@ public class ClientToServer implements IClientToServer {
 				cookie.append("csrftoken=").append(csrftoken).append(";");
 				method.setHeader("X-CSRFToken", csrftoken);
 			}
-			if(storager.isExist("sessionid") && cookie.indexOf("sessionid") == -1) {
+			if(storager.has("sessionid") && cookie.indexOf("sessionid") == -1) {
 				// 如果本地存储里存在sessionid且在beforeSend里添加的Cookie不包含sessionid，则将sessionid添加到Cookie内
 				cookie.append("sessionid=").append(storager.get("sessionid", "")).append(";");
 			}
@@ -105,7 +105,7 @@ public class ClientToServer implements IClientToServer {
 			// 在beforeSend里并没有主动添加Cookie，则将本地存储里的sessionid和csrftoken添加到Cookie
 			StringBuilder cookie = new StringBuilder("csrftoken=").append(csrftoken).append(";");
 			method.setHeader("X-CSRFToken", csrftoken);
-			if(storager.isExist("sessionid")) {
+			if(storager.has("sessionid")) {
 				cookie.append("sessionid=").append(storager.get("sessionid", "")).append(";");
 			}
 			method.setHeader("Cookie", cookie.toString());
@@ -261,7 +261,7 @@ public class ClientToServer implements IClientToServer {
 	
 	@Override
 	public String getCsrfToken() {
-		if(!storager.isExist("csrftoken")) {
+		if(!storager.has("csrftoken")) {
 			HttpGet httpGet = new HttpGet(ProjectConstants.URL_HOST + ProjectConstants.URL_GETCSRFTOKEN);
 			try {
 				HttpResponse response = client.execute(httpGet);

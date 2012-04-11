@@ -62,18 +62,10 @@ public class UserHomeActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				//startActivity(new Intent(getApplicationContext(), UserInfoActivity.class));
-				new HttpConnectionUtils(handler, storager).post("/test/", null);
+				new HttpConnectionUtils(connectionHandler, storager).post("/test/", new JSONObject());
 			}
 		});
-        
 	}
-	private Handler handler = new HttpConnectionHandler(this) {
-		@Override
-		protected void onSucceed(JSONObject result) {
-			super.onSucceed(result);
-			Log.d("²âÊÔ½á¹û", "UserHomeActivity#handler, result=" + result.toString());
-		}
-	};
     @Override
     public void onConfigurationChanged(Configuration config) {
         super.onConfigurationChanged(config);
@@ -101,4 +93,10 @@ public class UserHomeActivity extends Activity {
     	}
     	return super.onPrepareOptionsMenu(menu);
     }
+    private HttpConnectionHandler connectionHandler = new HttpConnectionHandler(this) {
+    	@Override
+    	protected void onSucceed(JSONObject result) {
+    		super.onSucceed(result);
+    	}
+    };
 }

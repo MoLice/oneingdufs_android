@@ -30,17 +30,17 @@ public final class R {
     public static final class attr {
     }
     public static final class color {
-        public static final int black=0x7f06000e;
-        public static final int black_light=0x7f06000f;
-        public static final int blue=0x7f060006;
-        public static final int blue_light=0x7f060007;
-        public static final int cyan=0x7f06000a;
-        public static final int cyan_light=0x7f06000b;
-        public static final int form_error=0x7f060014;
+        public static final int black=0x7f060010;
+        public static final int black_light=0x7f060011;
+        public static final int blue=0x7f060008;
+        public static final int blue_light=0x7f060009;
+        public static final int cyan=0x7f06000c;
+        public static final int cyan_light=0x7f06000d;
+        public static final int form_error=0x7f060016;
         /**  表单 
          */
-        public static final int form_label=0x7f060012;
-        public static final int form_warning=0x7f060013;
+        public static final int form_label=0x7f060014;
+        public static final int form_warning=0x7f060015;
         /**  颜色资源 
  广外蓝：用于标题性质的文字 
          */
@@ -48,30 +48,39 @@ public final class R {
         /**  广外红：用于错误提醒 
          */
         public static final int gdufs_red=0x7f060001;
-        public static final int green=0x7f060004;
-        public static final int green_light=0x7f060005;
-        public static final int light_text=0x7f060011;
-        public static final int pink=0x7f060008;
-        public static final int pink_light=0x7f060009;
-        public static final int red=0x7f06000c;
-        public static final int red_light=0x7f06000d;
+        public static final int green=0x7f060006;
+        public static final int green_light=0x7f060007;
+        public static final int light_text=0x7f060013;
+        public static final int pink=0x7f06000a;
+        public static final int pink_light=0x7f06000b;
+        public static final int red=0x7f06000e;
+        public static final int red_light=0x7f06000f;
         /**  分割线 
          */
         public static final int split_line=0x7f060002;
+        public static final int split_line_actionbar1=0x7f060003;
+        public static final int split_line_actionbar2=0x7f060004;
         /**  重要文字 
          */
-        public static final int strong_text=0x7f060010;
+        public static final int strong_text=0x7f060012;
         /**  背景色 
          */
-        public static final int window_background=0x7f060003;
+        public static final int window_background=0x7f060005;
     }
     public static final class dimen {
         public static final int zeroDip=0x7f070000;
     }
     public static final class drawable {
-        public static final int addpicture=0x7f020000;
-        public static final int ic_launcher=0x7f020001;
-        public static final int logo=0x7f020002;
+        public static final int actionbar_button=0x7f020000;
+        public static final int addpicture=0x7f020001;
+        public static final int bg_btn_nor=0x7f020002;
+        public static final int bg_btn_sel=0x7f020003;
+        public static final int btn_attention_nor=0x7f020004;
+        public static final int btn_attention_sel=0x7f020005;
+        public static final int btn_refresh=0x7f020006;
+        public static final int ic_launcher=0x7f020007;
+        public static final int icon_login=0x7f020008;
+        public static final int logo=0x7f020009;
     }
     public static final class id {
         public static final int actionbar=0x7f0a0000;
@@ -203,26 +212,27 @@ public final class R {
         public static final int actionbar_buttons_login=0x7f030002;
         public static final int actionbar_buttons_main=0x7f030003;
         public static final int actionbar_buttons_refresh=0x7f030004;
-        public static final int checkbox_list=0x7f030005;
-        public static final int common_lost=0x7f030006;
-        public static final int common_lost_lost=0x7f030007;
-        public static final int common_lost_lostitem=0x7f030008;
-        public static final int common_lost_pickup=0x7f030009;
-        public static final int dashboard_part=0x7f03000a;
-        public static final int life_card=0x7f03000b;
-        public static final int life_fix=0x7f03000c;
-        public static final int life_water=0x7f03000d;
-        public static final int login=0x7f03000e;
-        public static final int main=0x7f03000f;
-        public static final int numberpicker=0x7f030010;
-        public static final int register=0x7f030011;
-        public static final int study_syllabus=0x7f030012;
-        public static final int study_syllabus_class=0x7f030013;
-        public static final int timepicker=0x7f030014;
-        public static final int user_home=0x7f030015;
-        public static final int user_info=0x7f030016;
-        public static final int user_roomaddress=0x7f030017;
-        public static final int user_title=0x7f030018;
+        public static final int actionbar_splitline=0x7f030005;
+        public static final int checkbox_list=0x7f030006;
+        public static final int common_lost=0x7f030007;
+        public static final int common_lost_lost=0x7f030008;
+        public static final int common_lost_lostitem=0x7f030009;
+        public static final int common_lost_pickup=0x7f03000a;
+        public static final int dashboard_part=0x7f03000b;
+        public static final int life_card=0x7f03000c;
+        public static final int life_fix=0x7f03000d;
+        public static final int life_water=0x7f03000e;
+        public static final int login=0x7f03000f;
+        public static final int main=0x7f030010;
+        public static final int numberpicker=0x7f030011;
+        public static final int register=0x7f030012;
+        public static final int study_syllabus=0x7f030013;
+        public static final int study_syllabus_class=0x7f030014;
+        public static final int timepicker=0x7f030015;
+        public static final int user_home=0x7f030016;
+        public static final int user_info=0x7f030017;
+        public static final int user_roomaddress=0x7f030018;
+        public static final int user_title=0x7f030019;
     }
     public static final class raw {
         public static final int oneingdufs=0x7f040000;

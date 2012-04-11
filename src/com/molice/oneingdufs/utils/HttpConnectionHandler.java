@@ -1,11 +1,15 @@
 package com.molice.oneingdufs.utils;
 
+import java.net.SocketException;
+
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpRequestBase;
 import org.json.JSONObject;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnCancelListener;
 import android.graphics.Bitmap;
 import android.os.Handler;
 import android.os.Message;
@@ -22,6 +26,8 @@ public class HttpConnectionHandler extends Handler {
 	private Context context;
 	private ProgressDialog progressDialog;
 	
+	private HttpRequestBase currentMethod;
+	
 	public HttpConnectionHandler(Context context) {
 		this.context = context;
 	}
@@ -30,18 +36,32 @@ public class HttpConnectionHandler extends Handler {
 	 * 请求开始，可在此进行请求参数的设置
 	 */
 	protected void onStart(HttpRequestBase method) {
+		this.currentMethod = method;
 		progressDialog = ProgressDialog.show(context, "请等待...", "处理中...", true);
+		
+		// 如果在请求过程中使用返回键关闭对话框，则中断请求
+		progressDialog.setOnCancelListener(new OnCancelListener() {
+			@Override
+			public void onCancel(DialogInterface dialog) {
+				currentMethod.abort();
+			}
+		});
 	}
 	
 	/**
-	 * 请求成功时调用
-	 * @param result 普通请求时，参数为JSONObject对象，当为BITMAP请求时，参数为Bitmap对象
+	 * 普通请求成功时调用
+	 * @param result 服务器返回的数据
 	 */
 	protected void onSucceed(JSONObject result) {
 		if(progressDialog != null && progressDialog.isShowing()) {
 			progressDialog.dismiss();
 		}
 	}
+	
+	/**
+	 * Bitmap请求成功时调用
+	 * @param result 服务器返回的图片资源
+	 */
 	protected void onSucceed(Bitmap result) {
 		if(progressDialog != null && progressDialog.isShowing()) {
 			progressDialog.dismiss();
@@ -57,6 +77,7 @@ public class HttpConnectionHandler extends Handler {
 			progressDialog.dismiss();
 		}
 		Toast.makeText(context, result.optString("resultMsg"), Toast.LENGTH_LONG).show();
+		Log.d("处理错误", "result=" + result.toString());
 	}
 	
 	/**
@@ -67,6 +88,7 @@ public class HttpConnectionHandler extends Handler {
 			progressDialog.dismiss();
 		}
 		Toast.makeText(context, "网络连接超时", Toast.LENGTH_LONG).show();
+		Log.d("请求超时", "请求超时");
 	}
 	
 	/**
@@ -79,7 +101,8 @@ public class HttpConnectionHandler extends Handler {
 		}
 		Toast.makeText(context, "网络连接错误，" + e.toString(), Toast.LENGTH_LONG).show();
 		Log.d("网络连接错误", "HttpConnectionHanlder#onError, e=" + e.toString());
-		e.printStackTrace();
+		if(e instanceof SocketException)
+			Log.d("网络连接错误", "HttpConnectionHanlder#onError, 无网络连接, e=" + e.toString());
 	}
 	
 	/**

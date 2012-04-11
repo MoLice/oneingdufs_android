@@ -40,6 +40,9 @@ import android.util.Log;
  */
 public class HttpConnectionUtils implements Runnable {
 	private static final String TAG = HttpConnectionUtils.class.getSimpleName();
+	public static final int TIMEOUT = 8000;
+	public static final int TIMEOUT_SOCKET = 10000;
+	
 	public static final int STATUS_START = 0;
 	public static final int STATUS_SUCCEED = 1;
 	public static final int STATUS_FAILED = 2;
@@ -69,7 +72,7 @@ public class HttpConnectionUtils implements Runnable {
 	}
 
 	public void create(int method, String url, JSONObject data) {
-		Log.d(TAG, TAG + "method=" + method + ", url=" + url + ", data=" + String.valueOf(data));
+		Log.d(TAG, TAG + "#create, method=" + method + ", url=" + url + ", data=" + String.valueOf(data));
 		this.method = method;
 		this.url = url;
 		this.data = data;
@@ -100,8 +103,8 @@ public class HttpConnectionUtils implements Runnable {
 	public void run() {
 		httpClient = new DefaultHttpClient();
 		// 设置连接参数
-		HttpConnectionParams.setConnectionTimeout(httpClient.getParams(), 6000);
-		HttpConnectionParams.setSoTimeout(httpClient.getParams(), 10000);
+		HttpConnectionParams.setConnectionTimeout(httpClient.getParams(), TIMEOUT);
+		HttpConnectionParams.setSoTimeout(httpClient.getParams(), TIMEOUT_SOCKET);
 		HttpProtocolParams.setContentCharset(httpClient.getParams(), HTTP.UTF_8);
 		HttpProtocolParams.setUserAgent(httpClient.getParams(), storager.get("baseInfo", "app_version=OneInGDUFS"));
 		
@@ -181,22 +184,25 @@ public class HttpConnectionUtils implements Runnable {
 			} catch (Exception e) {
 				Log.d("返回结果处理异常", TAG + ", processResponse, e=" + e.toString());
 			}
-			if(result.optBoolean("success")) {
-				// 广播“请求成功”
-				handler.sendMessage(Message.obtain(handler, STATUS_SUCCEED, result));
-			} else {
-				// 广播“请求处理失败”
-				handler.sendMessage(Message.obtain(handler, STATUS_FAILED, result));
+			if(result != null) {
+				Log.d("看result", "HttpConnectionUtils#processResponse, result=" + result.toString());
+				if(result.optBoolean("success")) {
+					// 广播“请求成功”
+					handler.sendMessage(Message.obtain(handler, STATUS_SUCCEED, result));
+				} else {
+					// 广播“请求处理失败”
+					handler.sendMessage(Message.obtain(handler, STATUS_FAILED, result));
+				}
 			}
 		} else {
 			result = new JSONObject();
 			try {
 			result.putOpt("success", false);
 			result.putOpt("resultMsg", String.valueOf(response.getStatusLine().getStatusCode()));
+			handler.sendMessage(Message.obtain(handler, STATUS_FAILED, result));
 			} catch(Exception e) {
 				Log.d("JSON异常", TAG + ", processResponse, e=" + e.toString());
 			}
-			handler.sendMessage(Message.obtain(handler, STATUS_FAILED, result));
 		}
 	}
 
@@ -225,7 +231,7 @@ public class HttpConnectionUtils implements Runnable {
 	 */
 	private Object setRequestData(int method) {
 		if(data != null) {
-			if(method == GET) {
+			if(method == GET || method == DELETE) {
 				return "?data=" + URLEncoder.encode(data.toString());
 			} else {
 				List<NameValuePair> result = new ArrayList<NameValuePair>();
@@ -238,7 +244,7 @@ public class HttpConnectionUtils implements Runnable {
 				}
 			}
 		}
-		return null;
+		return (method == GET || method == DELETE) ? "" : null;
 	}
 	
 	/**
@@ -255,7 +261,7 @@ public class HttpConnectionUtils implements Runnable {
 				cookie.append("csrftoken=").append(csrftoken).append(";");
 				method.setHeader("X-CSRFToken", csrftoken);
 			}
-			if(storager.isExist("sessionid") && cookie.indexOf("sessionid") == -1) {
+			if(storager.has("sessionid") && cookie.indexOf("sessionid") == -1) {
 				// 如果本地存储里存在sessionid且在beforeSend里添加的Cookie不包含sessionid，则将sessionid添加到Cookie内
 				cookie.append("sessionid=").append(storager.get("sessionid", "")).append(";");
 			}
@@ -264,7 +270,7 @@ public class HttpConnectionUtils implements Runnable {
 			// 在beforeSend里并没有主动添加Cookie，则将本地存储里的sessionid和csrftoken添加到Cookie
 			StringBuilder cookie = new StringBuilder("csrftoken=").append(csrftoken).append(";");
 			method.setHeader("X-CSRFToken", csrftoken);
-			if(storager.isExist("sessionid")) {
+			if(storager.has("sessionid")) {
 				cookie.append("sessionid=").append(storager.get("sessionid", "")).append(";");
 			}
 			method.setHeader("Cookie", cookie.toString());
@@ -277,7 +283,7 @@ public class HttpConnectionUtils implements Runnable {
 	 * @return csrftoken值
 	 */
 	public String getCsrfToken() {
-		if(!storager.isExist("csrftoken")) {
+		if(!storager.has("csrftoken")) {
 			HttpGet httpGet = new HttpGet(ProjectConstants.URL_HOST + ProjectConstants.URL_GETCSRFTOKEN);
 			try {
 				HttpResponse response = new DefaultHttpClient().execute(httpGet);

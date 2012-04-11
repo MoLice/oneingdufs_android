@@ -1,22 +1,16 @@
 package com.molice.oneingdufs.activities;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpRequestBase;
-import org.apache.http.conn.ConnectTimeoutException;
 import org.json.JSONObject;
 
 import com.molice.oneingdufs.R;
-import com.molice.oneingdufs.interfaces.OnHttpRequestListener;
 import com.molice.oneingdufs.layouts.ActionBarController;
 import com.molice.oneingdufs.layouts.AppMenu;
-import com.molice.oneingdufs.utils.ClientToServer;
+import com.molice.oneingdufs.utils.HttpConnectionHandler;
+import com.molice.oneingdufs.utils.HttpConnectionUtils;
 import com.molice.oneingdufs.utils.ProjectConstants;
 import com.molice.oneingdufs.utils.SharedPreferencesStorager;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -78,7 +72,7 @@ public class LoginActivity extends Activity {
 		appMenu = new AppMenu(this);
 		
 		// 如果本地已存储过，则自动填充用户名
-		if(storager.isExist("username")) {
+		if(storager.has("username")) {
 			login_username.setText(storager.get("username", ""));
 		}
 		
@@ -99,32 +93,21 @@ public class LoginActivity extends Activity {
 					// 登录失败
 					Toast.makeText(LoginActivity.this, "登录失败，请检查用户名、密码，或者重新注册", Toast.LENGTH_LONG).show();
 				}
-				/*
-				// 发起服务器连接，准备登录
-				ClientToServer client = new ClientToServer(LoginActivity.this);
-				// 添加http请求监听器，在请求的不同阶段进行操作
-				client.setOnRequestListener(httpRequestListener);
-				// 将用户名、密码添加到http请求
-				JSONObject postData = new JSONObject();
+				JSONObject data = new JSONObject();
 				try {
-					postData.put("username", login_username.getText().toString());
-					postData.put("password", login_password.getText().toString());
+					data.putOpt("username", login_username.getText().toString());
+					data.putOpt("password", login_password.getText().toString());
 				} catch (Exception e) {
-					Log.d("JSON错误", "LoginActivity, e=" + e.toString());
 				}
-				// 发起post登录请求，请求标志位为0
-				client.post(ProjectConstants.URL_LOGIN, postData, 0);
-				*/
+				new HttpConnectionUtils(connectionHandler, storager).post(ProjectConstants.URL_LOGIN, data);
 			}
 		});
 		
 		// 设置注册按钮的点击动作，跳转到@{link RegisterActivity}并finish()@{link LoginActivity}
 		login_register.setOnClickListener(new OnClickListener() {
-			
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);
-				startActivity(intent);
+				startActivity(new Intent(getApplicationContext(), RegisterActivity.class));
 				finish();
 			}
 		});
@@ -227,65 +210,18 @@ public class LoginActivity extends Activity {
 		finish();
 	}
 	
-	private OnHttpRequestListener httpRequestListener = new OnHttpRequestListener() {
-		
+	private HttpConnectionHandler connectionHandler = new HttpConnectionHandler(this) {
 		@Override
-		public void onTimeout(int requestCode, ClientToServer target, HttpRequestBase method, ConnectTimeoutException e) {
-			Log.d("HTTP-TimeOut", "Timeout");
-		}
-		
-		@Override
-		public void onSuccess(int requestCode, ClientToServer target, HttpRequestBase method, HttpResponse response,
-				JSONObject result) {
-			switch(requestCode) {
-			case 0:
-				// 登录POST /home/login/
-				if(result.optBoolean("success")) {
-					// TODO 登录成功，将返回的所有用户数据存储到sqlite，以便应用在切换Activity时不用每次都从服务器请求最新数据
-					storager
-					.set("username", result.optString("username"))
-					.set("sessionid", result.optString("sessionid"))
-					.set("isLogin", true)
-					.save();
-					// 返回到某个Activity
-					callActivityAfterLogin("success");
-				} else {
-					// 登录失败
-					new AlertDialog.Builder(LoginActivity.this)
-					.setTitle("登录失败")
-					.setMessage(result.optString("resultMsg"))
-					.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							dialog.dismiss();
-						}
-					})
-					.show();
-				}
-				break;
-			}
-		}
-		
-		@Override
-		public void onFailed(int requestCode, ClientToServer target, HttpRequestBase method, HttpResponse response) {
-			Log.d("HTTP请求失败", "错误代码：" + String.valueOf(response.getStatusLine().getStatusCode()));
-			// 请求失败，中断连接
-			method.abort();
-		}
-		
-		@Override
-		public void onException(int requestCode, ClientToServer target, HttpRequestBase method, Exception e) {
-			Log.d("HTTP抛出异常", e.toString());
-		}
-		
-		@Override
-		public void beforeSend(int requestCode, ClientToServer target, HttpRequestBase method, HttpClient client) {
-		}
-		
-		@Override
-		public void afterSend(int requestCode, ClientToServer target, HttpRequestBase method, HttpClient client) {
-			// 关闭连接
-			client.getConnectionManager().shutdown();
+		protected void onSucceed(JSONObject result) {
+			// TODO 登录成功，将返回的所有用户数据存储到sqlite，以便应用在切换Activity时不用每次都从服务器请求最新数据
+			super.onSucceed(result);
+			storager
+			.set("username", result.optString("username"))
+			.set("sessionid", result.optString("sessionid"))
+			.set("isLogin", true)
+			.save();
+			// 返回到某个Activity
+			callActivityAfterLogin("success");
 		}
 	};
 }

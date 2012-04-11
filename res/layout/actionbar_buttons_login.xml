@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <!-- 未登录状态，显示登录按钮 -->
-<Button xmlns:android="http://schemas.android.com/apk/res/android"
+<!-- 未登录状态，显示登录按钮 -->
+<!--<Button xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/actionbar_login"
     style="@style/ActionBarButtonItem"
-    android:text="@string/login_title" />
+    android:background="@drawable/actionbar_button"
+    android:text="@string/login_title" />-->
+<ImageButton xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/actionbar_login"
+    style="@style/ActionBarButtonItem"
+    android:src="@drawable/icon_login"
+    android:scaleType="center" />

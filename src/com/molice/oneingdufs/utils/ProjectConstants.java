@@ -19,7 +19,9 @@ import android.util.Log;
  */
 public class ProjectConstants {
 	// url，除了URL_DOMAIN，其他地址开头结尾均要添加斜杠/
-	public final static String URL_HOST = "http://oneingdufs.sinaapp.com/api";
+	//public final static String URL_HOST = "http://oneingdufs.sinaapp.com/api";
+	public final static String URL_HOST = "http://10.0.2.2:8000/api";
+	//public final static String URL_HOST = "http://192.168.0.11:8000/api";
 	// global 全局
 	/** 获取csrftoken*/
 	public final static String URL_GETCSRFTOKEN = "/getcsrftoken/";
@@ -35,6 +37,10 @@ public class ProjectConstants {
 	public final static String URL_REGISTER = "/home/register/";
 	/** 退出登陆*/
 	public final static String URL_LOGOUT = "/home/logout/";
+	
+	// 在校生活
+	public final static String URL_LIFE_ROOMADDRESS = "/life/roomaddress/";
+	public final static String URL_LIFE_CARD = "/life/card/";
 	
 	// 方便调用的静态方法
 	/**
@@ -88,7 +94,7 @@ public class ProjectConstants {
 	public static void setPhone(Context context, SharedPreferencesStorager storager) {
         // 如果不存在本机号码phoneNumber则重新获取并存储
 		Log.d("函数返回值", ProjectConstants.getPhone(context));
-        if(!storager.isExist("user_info_phone")) {
+        if(!storager.has("user_info_phone")) {
         	storager.set("user_info_phone", ProjectConstants.getPhone(context)).save();
         }
 	}
@@ -119,8 +125,8 @@ public class ProjectConstants {
 	 * @return
 	 */
 	public static int getPxFromDip(Context context, int dip) {
-		final int scale = context.getResources().getDisplayMetrics().densityDpi;
-		Log.d("单位换算","ProjectConstants#getPxFromDip, dip=" + String.valueOf(dip) + ", px=" + String.valueOf((dip * scale + 0.5f)));
-		return (int) (dip * scale + 0.5f);
+		int densityDpi = context.getResources().getDisplayMetrics().densityDpi;
+		Log.d("单位换算","ProjectConstants#getPxFromDip, dip=" + String.valueOf(dip) + ", px=" + String.valueOf(dip * densityDpi / 160));
+		return (int) (dip * densityDpi / 160);
 	}
 }

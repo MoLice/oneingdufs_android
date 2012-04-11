@@ -96,7 +96,7 @@ public class NotificationService extends Service {
         // If running on an emulator
         if (deviceId == null || deviceId.trim().length() == 0
                 || deviceId.matches("0+")) {
-            if (sharedPrefs.isExist(Constants.EMULATOR_DEVICE_ID)) {
+            if (sharedPrefs.has(Constants.EMULATOR_DEVICE_ID)) {
                 deviceId = sharedPrefs.get(Constants.EMULATOR_DEVICE_ID, "");
             } else {
                 deviceId = (new StringBuilder("EMU")).append(

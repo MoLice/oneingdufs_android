@@ -62,7 +62,7 @@ public class SharedPreferencesStorager implements IDataStorager {
 	}
 
 	@Override
-	public Boolean isExist(String key) {
+	public Boolean has(String key) {
 		Log.d("SharedPreferencesStorager#isExist(), key=" + key, String.valueOf(preferences.contains(key)));
 		return preferences.contains(key);
 	}

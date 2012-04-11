@@ -357,7 +357,7 @@ public class FormValidator implements IFormValidator {
 		for(int i=0; i<length; i++) {
 			JSONObject inputData = form.optJSONObject(i);
 			String input_name = inputData.optString("input_name");
-			if(storager.isExist(prefix + input_name)) {
+			if(storager.has(prefix + input_name)) {
 				if(inputData.opt("input") instanceof Spinner) {
 					Spinner spinner = (Spinner) inputData.opt("input");
 					// Spinner类型的控件，在保存数据的时候就已经将其SelectedItem的索引存入Tag里

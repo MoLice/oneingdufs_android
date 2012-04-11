@@ -82,10 +82,10 @@ public class UserInfoActivity extends Activity {
 		validator.updateOriInputsValue();
 
 		// 显示用户名、学号
-		if(storager.isExist("username")) {
+		if(storager.has("username")) {
 			info_username.setText(storager.get("username", "当前用户"));
 		}
-		if(storager.isExist("studentId")) {
+		if(storager.has("studentId")) {
 			info_studentId.setText(storager.get("studentId", ""));
 		}
 		

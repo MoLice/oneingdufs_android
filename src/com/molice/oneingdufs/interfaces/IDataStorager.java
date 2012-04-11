@@ -35,5 +35,5 @@ public interface IDataStorager {
 	 * @param key
 	 * @return 存在则返回true，否则返回false
 	 */
-	public Boolean isExist(String key);
+	public Boolean has(String key);
 }

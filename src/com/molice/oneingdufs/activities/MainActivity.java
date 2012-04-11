@@ -17,7 +17,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
 /**
@@ -89,7 +89,7 @@ public class MainActivity extends Activity {
         });
         
         // 启动AndroidPN服务
-        //startNotificationService();
+        startNotificationService();
     }
     
     @Override
@@ -98,17 +98,17 @@ public class MainActivity extends Activity {
     	// 判断是否已登录，根据不同状态改变ActionBar右边的操作按钮
         if(!storager.get("isLogin", false)) {
             // 将ActionBar右边的操作按钮设置为登录按钮
-            View actionbar_buttons = ActionBarController.setActionBarButtons(this, R.layout.actionbar_buttons_login);
-            Button actionbar_login = (Button) actionbar_buttons.findViewById(R.id.actionbar_login);
+            View wrapper = ActionBarController.setActionBarButtons(this, new int[] {R.layout.actionbar_buttons_login});
+            ImageButton actionbar_login = (ImageButton) wrapper.findViewById(R.id.actionbar_login);
+            Log.d("看按钮是否存在", "MainActivity#onResume, ImageButton=" + actionbar_login.getMeasuredHeight());
             actionbar_login.setOnClickListener(new OnClickListener() {
     			@Override
     			public void onClick(View v) {
-    				Intent i = new Intent(getApplicationContext(), LoginActivity.class);
-    				startActivity(i);
+    				startActivity(new Intent(getApplicationContext(), LoginActivity.class));
     			}
     		});
         } else {
-        	ActionBarController.setActionBarButtons(this, R.layout.actionbar_buttons_main);
+        	ActionBarController.setActionBarButtons(this, new int[] {});
         }
     }
     

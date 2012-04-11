@@ -8,6 +8,8 @@
     <color name="gdufs_red">#df0024</color>
     <!-- 分割线 -->
     <color name="split_line">#d2deff</color>
+    <color name="split_line_actionbar1">#132042</color>
+    <color name="split_line_actionbar2">#758fd7</color>
     <!-- 背景色 -->
     <color name="window_background">#f8f9fe</color>
     <color name="green">#9bbb59</color>

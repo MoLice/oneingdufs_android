@@ -12,7 +12,7 @@
     <TextView
         android:id="@+id/life_card_cardId"
         style="@style/LinearFormContent"
-        android:text="17482"/>
+        android:text=""/>
     
     <!-- 余额 -->
     <TextView
@@ -21,7 +21,7 @@
     <TextView
         android:id="@+id/life_card_balance"
         style="@style/LinearFormContent"
-        android:text="￥100.00"/>
+        android:text=""/>
     
     <!-- 最后一次消费时间 -->
     <TextView
@@ -30,7 +30,7 @@
     <TextView
         android:id="@+id/life_card_lasttime"
         style="@style/LinearFormContent"
-        android:text="2012-03-26 20:14:01"/>
+        android:text=""/>
     
     <!-- 最后一次消费金额 -->
     <TextView
@@ -39,7 +39,7 @@
     <TextView
         android:id="@+id/life_card_lastspend"
         style="@style/LinearFormContent"
-        android:text="￥10.00"/>
+        android:text=""/>
     
     <!-- 最后一次消费地点 -->
     <TextView
@@ -48,5 +48,5 @@
     <TextView
         android:id="@+id/life_card_lastposition"
         style="@style/LinearFormContent"
-        android:text="二饭"/>
+        android:text=""/>
 </LinearLayout>

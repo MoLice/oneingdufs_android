@@ -46,15 +46,17 @@
     <style name="ActionBarButtonWrapper">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">fill_parent</item>
-        <item name="android:orientation">horizontal</item>
+        <item name="android:layout_gravity">center_vertical</item>
         <item name="android:layout_alignParentRight">true</item>
         <item name="android:layout_centerVertical">true</item>
-        <item name="android:divider">@color/split_line</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:gravity">center_vertical</item>
     </style>
     
     <style name="ActionBarButtonItem">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">fill_parent</item>
+        <item name="android:background">@android:color/transparent</item>
     </style>
     
     <style name="DashboardButton">

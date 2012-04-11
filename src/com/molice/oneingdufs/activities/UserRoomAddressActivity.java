@@ -1,10 +1,14 @@
 package com.molice.oneingdufs.activities;
 
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 import com.molice.oneingdufs.R;
 import com.molice.oneingdufs.layouts.ActionBarController;
 import com.molice.oneingdufs.utils.FormValidator;
+import com.molice.oneingdufs.utils.HttpConnectionHandler;
+import com.molice.oneingdufs.utils.HttpConnectionUtils;
+import com.molice.oneingdufs.utils.ProjectConstants;
 import com.molice.oneingdufs.utils.SharedPreferencesStorager;
 
 import android.app.Activity;
@@ -100,26 +104,16 @@ public class UserRoomAddressActivity extends Activity {
 			public void onClick(View v) {
 				if(validator.isFormModified()) {
 					if(validator.isFormCorrect()) {
-						// TODO 发送表单到后台，成功则将填写的信息保存到本地，不存储layer，因为已包含在room里
-						storager.set("user_roomaddress_building", building.getSelectedItem().toString())
-							.set("user_roomaddress_room", room.getSelectedItem().toString())
-							.save();
-						// 将当前选中的item索引添加到Tag内，方便FormValidator判断是否有更改
-						building.setTag(building.getSelectedItemPosition());
-						layer.setTag(layer.getSelectedItemPosition());
-						room.setTag(room.getSelectedItemPosition());
-						// 判断是否从ForResult调用，是则退出当前视图并返回数据，否则停留在当前并更新validator的表单原始输入，以便正确响应用户再次的修改
-						if(isForResult()) {
-							Bundle bundle = new Bundle();
-							bundle.putString("user_roomaddress_building", building.getSelectedItem().toString());
-							bundle.putString("user_roomaddress_room", room.getSelectedItem().toString());
-							Intent intent = new Intent();
-							intent.putExtras(bundle);
-							setResult(RESULT_OK, intent);
-							finish();
-						} else {
-							validator.updateOriInputsValue();
+						JSONObject data = new JSONObject();
+						try {
+							// 无需layer，因为该值已包含在room内
+							data.putOpt("building", building.getSelectedItem().toString());
+							data.putOpt("room", room.getSelectedItem().toString());
+						} catch (Exception e) {
+							Log.d("JSON异常", "UserRoomAddressActivity#submit#onclick, e=" + e.toString());
 						}
+						// 发送数据到服务端
+						new HttpConnectionUtils(connectionHandler, storager).post(ProjectConstants.URL_LIFE_ROOMADDRESS, data);
 					}
 				} else {
 					Toast.makeText(UserRoomAddressActivity.this, "无修改", Toast.LENGTH_SHORT).show();
@@ -204,4 +198,31 @@ public class UserRoomAddressActivity extends Activity {
 			return true;
 		return false;
 	}
+	
+	private HttpConnectionHandler connectionHandler = new HttpConnectionHandler(this) {
+		@Override
+		protected void onSucceed(JSONObject result) {
+			super.onSucceed(result);
+			Toast.makeText(UserRoomAddressActivity.this, "已更新宿舍地址，请继续操作", Toast.LENGTH_SHORT).show();
+			storager.set("user_roomaddress_building", building.getSelectedItem().toString())
+				.set("user_roomaddress_room", room.getSelectedItem().toString())
+				.save();
+			// 判断是否从ForResult调用，是则退出当前视图并返回数据，否则停留在当前并更新validator的表单原始输入，以便正确响应用户再次的修改
+			if(isForResult()) {
+				Bundle bundle = new Bundle();
+				bundle.putString("user_roomaddress_building", building.getSelectedItem().toString());
+				bundle.putString("user_roomaddress_room", room.getSelectedItem().toString());
+				Intent intent = new Intent();
+				intent.putExtras(bundle);
+				setResult(RESULT_OK, intent);
+				finish();
+			} else {
+				// 将当前选中的item索引添加到Tag内，方便FormValidator判断是否有更改
+				building.setTag(building.getSelectedItemPosition());
+				layer.setTag(layer.getSelectedItemPosition());
+				room.setTag(room.getSelectedItemPosition());
+				validator.updateOriInputsValue();
+			}
+		}
+	};
 }

@@ -237,10 +237,10 @@ public class XmppManager {
     }
 
     private boolean isRegistered() {
-    	Log.d("55555XmppManager#isRegistered#username", String.valueOf(sharedPrefs.isExist(Constants.XMPP_USERNAME)));
-    	Log.d("55555XmppManager#isRegistered#password", String.valueOf(sharedPrefs.isExist(Constants.XMPP_PASSWORD)));
-        return sharedPrefs.isExist(Constants.XMPP_USERNAME)
-                && sharedPrefs.isExist(Constants.XMPP_PASSWORD);
+    	Log.d("55555XmppManager#isRegistered#username", String.valueOf(sharedPrefs.has(Constants.XMPP_USERNAME)));
+    	Log.d("55555XmppManager#isRegistered#password", String.valueOf(sharedPrefs.has(Constants.XMPP_PASSWORD)));
+        return sharedPrefs.has(Constants.XMPP_USERNAME)
+                && sharedPrefs.has(Constants.XMPP_PASSWORD);
     }
 
     private void submitConnectTask() {
@@ -388,7 +388,7 @@ public class XmppManager {
                                 sharedPrefs.set(Constants.XMPP_USERNAME, newUsername)
                                 	.set(Constants.XMPP_PASSWORD, newPassword)
                                 	.save();
-                                Log.d("XmppManager#run()", "sharedPrefs.XMPP_USERNAME" + String.valueOf(sharedPrefs.isExist(Constants.XMPP_USERNAME)));
+                                Log.d("XmppManager#run()", "sharedPrefs.XMPP_USERNAME" + String.valueOf(sharedPrefs.has(Constants.XMPP_USERNAME)));
                                 Log.i(LOGTAG, "Account registered successfully");
                                 xmppManager.runTask();
                             } else {
@@ -441,7 +441,7 @@ public class XmppManager {
                     xmppManager.getConnection().login(
                             xmppManager.getUsername(),
                             xmppManager.getPassword(), XMPP_RESOURCE_NAME);
-                    if(sharedPrefs.isExist("isLogin") && sharedPrefs.get("isLogin", false)) {
+                    if(sharedPrefs.has("isLogin") && sharedPrefs.get("isLogin", false)) {
                     	// 用户已登录但XMPP需要重连，则在登录状态下更新XMPP用户名
                     	updateAPNUsername(xmppManager);
                     }
