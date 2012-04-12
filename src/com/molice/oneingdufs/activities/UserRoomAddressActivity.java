@@ -113,7 +113,7 @@ public class UserRoomAddressActivity extends Activity {
 							Log.d("JSON异常", "UserRoomAddressActivity#submit#onclick, e=" + e.toString());
 						}
 						// 发送数据到服务端
-						new HttpConnectionUtils(connectionHandler, storager).post(ProjectConstants.URL_LIFE_ROOMADDRESS, data);
+						new HttpConnectionUtils(connectionHandler, storager).post(ProjectConstants.URL.life_roomAddress, data);
 					}
 				} else {
 					Toast.makeText(UserRoomAddressActivity.this, "无修改", Toast.LENGTH_SHORT).show();

@@ -5,7 +5,6 @@ import org.json.JSONObject;
 
 import com.molice.oneingdufs.R;
 import com.molice.oneingdufs.layouts.ActionBarController;
-import com.molice.oneingdufs.layouts.AppMenu;
 import com.molice.oneingdufs.layouts.TimePickerControllerForLifeFix;
 import com.molice.oneingdufs.utils.FormValidator;
 import com.molice.oneingdufs.utils.Lifer;
@@ -17,8 +16,6 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -34,7 +31,6 @@ public class LifeFixActivity extends Activity{
 	private Button submit;
 	
 	private Lifer lifer;
-	private AppMenu appMenu;
 	private SharedPreferencesStorager storager;
 	private FormValidator validator;
 	
@@ -52,7 +48,6 @@ public class LifeFixActivity extends Activity{
         cancel = (Button) findViewById(R.id.life_fix_cancel);
         submit = (Button) findViewById(R.id.life_fix_submit);
         
-        appMenu = new AppMenu(this);
         storager = new SharedPreferencesStorager(this);
         lifer = new Lifer(this);
         
@@ -101,29 +96,6 @@ public class LifeFixActivity extends Activity{
     @Override
     public void onConfigurationChanged(Configuration config) {
         super.onConfigurationChanged(config);
-    }
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-    	appMenu.onCreateOptionsMenu(menu);
-    	return super.onCreateOptionsMenu(menu);
-    }
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-    	Log.d("MainActivity", "onOptionsItemSelected±»µ÷ÓÃ");
-    	return appMenu.onOptionsItemSelected(item);
-    }
-    @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-    	if(storager.get("isLogin", false)) {
-    		// ÏÔÊ¾µÇÂ¼×é£¬Òþ²ØÎ´µÇÂ¼×é
-    		menu.setGroupVisible(AppMenu.NOTLOGIN, false);
-    		menu.setGroupVisible(AppMenu.ISLOGIN, true);
-    	} else {
-    		// ÏÔÊ¾Î´µÇÂ¼×é£¬Òþ²ØµÇÂ¼×é
-    		menu.setGroupVisible(AppMenu.NOTLOGIN, true);
-    		menu.setGroupVisible(AppMenu.ISLOGIN, false);
-    	}
-    	return super.onPrepareOptionsMenu(menu);
     }
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {

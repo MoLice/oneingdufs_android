@@ -11,64 +11,68 @@ public final class R {
     public static final class array {
         /**  失物招领标签 
          */
-        public static final int common_lost_tags=0x7f050000;
-        public static final int common_lost_tags_details=0x7f050001;
+        public static final int common_lost_tags=0x7f060000;
+        public static final int common_lost_tags_details=0x7f060001;
         /**  订水桶数 
          */
-        public static final int life_water_number=0x7f050005;
+        public static final int life_water_number=0x7f060005;
+        /**  设置-平台列表 
+         */
+        public static final int settings_host_url=0x7f060006;
+        public static final int settings_host_value=0x7f060007;
         /**  宿舍住址 
  楼号 
          */
-        public static final int user_roomaddress_building=0x7f050002;
+        public static final int user_roomaddress_building=0x7f060002;
         /**  楼层 
          */
-        public static final int user_roomaddress_layer=0x7f050003;
+        public static final int user_roomaddress_layer=0x7f060003;
         /**  宿舍号 只为显示文字提示，真正数据是动态从服务端获取的 
          */
-        public static final int user_roomaddress_room=0x7f050004;
+        public static final int user_roomaddress_room=0x7f060004;
     }
     public static final class attr {
     }
     public static final class color {
-        public static final int black=0x7f060010;
-        public static final int black_light=0x7f060011;
-        public static final int blue=0x7f060008;
-        public static final int blue_light=0x7f060009;
-        public static final int cyan=0x7f06000c;
-        public static final int cyan_light=0x7f06000d;
-        public static final int form_error=0x7f060016;
+        public static final int black=0x7f070010;
+        public static final int black_light=0x7f070011;
+        public static final int blue=0x7f070008;
+        public static final int blue_light=0x7f070009;
+        public static final int cyan=0x7f07000c;
+        public static final int cyan_light=0x7f07000d;
+        public static final int form_error=0x7f070016;
         /**  表单 
          */
-        public static final int form_label=0x7f060014;
-        public static final int form_warning=0x7f060015;
+        public static final int form_label=0x7f070014;
+        public static final int form_warning=0x7f070015;
         /**  颜色资源 
  广外蓝：用于标题性质的文字 
          */
-        public static final int gdufs_blue=0x7f060000;
+        public static final int gdufs_blue=0x7f070000;
         /**  广外红：用于错误提醒 
          */
-        public static final int gdufs_red=0x7f060001;
-        public static final int green=0x7f060006;
-        public static final int green_light=0x7f060007;
-        public static final int light_text=0x7f060013;
-        public static final int pink=0x7f06000a;
-        public static final int pink_light=0x7f06000b;
-        public static final int red=0x7f06000e;
-        public static final int red_light=0x7f06000f;
+        public static final int gdufs_red=0x7f070001;
+        public static final int green=0x7f070006;
+        public static final int green_light=0x7f070007;
+        public static final int light_text=0x7f070013;
+        public static final int pink=0x7f07000a;
+        public static final int pink_light=0x7f07000b;
+        public static final int red=0x7f07000e;
+        public static final int red_light=0x7f07000f;
         /**  分割线 
          */
-        public static final int split_line=0x7f060002;
-        public static final int split_line_actionbar1=0x7f060003;
-        public static final int split_line_actionbar2=0x7f060004;
+        public static final int split_line=0x7f070002;
+        public static final int split_line_actionbar1=0x7f070003;
+        public static final int split_line_actionbar2=0x7f070004;
         /**  重要文字 
          */
-        public static final int strong_text=0x7f060012;
+        public static final int strong_text=0x7f070012;
         /**  背景色 
          */
-        public static final int window_background=0x7f060005;
+        public static final int window_background=0x7f070005;
     }
     public static final class dimen {
-        public static final int zeroDip=0x7f070000;
+        public static final int zeroDip=0x7f080000;
     }
     public static final class drawable {
         public static final int actionbar_button=0x7f020000;
@@ -83,128 +87,128 @@ public final class R {
         public static final int logo=0x7f020009;
     }
     public static final class id {
-        public static final int actionbar=0x7f0a0000;
-        public static final int actionbar_buttonWrapper=0x7f0a0002;
-        public static final int actionbar_currentActivity=0x7f0a0001;
-        public static final int actionbar_login=0x7f0a0003;
-        public static final int actionbar_refresh=0x7f0a0004;
-        public static final int checkbox_checkbox=0x7f0a0007;
-        public static final int checkbox_details=0x7f0a0006;
-        public static final int checkbox_title=0x7f0a0005;
-        public static final int common_lost_lost=0x7f0a0008;
-        public static final int common_lost_lost_byDatetime=0x7f0a0009;
-        public static final int common_lost_lost_byDatetime_line=0x7f0a000a;
-        public static final int common_lost_lost_byTag=0x7f0a000b;
-        public static final int common_lost_lost_byTag_line=0x7f0a000c;
-        public static final int common_lost_lostitem_datetime=0x7f0a0011;
-        public static final int common_lost_lostitem_details=0x7f0a0012;
-        public static final int common_lost_lostitem_img=0x7f0a000e;
-        public static final int common_lost_lostitem_location=0x7f0a0010;
-        public static final int common_lost_lostitem_tag=0x7f0a000f;
-        public static final int common_lost_lostlist=0x7f0a000d;
-        public static final int common_lost_pickup=0x7f0a0013;
-        public static final int common_lost_pickup_cancel=0x7f0a001c;
-        public static final int common_lost_pickup_details=0x7f0a001a;
-        public static final int common_lost_pickup_details_label=0x7f0a001b;
-        public static final int common_lost_pickup_location=0x7f0a0018;
-        public static final int common_lost_pickup_location_label=0x7f0a0019;
-        public static final int common_lost_pickup_picture=0x7f0a0014;
-        public static final int common_lost_pickup_submit=0x7f0a001d;
-        public static final int common_lost_pickup_tag=0x7f0a0015;
-        public static final int common_lost_pickup_tag_btn=0x7f0a0016;
-        public static final int common_lost_pickup_tag_label=0x7f0a0017;
-        public static final int life_card_balance=0x7f0a0021;
-        public static final int life_card_cardId=0x7f0a0020;
-        public static final int life_card_lastposition=0x7f0a0024;
-        public static final int life_card_lastspend=0x7f0a0023;
-        public static final int life_card_lasttime=0x7f0a0022;
-        public static final int life_fix_cancel=0x7f0a002c;
-        public static final int life_fix_content=0x7f0a0026;
-        public static final int life_fix_content_label=0x7f0a0027;
-        public static final int life_fix_phone=0x7f0a002a;
-        public static final int life_fix_phone_label=0x7f0a002b;
-        public static final int life_fix_roomAddress=0x7f0a0025;
-        public static final int life_fix_submit=0x7f0a002d;
-        public static final int life_fix_time=0x7f0a0028;
-        public static final int life_fix_time_label=0x7f0a0029;
-        public static final int life_water_cancel=0x7f0a0033;
-        public static final int life_water_number=0x7f0a002f;
-        public static final int life_water_number_label=0x7f0a0030;
-        public static final int life_water_roomAddress=0x7f0a002e;
-        public static final int life_water_submit=0x7f0a0034;
-        public static final int life_water_time=0x7f0a0031;
-        public static final int life_water_time_label=0x7f0a0032;
-        public static final int login_password=0x7f0a0036;
-        public static final int login_register=0x7f0a0037;
-        public static final int login_submit=0x7f0a0038;
-        public static final int login_username=0x7f0a0035;
-        public static final int main_wrapper=0x7f0a0039;
-        public static final int numberpicker_input=0x7f0a003b;
-        public static final int numberpicker_plus=0x7f0a003c;
-        public static final int numberpicker_sub=0x7f0a003a;
-        public static final int part_content=0x7f0a001f;
-        public static final int part_title=0x7f0a001e;
-        public static final int register_back=0x7f0a0045;
-        public static final int register_mygdufs_pwd=0x7f0a0043;
-        public static final int register_mygdufs_pwd_label=0x7f0a0044;
-        public static final int register_password=0x7f0a003f;
-        public static final int register_password_label=0x7f0a0040;
-        public static final int register_studentId=0x7f0a0041;
-        public static final int register_studentId_label=0x7f0a0042;
-        public static final int register_submit=0x7f0a0046;
-        public static final int register_username=0x7f0a003d;
-        public static final int register_username_label=0x7f0a003e;
-        public static final int study_syllabus_class=0x7f0a0058;
-        public static final int study_syllabus_classes1=0x7f0a0047;
-        public static final int study_syllabus_classes2=0x7f0a0048;
-        public static final int study_syllabus_classes3=0x7f0a0049;
-        public static final int study_syllabus_day1=0x7f0a004a;
-        public static final int study_syllabus_day2=0x7f0a004b;
-        public static final int study_syllabus_day3=0x7f0a004c;
-        public static final int study_syllabus_day4=0x7f0a004d;
-        public static final int study_syllabus_day5=0x7f0a004e;
-        public static final int study_syllabus_day6=0x7f0a004f;
-        public static final int study_syllabus_day7=0x7f0a0050;
-        public static final int study_syllabus_line1=0x7f0a0051;
-        public static final int study_syllabus_line2=0x7f0a0052;
-        public static final int study_syllabus_line3=0x7f0a0053;
-        public static final int study_syllabus_line4=0x7f0a0054;
-        public static final int study_syllabus_line5=0x7f0a0055;
-        public static final int study_syllabus_line6=0x7f0a0056;
-        public static final int study_syllabus_line7=0x7f0a0057;
-        public static final int timepick_wapper=0x7f0a0059;
-        public static final int timepicker_plus1=0x7f0a005c;
-        public static final int timepicker_plus2=0x7f0a005f;
-        public static final int timepicker_sub1=0x7f0a005a;
-        public static final int timepicker_sub2=0x7f0a005d;
-        public static final int timepicker_time1=0x7f0a005b;
-        public static final int timepicker_time2=0x7f0a005e;
-        public static final int user_home_class=0x7f0a0063;
-        public static final int user_home_info=0x7f0a0060;
-        public static final int user_home_message=0x7f0a0061;
-        public static final int user_home_todo=0x7f0a0062;
-        public static final int user_info_cancel=0x7f0a006e;
-        public static final int user_info_cornet=0x7f0a006a;
-        public static final int user_info_cornet_label=0x7f0a006b;
-        public static final int user_info_email=0x7f0a0064;
-        public static final int user_info_email_label=0x7f0a0065;
-        public static final int user_info_phone=0x7f0a0068;
-        public static final int user_info_phone_label=0x7f0a0069;
-        public static final int user_info_qq=0x7f0a006c;
-        public static final int user_info_qq_label=0x7f0a006d;
-        public static final int user_info_submit=0x7f0a006f;
-        public static final int user_info_truename=0x7f0a0066;
-        public static final int user_info_truename_label=0x7f0a0067;
-        public static final int user_roomaddress_building=0x7f0a0070;
-        public static final int user_roomaddress_building_label=0x7f0a0071;
-        public static final int user_roomaddress_cancel=0x7f0a0076;
-        public static final int user_roomaddress_layer=0x7f0a0072;
-        public static final int user_roomaddress_layer_label=0x7f0a0073;
-        public static final int user_roomaddress_room=0x7f0a0074;
-        public static final int user_roomaddress_room_label=0x7f0a0075;
-        public static final int user_roomaddress_submit=0x7f0a0077;
-        public static final int user_studentId=0x7f0a0079;
-        public static final int user_username=0x7f0a0078;
+        public static final int actionbar=0x7f0b0000;
+        public static final int actionbar_buttonWrapper=0x7f0b0002;
+        public static final int actionbar_currentActivity=0x7f0b0001;
+        public static final int actionbar_login=0x7f0b0003;
+        public static final int actionbar_refresh=0x7f0b0004;
+        public static final int checkbox_checkbox=0x7f0b0007;
+        public static final int checkbox_details=0x7f0b0006;
+        public static final int checkbox_title=0x7f0b0005;
+        public static final int common_lost_lost=0x7f0b0008;
+        public static final int common_lost_lost_byDatetime=0x7f0b0009;
+        public static final int common_lost_lost_byDatetime_line=0x7f0b000a;
+        public static final int common_lost_lost_byTag=0x7f0b000b;
+        public static final int common_lost_lost_byTag_line=0x7f0b000c;
+        public static final int common_lost_lostitem_datetime=0x7f0b0011;
+        public static final int common_lost_lostitem_details=0x7f0b0012;
+        public static final int common_lost_lostitem_img=0x7f0b000e;
+        public static final int common_lost_lostitem_location=0x7f0b0010;
+        public static final int common_lost_lostitem_tag=0x7f0b000f;
+        public static final int common_lost_lostlist=0x7f0b000d;
+        public static final int common_lost_pickup=0x7f0b0013;
+        public static final int common_lost_pickup_cancel=0x7f0b001c;
+        public static final int common_lost_pickup_details=0x7f0b001a;
+        public static final int common_lost_pickup_details_label=0x7f0b001b;
+        public static final int common_lost_pickup_location=0x7f0b0018;
+        public static final int common_lost_pickup_location_label=0x7f0b0019;
+        public static final int common_lost_pickup_picture=0x7f0b0014;
+        public static final int common_lost_pickup_submit=0x7f0b001d;
+        public static final int common_lost_pickup_tag=0x7f0b0015;
+        public static final int common_lost_pickup_tag_btn=0x7f0b0016;
+        public static final int common_lost_pickup_tag_label=0x7f0b0017;
+        public static final int life_card_balance=0x7f0b0021;
+        public static final int life_card_cardId=0x7f0b0020;
+        public static final int life_card_lastposition=0x7f0b0024;
+        public static final int life_card_lastspend=0x7f0b0023;
+        public static final int life_card_lasttime=0x7f0b0022;
+        public static final int life_fix_cancel=0x7f0b002c;
+        public static final int life_fix_content=0x7f0b0026;
+        public static final int life_fix_content_label=0x7f0b0027;
+        public static final int life_fix_phone=0x7f0b002a;
+        public static final int life_fix_phone_label=0x7f0b002b;
+        public static final int life_fix_roomAddress=0x7f0b0025;
+        public static final int life_fix_submit=0x7f0b002d;
+        public static final int life_fix_time=0x7f0b0028;
+        public static final int life_fix_time_label=0x7f0b0029;
+        public static final int life_water_cancel=0x7f0b0033;
+        public static final int life_water_number=0x7f0b002f;
+        public static final int life_water_number_label=0x7f0b0030;
+        public static final int life_water_roomAddress=0x7f0b002e;
+        public static final int life_water_submit=0x7f0b0034;
+        public static final int life_water_time=0x7f0b0031;
+        public static final int life_water_time_label=0x7f0b0032;
+        public static final int login_password=0x7f0b0036;
+        public static final int login_register=0x7f0b0037;
+        public static final int login_submit=0x7f0b0038;
+        public static final int login_username=0x7f0b0035;
+        public static final int main_wrapper=0x7f0b0039;
+        public static final int numberpicker_input=0x7f0b003b;
+        public static final int numberpicker_plus=0x7f0b003c;
+        public static final int numberpicker_sub=0x7f0b003a;
+        public static final int part_content=0x7f0b001f;
+        public static final int part_title=0x7f0b001e;
+        public static final int register_back=0x7f0b0045;
+        public static final int register_mygdufs_pwd=0x7f0b0043;
+        public static final int register_mygdufs_pwd_label=0x7f0b0044;
+        public static final int register_password=0x7f0b003f;
+        public static final int register_password_label=0x7f0b0040;
+        public static final int register_studentId=0x7f0b0041;
+        public static final int register_studentId_label=0x7f0b0042;
+        public static final int register_submit=0x7f0b0046;
+        public static final int register_username=0x7f0b003d;
+        public static final int register_username_label=0x7f0b003e;
+        public static final int study_syllabus_class=0x7f0b0058;
+        public static final int study_syllabus_classes1=0x7f0b0047;
+        public static final int study_syllabus_classes2=0x7f0b0048;
+        public static final int study_syllabus_classes3=0x7f0b0049;
+        public static final int study_syllabus_day1=0x7f0b004a;
+        public static final int study_syllabus_day2=0x7f0b004b;
+        public static final int study_syllabus_day3=0x7f0b004c;
+        public static final int study_syllabus_day4=0x7f0b004d;
+        public static final int study_syllabus_day5=0x7f0b004e;
+        public static final int study_syllabus_day6=0x7f0b004f;
+        public static final int study_syllabus_day7=0x7f0b0050;
+        public static final int study_syllabus_line1=0x7f0b0051;
+        public static final int study_syllabus_line2=0x7f0b0052;
+        public static final int study_syllabus_line3=0x7f0b0053;
+        public static final int study_syllabus_line4=0x7f0b0054;
+        public static final int study_syllabus_line5=0x7f0b0055;
+        public static final int study_syllabus_line6=0x7f0b0056;
+        public static final int study_syllabus_line7=0x7f0b0057;
+        public static final int timepick_wapper=0x7f0b0059;
+        public static final int timepicker_plus1=0x7f0b005c;
+        public static final int timepicker_plus2=0x7f0b005f;
+        public static final int timepicker_sub1=0x7f0b005a;
+        public static final int timepicker_sub2=0x7f0b005d;
+        public static final int timepicker_time1=0x7f0b005b;
+        public static final int timepicker_time2=0x7f0b005e;
+        public static final int user_home_class=0x7f0b0063;
+        public static final int user_home_info=0x7f0b0060;
+        public static final int user_home_message=0x7f0b0061;
+        public static final int user_home_todo=0x7f0b0062;
+        public static final int user_info_cancel=0x7f0b006e;
+        public static final int user_info_cornet=0x7f0b006a;
+        public static final int user_info_cornet_label=0x7f0b006b;
+        public static final int user_info_email=0x7f0b0064;
+        public static final int user_info_email_label=0x7f0b0065;
+        public static final int user_info_phone=0x7f0b0068;
+        public static final int user_info_phone_label=0x7f0b0069;
+        public static final int user_info_qq=0x7f0b006c;
+        public static final int user_info_qq_label=0x7f0b006d;
+        public static final int user_info_submit=0x7f0b006f;
+        public static final int user_info_truename=0x7f0b0066;
+        public static final int user_info_truename_label=0x7f0b0067;
+        public static final int user_roomaddress_building=0x7f0b0070;
+        public static final int user_roomaddress_building_label=0x7f0b0071;
+        public static final int user_roomaddress_cancel=0x7f0b0076;
+        public static final int user_roomaddress_layer=0x7f0b0072;
+        public static final int user_roomaddress_layer_label=0x7f0b0073;
+        public static final int user_roomaddress_room=0x7f0b0074;
+        public static final int user_roomaddress_room_label=0x7f0b0075;
+        public static final int user_roomaddress_submit=0x7f0b0077;
+        public static final int user_studentId=0x7f0b0079;
+        public static final int user_username=0x7f0b0078;
     }
     public static final class layout {
         public static final int about=0x7f030000;
@@ -235,167 +239,167 @@ public final class R {
         public static final int user_title=0x7f030019;
     }
     public static final class raw {
-        public static final int oneingdufs=0x7f040000;
+        public static final int oneingdufs=0x7f050000;
     }
     public static final class string {
-        public static final int app_name=0x7f080001;
-        public static final int back=0x7f080003;
+        public static final int app_name=0x7f090001;
+        public static final int back=0x7f090003;
         /**  global 全局通用 
          */
-        public static final int cancel=0x7f080002;
-        public static final int common_lost_lost_byDatetime=0x7f080074;
-        public static final int common_lost_lost_byTag=0x7f080075;
-        public static final int common_lost_pickup_details=0x7f080071;
-        public static final int common_lost_pickup_details_label=0x7f080072;
-        public static final int common_lost_pickup_explain=0x7f080073;
-        public static final int common_lost_pickup_location=0x7f08006f;
-        public static final int common_lost_pickup_location_label=0x7f080070;
+        public static final int cancel=0x7f090002;
+        public static final int common_lost_lost_byDatetime=0x7f090074;
+        public static final int common_lost_lost_byTag=0x7f090075;
+        public static final int common_lost_pickup_details=0x7f090071;
+        public static final int common_lost_pickup_details_label=0x7f090072;
+        public static final int common_lost_pickup_explain=0x7f090073;
+        public static final int common_lost_pickup_location=0x7f09006f;
+        public static final int common_lost_pickup_location_label=0x7f090070;
         /**  公共消息 
  失物招领 
          */
-        public static final int common_lost_pickup_picture_label=0x7f08006b;
-        public static final int common_lost_pickup_tag=0x7f08006c;
-        public static final int common_lost_pickup_tag_btn=0x7f08006d;
-        public static final int common_lost_pickup_tag_label=0x7f08006e;
-        public static final int dashboard_activity=0x7f080016;
-        public static final int dashboard_calendar=0x7f080010;
-        public static final int dashboard_card=0x7f08000d;
-        public static final int dashboard_class=0x7f080017;
+        public static final int common_lost_pickup_picture_label=0x7f09006b;
+        public static final int common_lost_pickup_tag=0x7f09006c;
+        public static final int common_lost_pickup_tag_btn=0x7f09006d;
+        public static final int common_lost_pickup_tag_label=0x7f09006e;
+        public static final int dashboard_activity=0x7f090016;
+        public static final int dashboard_calendar=0x7f090010;
+        public static final int dashboard_card=0x7f09000d;
+        public static final int dashboard_class=0x7f090017;
         /**  公共消息 
          */
-        public static final int dashboard_common=0x7f08000f;
+        public static final int dashboard_common=0x7f09000f;
         /**  Dashboard Button 
  按钮默认文字 
          */
-        public static final int dashboard_default=0x7f080008;
-        public static final int dashboard_fix=0x7f08000c;
-        public static final int dashboard_gdufslife=0x7f08000e;
-        public static final int dashboard_library=0x7f080015;
+        public static final int dashboard_default=0x7f090008;
+        public static final int dashboard_fix=0x7f09000c;
+        public static final int dashboard_gdufslife=0x7f09000e;
+        public static final int dashboard_library=0x7f090015;
         /**  校园生活 
          */
-        public static final int dashboard_life=0x7f08000a;
-        public static final int dashboard_lost=0x7f080012;
+        public static final int dashboard_life=0x7f09000a;
+        public static final int dashboard_lost=0x7f090012;
         /**  在校学习 
          */
-        public static final int dashboard_study=0x7f080013;
-        public static final int dashboard_syllabus=0x7f080014;
-        public static final int dashboard_telephones=0x7f080011;
-        public static final int dashboard_water=0x7f08000b;
-        public static final int hello=0x7f080000;
-        public static final int life_card_balance=0x7f080067;
-        public static final int life_card_cardId=0x7f080066;
-        public static final int life_card_lastposition=0x7f08006a;
-        public static final int life_card_lastspend=0x7f080069;
-        public static final int life_card_lasttime=0x7f080068;
+        public static final int dashboard_study=0x7f090013;
+        public static final int dashboard_syllabus=0x7f090014;
+        public static final int dashboard_telephones=0x7f090011;
+        public static final int dashboard_water=0x7f09000b;
+        public static final int hello=0x7f090000;
+        public static final int life_card_balance=0x7f090067;
+        public static final int life_card_cardId=0x7f090066;
+        public static final int life_card_lastposition=0x7f09006a;
+        public static final int life_card_lastspend=0x7f090069;
+        public static final int life_card_lasttime=0x7f090068;
         /**  校园卡 
          */
-        public static final int life_card_title=0x7f080065;
-        public static final int life_fix_content=0x7f08005c;
-        public static final int life_fix_content_error=0x7f08005e;
-        public static final int life_fix_content_label=0x7f08005d;
-        public static final int life_fix_phone=0x7f080061;
-        public static final int life_fix_phone_error=0x7f080064;
-        public static final int life_fix_phone_info=0x7f080063;
-        public static final int life_fix_phone_label=0x7f080062;
-        public static final int life_fix_time_error=0x7f080060;
-        public static final int life_fix_time_label=0x7f08005f;
+        public static final int life_card_title=0x7f090065;
+        public static final int life_fix_content=0x7f09005c;
+        public static final int life_fix_content_error=0x7f09005e;
+        public static final int life_fix_content_label=0x7f09005d;
+        public static final int life_fix_phone=0x7f090061;
+        public static final int life_fix_phone_error=0x7f090064;
+        public static final int life_fix_phone_info=0x7f090063;
+        public static final int life_fix_phone_label=0x7f090062;
+        public static final int life_fix_time_error=0x7f090060;
+        public static final int life_fix_time_label=0x7f09005f;
         /**  报修 
          */
-        public static final int life_fix_title=0x7f08005b;
+        public static final int life_fix_title=0x7f09005b;
         /**  校园生活 
          */
-        public static final int life_roomAddress=0x7f080056;
-        public static final int life_water_number_label=0x7f080058;
-        public static final int life_water_time_info=0x7f08005a;
-        public static final int life_water_time_label=0x7f080059;
+        public static final int life_roomAddress=0x7f090056;
+        public static final int life_water_number_label=0x7f090058;
+        public static final int life_water_time_info=0x7f09005a;
+        public static final int life_water_time_label=0x7f090059;
         /**  订水 
          */
-        public static final int life_water_title=0x7f080057;
-        public static final int login_failed=0x7f08001d;
-        public static final int login_password=0x7f08001a;
-        public static final int login_register=0x7f08001c;
-        public static final int login_submit=0x7f08001b;
+        public static final int life_water_title=0x7f090057;
+        public static final int login_failed=0x7f09001d;
+        public static final int login_password=0x7f09001a;
+        public static final int login_register=0x7f09001c;
+        public static final int login_submit=0x7f09001b;
         /**  登录界面 login 
          */
-        public static final int login_title=0x7f080018;
-        public static final int login_username=0x7f080019;
-        public static final int menu_about=0x7f080033;
-        public static final int menu_close=0x7f080030;
-        public static final int menu_helpus=0x7f080034;
+        public static final int login_title=0x7f090018;
+        public static final int login_username=0x7f090019;
+        public static final int menu_about=0x7f090033;
+        public static final int menu_close=0x7f090030;
+        public static final int menu_helpus=0x7f090034;
         /**  Menu 菜单 
          */
-        public static final int menu_login=0x7f08002d;
-        public static final int menu_logout=0x7f08002f;
-        public static final int menu_register=0x7f08002e;
-        public static final int menu_setting=0x7f080032;
-        public static final int menu_user=0x7f080031;
-        public static final int refresh=0x7f080007;
-        public static final int register_back=0x7f08002b;
-        public static final int register_mygdufs_pwd=0x7f080028;
-        public static final int register_mygdufs_pwd_error=0x7f08002a;
-        public static final int register_mygdufs_pwd_label=0x7f080029;
-        public static final int register_password=0x7f080022;
-        public static final int register_password_error=0x7f080024;
-        public static final int register_password_label=0x7f080023;
-        public static final int register_studentId=0x7f080025;
-        public static final int register_studentId_error=0x7f080027;
-        public static final int register_studentId_label=0x7f080026;
-        public static final int register_submit=0x7f08002c;
+        public static final int menu_login=0x7f09002d;
+        public static final int menu_logout=0x7f09002f;
+        public static final int menu_register=0x7f09002e;
+        public static final int menu_setting=0x7f090032;
+        public static final int menu_user=0x7f090031;
+        public static final int refresh=0x7f090007;
+        public static final int register_back=0x7f09002b;
+        public static final int register_mygdufs_pwd=0x7f090028;
+        public static final int register_mygdufs_pwd_error=0x7f09002a;
+        public static final int register_mygdufs_pwd_label=0x7f090029;
+        public static final int register_password=0x7f090022;
+        public static final int register_password_error=0x7f090024;
+        public static final int register_password_label=0x7f090023;
+        public static final int register_studentId=0x7f090025;
+        public static final int register_studentId_error=0x7f090027;
+        public static final int register_studentId_label=0x7f090026;
+        public static final int register_submit=0x7f09002c;
         /**  注册界面 register 
          */
-        public static final int register_title=0x7f08001e;
-        public static final int register_username=0x7f08001f;
-        public static final int register_username_error=0x7f080021;
-        public static final int register_username_label=0x7f080020;
-        public static final int save=0x7f080005;
+        public static final int register_title=0x7f09001e;
+        public static final int register_username=0x7f09001f;
+        public static final int register_username_error=0x7f090021;
+        public static final int register_username_label=0x7f090020;
+        public static final int save=0x7f090005;
         /**  分割线默认文字 
          */
-        public static final int splitline_title=0x7f080009;
-        public static final int submit=0x7f080006;
-        public static final int sure=0x7f080004;
-        public static final int user_home_info=0x7f080036;
-        public static final int user_home_message=0x7f080037;
-        public static final int user_home_relativeId=0x7f080039;
+        public static final int splitline_title=0x7f090009;
+        public static final int submit=0x7f090006;
+        public static final int sure=0x7f090004;
+        public static final int user_home_info=0x7f090036;
+        public static final int user_home_message=0x7f090037;
+        public static final int user_home_relativeId=0x7f090039;
         /**  用户中心-个人中心 
          */
-        public static final int user_home_title=0x7f080035;
-        public static final int user_home_todo=0x7f080038;
-        public static final int user_info_cancel=0x7f08004a;
-        public static final int user_info_cornet=0x7f080044;
-        public static final int user_info_cornet_error=0x7f080046;
-        public static final int user_info_cornet_label=0x7f080045;
-        public static final int user_info_email=0x7f08003b;
-        public static final int user_info_email_error=0x7f08003d;
-        public static final int user_info_email_label=0x7f08003c;
-        public static final int user_info_phone=0x7f080041;
-        public static final int user_info_phone_error=0x7f080043;
-        public static final int user_info_phone_label=0x7f080042;
-        public static final int user_info_qq=0x7f080047;
-        public static final int user_info_qq_error=0x7f080049;
-        public static final int user_info_qq_label=0x7f080048;
-        public static final int user_info_submit=0x7f08004b;
+        public static final int user_home_title=0x7f090035;
+        public static final int user_home_todo=0x7f090038;
+        public static final int user_info_cancel=0x7f09004a;
+        public static final int user_info_cornet=0x7f090044;
+        public static final int user_info_cornet_error=0x7f090046;
+        public static final int user_info_cornet_label=0x7f090045;
+        public static final int user_info_email=0x7f09003b;
+        public static final int user_info_email_error=0x7f09003d;
+        public static final int user_info_email_label=0x7f09003c;
+        public static final int user_info_phone=0x7f090041;
+        public static final int user_info_phone_error=0x7f090043;
+        public static final int user_info_phone_label=0x7f090042;
+        public static final int user_info_qq=0x7f090047;
+        public static final int user_info_qq_error=0x7f090049;
+        public static final int user_info_qq_label=0x7f090048;
+        public static final int user_info_submit=0x7f09004b;
         /**  用户中心-个人信息 
          */
-        public static final int user_info_title=0x7f08003a;
-        public static final int user_info_truename=0x7f08003e;
-        public static final int user_info_truename_error=0x7f080040;
-        public static final int user_info_truename_label=0x7f08003f;
-        public static final int user_roomaddress_building_error=0x7f08004f;
-        public static final int user_roomaddress_building_label=0x7f08004e;
-        public static final int user_roomaddress_building_prompt=0x7f08004d;
-        public static final int user_roomaddress_layer_error=0x7f080052;
-        public static final int user_roomaddress_layer_label=0x7f080051;
-        public static final int user_roomaddress_layer_prompt=0x7f080050;
-        public static final int user_roomaddress_room_error=0x7f080055;
-        public static final int user_roomaddress_room_label=0x7f080054;
-        public static final int user_roomaddress_room_prompt=0x7f080053;
+        public static final int user_info_title=0x7f09003a;
+        public static final int user_info_truename=0x7f09003e;
+        public static final int user_info_truename_error=0x7f090040;
+        public static final int user_info_truename_label=0x7f09003f;
+        public static final int user_roomaddress_building_error=0x7f09004f;
+        public static final int user_roomaddress_building_label=0x7f09004e;
+        public static final int user_roomaddress_building_prompt=0x7f09004d;
+        public static final int user_roomaddress_layer_error=0x7f090052;
+        public static final int user_roomaddress_layer_label=0x7f090051;
+        public static final int user_roomaddress_layer_prompt=0x7f090050;
+        public static final int user_roomaddress_room_error=0x7f090055;
+        public static final int user_roomaddress_room_label=0x7f090054;
+        public static final int user_roomaddress_room_prompt=0x7f090053;
         /**  用户中心-宿舍住址 
          */
-        public static final int user_roomaddress_title=0x7f08004c;
+        public static final int user_roomaddress_title=0x7f09004c;
     }
     public static final class style {
-        public static final int ActionBarButtonItem=0x7f090003;
-        public static final int ActionBarButtonWrapper=0x7f090002;
+        public static final int ActionBarButtonItem=0x7f0a0003;
+        public static final int ActionBarButtonWrapper=0x7f0a0002;
         /** 
 |- ActionBar 顶部actionbar
     |- ~Compat
@@ -425,44 +429,47 @@ public final class R {
     |- ~Day 星期几
 
          */
-        public static final int ActionBarCompat=0x7f090000;
-        public static final int ActionBarTextView=0x7f090001;
-        public static final int DashboardButton=0x7f090004;
-        public static final int FooterBar=0x7f090005;
-        public static final int FormItem=0x7f090008;
-        public static final int FormLabel=0x7f09000a;
-        public static final int FormTextItem=0x7f090009;
-        public static final int FormWrapper=0x7f090007;
-        public static final int LinearFormContent=0x7f09000d;
-        public static final int LinearFormHeader=0x7f09000c;
-        public static final int LinearFormItem=0x7f09000b;
-        public static final int SplitLine=0x7f090006;
+        public static final int ActionBarCompat=0x7f0a0000;
+        public static final int ActionBarTextView=0x7f0a0001;
+        public static final int DashboardButton=0x7f0a0004;
+        public static final int FooterBar=0x7f0a0005;
+        public static final int FormItem=0x7f0a0008;
+        public static final int FormLabel=0x7f0a000a;
+        public static final int FormTextItem=0x7f0a0009;
+        public static final int FormWrapper=0x7f0a0007;
+        public static final int LinearFormContent=0x7f0a000d;
+        public static final int LinearFormHeader=0x7f0a000c;
+        public static final int LinearFormItem=0x7f0a000b;
+        public static final int SplitLine=0x7f0a0006;
         /**  课程内容 TextView 
          */
-        public static final int SyllabusClass=0x7f090016;
+        public static final int SyllabusClass=0x7f0a0016;
         /**  课程列容器 LinearLayout 
          */
-        public static final int SyllabusClasses=0x7f090015;
+        public static final int SyllabusClasses=0x7f0a0015;
         /**  小节 TextView 
          */
-        public static final int SyllabusCutter=0x7f090014;
+        public static final int SyllabusCutter=0x7f0a0014;
         /**  小节列容器 LinearLayout 
          */
-        public static final int SyllabusCutters=0x7f090013;
+        public static final int SyllabusCutters=0x7f0a0013;
         /**  星期几 TextView 
          */
-        public static final int SyllabusDay=0x7f090017;
+        public static final int SyllabusDay=0x7f0a0017;
         /**  星期几标志线 View 
          */
-        public static final int SyllabusDayLine=0x7f090018;
+        public static final int SyllabusDayLine=0x7f0a0018;
         /**  Syllabus 我的课表 
  上下午 TextView 
          */
-        public static final int SyllabusNoon=0x7f090012;
-        public static final int TableItem=0x7f09000e;
-        public static final int TableTextItem=0x7f09000f;
-        public static final int TableTextItemGL=0x7f090010;
-        public static final int TableTextItemGR=0x7f090011;
-        public static final int gdufsTheme=0x7f090019;
+        public static final int SyllabusNoon=0x7f0a0012;
+        public static final int TableItem=0x7f0a000e;
+        public static final int TableTextItem=0x7f0a000f;
+        public static final int TableTextItemGL=0x7f0a0010;
+        public static final int TableTextItemGR=0x7f0a0011;
+        public static final int gdufsTheme=0x7f0a0019;
+    }
+    public static final class xml {
+        public static final int settings=0x7f040000;
     }
 }

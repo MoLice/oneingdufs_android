@@ -29,6 +29,7 @@ import com.molice.oneingdufs.interfaces.IClientToServer;
 import com.molice.oneingdufs.interfaces.OnHttpRequestListener;
 
 /**
+ * <strong>已废弃，请使用{@link HttpConnectionUtils}</strong><br/>
  * 负责客户端和服务端所有通讯的类，包括常用的get、post方法<br />
  * HTTP默认的设置也包含在类中，例如请求的url基础网址、连接超时设置、Http头部信息等<br />
  * get/post方法均会自动在Cookie头部里添加csrftoken和sessionid(如果有sessionid的话)<br />
@@ -116,7 +117,7 @@ public class ClientToServer implements IClientToServer {
 	public void get(String url, JSONObject data, int requestCode) {
 		// 如果是相对地址，自动添加上域名
 		if(!url.startsWith("http://")) {
-			url = ProjectConstants.URL_HOST + url;
+			url = ProjectConstants.URL.host + url;
 		}
 		// 如果需要传参，则将参数添加到url尾部
 		if(data != null) {
@@ -177,7 +178,7 @@ public class ClientToServer implements IClientToServer {
 	public void post(String url, JSONObject data, int requestCode) {
 		// 如果是相对地址，自动添加上域名
 		if(!url.startsWith("http://")) {
-			url = ProjectConstants.URL_HOST + url;
+			url = ProjectConstants.URL.host + url;
 		}
 		HttpPost httpPost = new HttpPost(url);
 		UrlEncodedFormEntity postData = (UrlEncodedFormEntity) requestDataFormatter("post", data);
@@ -262,7 +263,7 @@ public class ClientToServer implements IClientToServer {
 	@Override
 	public String getCsrfToken() {
 		if(!storager.has("csrftoken")) {
-			HttpGet httpGet = new HttpGet(ProjectConstants.URL_HOST + ProjectConstants.URL_GETCSRFTOKEN);
+			HttpGet httpGet = new HttpGet(ProjectConstants.URL.host + ProjectConstants.URL.getCsrftoken);
 			try {
 				HttpResponse response = client.execute(httpGet);
 				if(response.getStatusLine().getStatusCode() == 200) {

@@ -18,29 +18,43 @@ import android.util.Log;
  * @date 2012-3-24
  */
 public class ProjectConstants {
-	// url，除了URL_DOMAIN，其他地址开头结尾均要添加斜杠/
-	//public final static String URL_HOST = "http://oneingdufs.sinaapp.com/api";
-	public final static String URL_HOST = "http://10.0.2.2:8000/api";
-	//public final static String URL_HOST = "http://192.168.0.11:8000/api";
-	// global 全局
-	/** 获取csrftoken*/
-	public final static String URL_GETCSRFTOKEN = "/getcsrftoken/";
-	/** 发送消息到另外一个用户*/
-	public final static String URL_SENDNOTIFICATION = "/sendnotification/";
-	/** 更新XMPP用户名到应用服务器，在登录方法中使用，主要是因为会有重连情况出现*/
-	public final static String URL_UPDATEAPNUSERNAME = "/updateapnusername/";
 	public final static String IMAGE_PATH = "image/*";
-	// home 用户中心
-	/** 登录*/
-	public final static String URL_LOGIN = "/home/login/";
-	/** 注册*/
-	public final static String URL_REGISTER = "/home/register/";
-	/** 退出登陆*/
-	public final static String URL_LOGOUT = "/home/logout/";
 	
-	// 在校生活
-	public final static String URL_LIFE_ROOMADDRESS = "/life/roomaddress/";
-	public final static String URL_LIFE_CARD = "/life/card/";
+	/**
+	 * 系统使用到的url，除了host，其他地址开头结尾均要添加斜杠/
+	 * 
+	 * @author MoLice (sf.molice@gmail.com)
+	 * @date 2012-4-12
+	 */
+	public static final class URL {
+		// global 全局
+		/** 服务器地址，可在应用设置界面里更改*/
+		public static String host = "http://10.0.2.2:8000/api";
+		/** 获取csrftoken*/
+		public final static String getCsrftoken = "/getcsrftoken/";
+		/** 发送消息到另外一个用户*/
+		public final static String sendNotification = "/sendnotification/";
+		/** 更新XMPP用户名到应用服务器，在登录方法中使用，主要是因为会有重连情况出现*/
+		public final static String updateApnUsername = "/updateapnusername/";
+		
+		// home 用户中心
+		/** 登录*/
+		public final static String login = "/home/login/";
+		/** 注册*/
+		public final static String register = "/home/register/";
+		/** 退出登陆*/
+		public final static String logout = "/home/logout/";
+		
+		// 校园生活
+		/** 更新宿舍地址*/
+		public final static String life_roomAddress = "/life/roomaddress/";
+		/** 获取校园卡数据*/
+		public final static String life_card = "/life/card/";
+		
+		// 在校学习
+		/** 获取课表数据*/
+		public final static String study_syllabus = "/study/syllabus/";
+	}
 	
 	// 方便调用的静态方法
 	/**

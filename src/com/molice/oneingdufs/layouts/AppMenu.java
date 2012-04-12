@@ -4,6 +4,7 @@ import com.molice.oneingdufs.R;
 import com.molice.oneingdufs.activities.AboutActivity;
 import com.molice.oneingdufs.activities.LoginActivity;
 import com.molice.oneingdufs.activities.RegisterActivity;
+import com.molice.oneingdufs.activities.SettingsActivity;
 import com.molice.oneingdufs.activities.UserHomeActivity;
 import com.molice.oneingdufs.androidpn.ServiceManager;
 import com.molice.oneingdufs.utils.Debug;
@@ -90,6 +91,7 @@ public class AppMenu {
 			break;
 		case mSetting:
 			// Èí¼þÉèÖÃ
+			context.startActivity(new Intent(context.getApplicationContext(), SettingsActivity.class));
 			break;
 		case mLogout:
 			// ÍË³öµÇÂ¼
@@ -112,7 +114,8 @@ public class AppMenu {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						Activity activity = (Activity) context;
-						new ServiceManager(activity).stopService();
+						if(SettingsActivity.getNotification(activity))
+							new ServiceManager(activity).stopService();
 						activity.finish();
 						System.exit(0);
 					}

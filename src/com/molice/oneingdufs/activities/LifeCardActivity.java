@@ -6,7 +6,6 @@ import org.json.JSONObject;
 
 import com.molice.oneingdufs.R;
 import com.molice.oneingdufs.layouts.ActionBarController;
-import com.molice.oneingdufs.layouts.AppMenu;
 import com.molice.oneingdufs.utils.HttpConnectionHandler;
 import com.molice.oneingdufs.utils.HttpConnectionUtils;
 import com.molice.oneingdufs.utils.ProjectConstants;
@@ -16,8 +15,6 @@ import android.app.Activity;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageButton;
@@ -32,7 +29,6 @@ import android.widget.Toast;
  * @date 2012-3-26
  */
 public class LifeCardActivity extends Activity {
-	private AppMenu appMenu;
 	private SharedPreferencesStorager storager;
 	
 	private JSONObject items;
@@ -48,7 +44,6 @@ public class LifeCardActivity extends Activity {
         
         ImageButton refresh = (ImageButton) findViewById(R.id.actionbar_refresh);
         
-        appMenu = new AppMenu(this);
         storager = new SharedPreferencesStorager(this);
         
         // 初始化字段
@@ -72,7 +67,7 @@ public class LifeCardActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				// 发送网络请求，更新数据
-				new HttpConnectionUtils(connectionHandler, storager).get(ProjectConstants.URL_LIFE_CARD, null);
+				new HttpConnectionUtils(connectionHandler, storager).get(ProjectConstants.URL.life_card, null);
 			}
 		});
         
@@ -81,29 +76,6 @@ public class LifeCardActivity extends Activity {
     @Override
     public void onConfigurationChanged(Configuration config) {
         super.onConfigurationChanged(config);
-    }
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-    	appMenu.onCreateOptionsMenu(menu);
-    	return super.onCreateOptionsMenu(menu);
-    }
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-    	Log.d("MainActivity", "onOptionsItemSelected被调用");
-    	return appMenu.onOptionsItemSelected(item);
-    }
-    @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-    	if(storager.get("isLogin", false)) {
-    		// 显示登录组，隐藏未登录组
-    		menu.setGroupVisible(AppMenu.NOTLOGIN, false);
-    		menu.setGroupVisible(AppMenu.ISLOGIN, true);
-    	} else {
-    		// 显示未登录组，隐藏登录组
-    		menu.setGroupVisible(AppMenu.NOTLOGIN, true);
-    		menu.setGroupVisible(AppMenu.ISLOGIN, false);
-    	}
-    	return super.onPrepareOptionsMenu(menu);
     }
     
     /**
@@ -122,7 +94,7 @@ public class LifeCardActivity extends Activity {
     	// 先检查是否有不存在的字段，若有则发送请求
     	for(int i=0; i<length; i++) {
     		if(!storager.has(itemsId[i])) {
-    			new HttpConnectionUtils(connectionHandler, storager).get(ProjectConstants.URL_LIFE_CARD, null);
+    			new HttpConnectionUtils(connectionHandler, storager).get(ProjectConstants.URL.life_card, null);
     			return false;
     		}
     	}

@@ -4,7 +4,9 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import com.molice.oneingdufs.R;
-import com.molice.oneingdufs.layouts.AppMenu;
+import com.molice.oneingdufs.utils.HttpConnectionHandler;
+import com.molice.oneingdufs.utils.HttpConnectionUtils;
+import com.molice.oneingdufs.utils.ProjectConstants;
 import com.molice.oneingdufs.utils.SharedPreferencesStorager;
 
 import android.app.Activity;
@@ -12,12 +14,11 @@ import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * 在校学习-我的课表<br/>
@@ -27,7 +28,6 @@ import android.widget.TextView;
  * @date 2012-3-28
  */
 public class StudySyllabusActivity extends Activity {
-	private AppMenu appMenu;
 	private SharedPreferencesStorager storager;
 	
 	// 所有课程数据
@@ -64,7 +64,6 @@ public class StudySyllabusActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.study_syllabus);
         
-        appMenu = new AppMenu(this);
         storager = new SharedPreferencesStorager(this);
         
         classes = new LinearLayout[] {
@@ -99,63 +98,13 @@ public class StudySyllabusActivity extends Activity {
         color_dayBg = getResources().getColor(R.color.black_light);
         color_curDay = getResources().getColor(R.color.red_light);
         
-        try {
-			syllabus = new JSONArray("[[{\"noon\":2,\"cutter\":1,\"content\":\"网络编程\\n实验楼A-207\"},{\"noon\":0,\"cutter\":1,\"content\":\"网络编程\\n实验楼A-207\"}],[],[],[{\"noon\":1,\"cutter\":3,\"content\":\"网络编程\\n实验楼A-207\"}],[],[],[]]");
-		} catch (Exception e) {
-			Log.e("JSON错误", "StudySyllabusActivity#syllabus, e=" + e.toString());
-		}
-        if(syllabus != null) {
-        	// 默认显示星期一
-        	setOneClassFromObject(syllabus.optJSONArray(0));
-	        for(int i=0; i<7; i++) {
-	        	days[i].setTag(i);
-	        	days[i].setOnClickListener(new OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						int index = new Integer(String.valueOf(v.getTag()));
-						// 显示当前被点击的星期为红色
-						for(int i=0; i<7; i++) {
-							days[i].setTextColor(color_dayBg);
-							lines[i].setBackgroundColor(Color.TRANSPARENT);
-						}
-						((TextView) v).setTextColor(color_curDay);
-						lines[index].setBackgroundColor(color_curDay);
-						// 根据点击的天数，显示左边的课表
-						setOneClassFromObject(syllabus.optJSONArray(index));
-					}
-				});
-	        }
-        }
-        
+        // 检查是否需要发送更新课表的请求
+        checkLocalSyllabus();
 	}
     @Override
     public void onConfigurationChanged(Configuration config) {
         super.onConfigurationChanged(config);
     }
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-    	appMenu.onCreateOptionsMenu(menu);
-    	return super.onCreateOptionsMenu(menu);
-    }
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-    	Log.d("MainActivity", "onOptionsItemSelected被调用");
-    	return appMenu.onOptionsItemSelected(item);
-    }
-    @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-    	if(storager.get("isLogin", false)) {
-    		// 显示登录组，隐藏未登录组
-    		menu.setGroupVisible(AppMenu.NOTLOGIN, false);
-    		menu.setGroupVisible(AppMenu.ISLOGIN, true);
-    	} else {
-    		// 显示未登录组，隐藏登录组
-    		menu.setGroupVisible(AppMenu.NOTLOGIN, true);
-    		menu.setGroupVisible(AppMenu.ISLOGIN, false);
-    	}
-    	return super.onPrepareOptionsMenu(menu);
-    }
-    // 从{@link #syllabus}得到每天的课表，并填充到视图中
     /**
      * 将一节课的数据转换为视图控件
      * @param data 当天课表的一节课
@@ -173,8 +122,12 @@ public class StudySyllabusActivity extends Activity {
     	for(int i=0; i<length; i++) {
     		// 获取每节课的数据
     		JSONObject data = datas.optJSONObject(i);
+    		// 获取上下两个课表容器的引用
     		TextView class1 = (TextView) classes[data.optInt("noon")].getChildAt(0);
     		TextView class2 = (TextView) classes[data.optInt("noon")].getChildAt(1);
+    		// 回复容器的面积
+    		class1.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, getResources().getDimensionPixelSize(R.dimen.zeroDip), 2));
+    		class2.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, getResources().getDimensionPixelSize(R.dimen.zeroDip), 2));
         	// 将TextView添加到对应位置
         	if(data.optInt("cutter") == 0) {
         		// 是该时段的第一节课
@@ -204,4 +157,62 @@ public class StudySyllabusActivity extends Activity {
         	}
     	}
     }
+    
+    /**
+     * 检查本地存储里是否有课表数据，若有则提取并显示，若没有则发起网络连接，从服务端下载
+     * @return 如果本地存储已经有，则返回true，否则返回false
+     */
+    private boolean checkLocalSyllabus() {
+    	storager.del("study_syllabus").save();
+    	if(storager.get("study_syllabus", "").equals("")) {
+    		// 本地不存在课表数据，需要发送请求到服务端
+    		new HttpConnectionUtils(connectionHandler, storager).get(ProjectConstants.URL.study_syllabus, null);
+    		return false;
+    	} else {
+    		// 本地存在课表数据，直接提取并显示
+    		try {
+    			syllabus = new JSONArray(storager.get("study_syllabus", "[]"));
+    			displaySyllabus();
+    		} catch (Exception e) {
+    			Log.e("JSON错误", "StudySyllabusActivity#checkLocalSyllabus, e=" + e.toString());
+    		}
+    		return false;
+    	}
+    }
+    
+    private void displaySyllabus() {
+    	if(syllabus != null) {
+        	// 默认显示星期一
+        	setOneClassFromObject(syllabus.optJSONArray(0));
+	        for(int i=0; i<7; i++) {
+	        	days[i].setTag(i);
+	        	days[i].setOnClickListener(new OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						int index = new Integer(String.valueOf(v.getTag()));
+						// 显示当前被点击的星期为红色
+						for(int i=0; i<7; i++) {
+							days[i].setTextColor(color_dayBg);
+							lines[i].setBackgroundColor(Color.TRANSPARENT);
+						}
+						((TextView) v).setTextColor(color_curDay);
+						lines[index].setBackgroundColor(color_curDay);
+						// 根据点击的天数，显示左边的课表
+						setOneClassFromObject(syllabus.optJSONArray(index));
+					}
+				});
+	        }
+        }
+    }
+    
+    private HttpConnectionHandler connectionHandler= new HttpConnectionHandler(this) {
+    	@Override
+    	protected void onSucceed(JSONObject result) {
+    		super.onSucceed(result);
+    		syllabus = result.optJSONArray("syllabus");
+    		storager.set("study_syllabus", syllabus.toString()).save();
+    		displaySyllabus();
+    		Toast.makeText(StudySyllabusActivity.this, "成功获取课表", Toast.LENGTH_SHORT).show();
+    	}
+    };
 }

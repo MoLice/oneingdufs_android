@@ -500,7 +500,7 @@ public class XmppManager {
 		} catch (Exception e) {
 			Log.e("“Ï≥£", "XmppManager.updateAPNUsername, e=" + e.toString());
 		}
-    	client.post(ProjectConstants.URL_UPDATEAPNUSERNAME, data, 0);
+    	client.post(ProjectConstants.URL.updateApnUsername, data, 0);
     }
 
 }

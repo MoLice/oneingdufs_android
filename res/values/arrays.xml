@@ -61,4 +61,16 @@
         <item>2桶</item>
         <item>1桶</item>
     </string-array>
+    
+    <!-- 设置-平台列表 -->
+    <string-array name="settings_host_url">
+        <item>10.0.2.2</item>
+        <item>192.168.0.11</item>
+        <item>oneingdufs.sinaapp.com</item>
+    </string-array>
+    <string-array name="settings_host_value">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
 </resources>

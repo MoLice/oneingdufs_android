@@ -6,7 +6,6 @@ import org.json.JSONObject;
 import com.molice.oneingdufs.R;
 import com.molice.oneingdufs.androidpn.Constants;
 import com.molice.oneingdufs.layouts.ActionBarController;
-import com.molice.oneingdufs.layouts.AppMenu;
 import com.molice.oneingdufs.utils.FormValidator;
 import com.molice.oneingdufs.utils.HttpConnectionHandler;
 import com.molice.oneingdufs.utils.HttpConnectionUtils;
@@ -19,8 +18,6 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -37,7 +34,6 @@ public class RegisterActivity extends Activity {
 	private JSONArray form;
 	private FormValidator validator;
 	private SharedPreferencesStorager storager;
-	private AppMenu appMenu;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,8 +52,6 @@ public class RegisterActivity extends Activity {
 		
 		register_back = (Button) findViewById(R.id.register_back);
 		register_submit = (Button) findViewById(R.id.register_submit);
-		
-		appMenu = new AppMenu(this);
 		
 		form = new JSONArray();
 		// 添加username
@@ -95,7 +89,7 @@ public class RegisterActivity extends Activity {
 						} catch (Exception e) {
 							Log.d("JSON错误", "RegisterActivity, e=" + e.toString());
 						}
-						new HttpConnectionUtils(connectionHandler, storager).post(ProjectConstants.URL_REGISTER, input);
+						new HttpConnectionUtils(connectionHandler, storager).post(ProjectConstants.URL.register, input);
 					} else {
 						Log.d("表单验证", "失败");
 						ProjectConstants.alertDialog(RegisterActivity.this, "输入错误", "请按照提示修改", true);
@@ -111,29 +105,6 @@ public class RegisterActivity extends Activity {
     @Override
     public void onConfigurationChanged(Configuration config) {
         super.onConfigurationChanged(config);
-    }
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-    	appMenu.onCreateOptionsMenu(menu);
-    	return super.onCreateOptionsMenu(menu);
-    }
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-    	Log.d("MainActivity", "onOptionsItemSelected被调用");
-    	return appMenu.onOptionsItemSelected(item);
-    }
-    @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-    	if(storager.get("isLogin", false)) {
-    		// 显示登录组，隐藏未登录组
-    		menu.setGroupVisible(AppMenu.NOTLOGIN, false);
-    		menu.setGroupVisible(AppMenu.ISLOGIN, true);
-    	} else {
-    		// 显示未登录组，隐藏登录组
-    		menu.setGroupVisible(AppMenu.NOTLOGIN, true);
-    		menu.setGroupVisible(AppMenu.ISLOGIN, false);
-    	}
-    	return super.onPrepareOptionsMenu(menu);
     }
     
     @Override

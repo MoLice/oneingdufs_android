@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+    <CheckBoxPreference
+        android:key="settings_notification"
+        android:title="消息通知"
+        android:summaryOn="接收消息通知"
+        android:summaryOff="不接收消息通知"
+        android:defaultValue="false"/>
+    <PreferenceCategory
+        android:title="调试">
+        <ListPreference
+            android:key="settings_debug_host"
+            android:title="选择服务器地址"
+            android:summary="不同平台需设置不同的服务器地址"
+            android:dialogTitle="选择服务器地址"
+            android:entries="@array/settings_host_url"
+            android:entryValues="@array/settings_host_value"
+            android:defaultValue="0"/>
+    </PreferenceCategory>
+</PreferenceScreen>

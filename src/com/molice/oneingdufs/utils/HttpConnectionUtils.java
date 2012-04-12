@@ -110,7 +110,7 @@ public class HttpConnectionUtils implements Runnable {
 		
 		// 检查url是站内地址或是站外地址，若以http://开头则是站外地址，直接返回，否则是站内地址，自动补充http://+域名
 		if(!url.startsWith("http://"))
-			url = ProjectConstants.URL_HOST + url;
+			url = ProjectConstants.URL.host + url;
 		
 		try {
 			HttpResponse response = null;
@@ -284,7 +284,7 @@ public class HttpConnectionUtils implements Runnable {
 	 */
 	public String getCsrfToken() {
 		if(!storager.has("csrftoken")) {
-			HttpGet httpGet = new HttpGet(ProjectConstants.URL_HOST + ProjectConstants.URL_GETCSRFTOKEN);
+			HttpGet httpGet = new HttpGet(ProjectConstants.URL.host + ProjectConstants.URL.getCsrftoken);
 			try {
 				HttpResponse response = new DefaultHttpClient().execute(httpGet);
 				if(response.getStatusLine().getStatusCode() == 200) {

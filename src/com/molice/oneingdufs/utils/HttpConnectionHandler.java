@@ -37,13 +37,15 @@ public class HttpConnectionHandler extends Handler {
 	 */
 	protected void onStart(HttpRequestBase method) {
 		this.currentMethod = method;
-		progressDialog = ProgressDialog.show(context, "请等待...", "处理中...", true);
+		progressDialog = ProgressDialog.show(context, "请等待...", "网络连接中...", true);
+		progressDialog.setCancelable(true);
 		
 		// 如果在请求过程中使用返回键关闭对话框，则中断请求
 		progressDialog.setOnCancelListener(new OnCancelListener() {
 			@Override
 			public void onCancel(DialogInterface dialog) {
 				currentMethod.abort();
+				progressDialog.dismiss();
 			}
 		});
 	}

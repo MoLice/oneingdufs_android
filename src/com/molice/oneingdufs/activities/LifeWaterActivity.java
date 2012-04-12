@@ -6,18 +6,14 @@ import org.json.JSONObject;
 
 import com.molice.oneingdufs.R;
 import com.molice.oneingdufs.layouts.ActionBarController;
-import com.molice.oneingdufs.layouts.AppMenu;
 import com.molice.oneingdufs.layouts.TimePickerControllerForLifeWater;
 import com.molice.oneingdufs.utils.Lifer;
-import com.molice.oneingdufs.utils.SharedPreferencesStorager;
 
 import android.app.Activity;
 import android.content.res.Configuration;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -48,8 +44,6 @@ public class LifeWaterActivity extends Activity {
 	private final int END_HOUR = 17;
 	
 	private Lifer lifer;
-	private SharedPreferencesStorager storager;
-	private AppMenu appMenu;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -67,8 +61,6 @@ public class LifeWaterActivity extends Activity {
 		submit = (Button) findViewById(R.id.life_water_submit);
 		
 		lifer = new Lifer(this);
-		storager = new SharedPreferencesStorager(this);
-		appMenu = new AppMenu(this);
 		
 		// 设置当前小时
 		currentHour = getCurrentHour();
@@ -108,30 +100,6 @@ public class LifeWaterActivity extends Activity {
     public void onConfigurationChanged(Configuration config) {
         super.onConfigurationChanged(config);
     }
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-    	appMenu.onCreateOptionsMenu(menu);
-    	return super.onCreateOptionsMenu(menu);
-    }
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-    	Log.d("MainActivity", "onOptionsItemSelected被调用");
-    	return appMenu.onOptionsItemSelected(item);
-    }
-    @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-    	if(storager.get("isLogin", false)) {
-    		// 显示登录组，隐藏未登录组
-    		menu.setGroupVisible(AppMenu.NOTLOGIN, false);
-    		menu.setGroupVisible(AppMenu.ISLOGIN, true);
-    	} else {
-    		// 显示未登录组，隐藏登录组
-    		menu.setGroupVisible(AppMenu.NOTLOGIN, true);
-    		menu.setGroupVisible(AppMenu.ISLOGIN, false);
-    	}
-    	return super.onPrepareOptionsMenu(menu);
-    }
-	
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		// 处理{@link UserRoomAddressActivity}返回的数据

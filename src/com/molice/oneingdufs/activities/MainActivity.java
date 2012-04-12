@@ -89,7 +89,8 @@ public class MainActivity extends Activity {
         });
         
         // Æô¶¯AndroidPN·þÎñ
-        startNotificationService();
+        if(SettingsActivity.getNotification(this))
+        	startNotificationService();
     }
     
     @Override

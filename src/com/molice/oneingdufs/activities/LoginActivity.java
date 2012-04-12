@@ -4,7 +4,6 @@ import org.json.JSONObject;
 
 import com.molice.oneingdufs.R;
 import com.molice.oneingdufs.layouts.ActionBarController;
-import com.molice.oneingdufs.layouts.AppMenu;
 import com.molice.oneingdufs.utils.HttpConnectionHandler;
 import com.molice.oneingdufs.utils.HttpConnectionUtils;
 import com.molice.oneingdufs.utils.ProjectConstants;
@@ -16,9 +15,6 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -42,8 +38,6 @@ public class LoginActivity extends Activity {
 	private Button login_register;
 	// SharedPreferences
 	private SharedPreferencesStorager storager;
-	// 选项菜单Menu
-	private AppMenu appMenu;
 	// 登录结束（不管成功失败）后处理Activity跳转的Intent
 	private Intent intent;
 
@@ -68,8 +62,6 @@ public class LoginActivity extends Activity {
 		login_password = (EditText) findViewById(R.id.login_password);
 		login_submit = (Button) findViewById(R.id.login_submit);
 		login_register = (Button) findViewById(R.id.login_register);
-		
-		appMenu = new AppMenu(this);
 		
 		// 如果本地已存储过，则自动填充用户名
 		if(storager.has("username")) {
@@ -99,7 +91,7 @@ public class LoginActivity extends Activity {
 					data.putOpt("password", login_password.getText().toString());
 				} catch (Exception e) {
 				}
-				new HttpConnectionUtils(connectionHandler, storager).post(ProjectConstants.URL_LOGIN, data);
+				new HttpConnectionUtils(connectionHandler, storager).post(ProjectConstants.URL.login, data);
 			}
 		});
 		
@@ -154,30 +146,6 @@ public class LoginActivity extends Activity {
     public void onConfigurationChanged(Configuration config) {
         super.onConfigurationChanged(config);
     }
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-    	appMenu.onCreateOptionsMenu(menu);
-    	return super.onCreateOptionsMenu(menu);
-    }
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-    	Log.d("MainActivity", "onOptionsItemSelected被调用");
-    	return appMenu.onOptionsItemSelected(item);
-    }
-    @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-    	if(storager.get("isLogin", false)) {
-    		// 显示登录组，隐藏未登录组
-    		menu.setGroupVisible(AppMenu.NOTLOGIN, false);
-    		menu.setGroupVisible(AppMenu.ISLOGIN, true);
-    	} else {
-    		// 显示未登录组，隐藏登录组
-    		menu.setGroupVisible(AppMenu.NOTLOGIN, true);
-    		menu.setGroupVisible(AppMenu.ISLOGIN, false);
-    	}
-    	return super.onPrepareOptionsMenu(menu);
-    }
-	
 	/**
 	 * 用于响应用户名、密码这两个文本框的TextChange事件 如果两个文本框同时不为空则启用登录按钮，否则登录按钮不可用
 	 */

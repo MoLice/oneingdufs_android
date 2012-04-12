@@ -36,7 +36,7 @@ public class Logout {
 			.setPositiveButton("ÍË³ö", new OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					new HttpConnectionUtils(connectionHandler, storager).post(ProjectConstants.URL_LOGOUT, new JSONObject());
+					new HttpConnectionUtils(connectionHandler, storager).get(ProjectConstants.URL.logout, null);
 				}
 			})
 			.setNegativeButton("È¡Ïû", new OnClickListener() {
