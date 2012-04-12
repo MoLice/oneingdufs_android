@@ -63,7 +63,7 @@ public class MainActivity extends Activity {
         		// 校园卡
         		{null, R.string.dashboard_card, LifeCardActivity.class},
         		// 后勤留言
-        		{null, R.string.dashboard_gdufslife, null}
+        		{null, R.string.dashboard_gdufslife, LifeGdufsLifeActivity.class}
         });
         
         // 添加在校学习

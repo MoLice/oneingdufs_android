@@ -73,4 +73,17 @@
         <item>1</item>
         <item>2</item>
     </string-array>
+    
+    <!-- 后勤留言 -->
+    <string-array name="life_gdufslife_campus">
+        <item>南校</item>
+        <item>北校</item>
+    </string-array>
+    <string-array name="life_gdufslife_type">
+        <item>宿舍</item>
+        <item>教学</item>
+        <item>饭堂</item>
+        <item>门诊</item>
+        <item>其他</item>
+    </string-array>
 </resources>

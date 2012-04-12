@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.molice.oneingdufs"
-    android:versionCode="1"
-    android:versionName="0.80" >
+    android:versionCode="20"
+    android:versionName="0.85" >
 
     <application
         android:icon="@drawable/ic_launcher"
@@ -24,20 +24,20 @@
             android:name=".activities.RegisterActivity"
             android:launchMode="singleTop"
             android:configChanges="orientation|keyboardHidden"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait"/>
         <!-- 登录 -->
         <activity
             android:name=".activities.LoginActivity"
             android:launchMode="singleTop"
             android:configChanges="orientation|keyboardHidden"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait"/>
         <!-- 在校学习 Study -->
             <!-- 我的课表 -->
         <activity
             android:name=".activities.StudySyllabusActivity"
             android:launchMode="singleTop"
             android:configChanges="orientation|keyboardHidden"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait"/>
         
         <!-- 校园生活 Life  -->
             <!-- 校园生活-订水 -->
@@ -45,19 +45,25 @@
             android:name=".activities.LifeWaterActivity"
             android:launchMode="singleTop"
             android:configChanges="orientation|keyboardHidden"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait"/>
             <!-- 校园生活-报修 -->
         <activity
             android:name=".activities.LifeFixActivity"
             android:launchMode="singleTop"
             android:configChanges="orientation|keyboardHidden"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait"/>
             <!-- 校园生活-校园卡 -->
         <activity
             android:name=".activities.LifeCardActivity"
             android:launchMode="singleTop"
             android:configChanges="orientation|keyboardHidden"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait"/>
+            <!-- 校园生活-后勤留言 -->
+        <activity
+            android:name=".activities.LifeGdufsLifeActivity"
+            android:launchMode="singleTop"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait"/>
         <!-- 公共消息 Common -->
         <activity
             android:name=".activities.CommonLostActivity"
@@ -70,31 +76,31 @@
             android:name=".activities.UserHomeActivity"
             android:launchMode="singleTask"
             android:configChanges="orientation|keyboardHidden"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait"/>
             <!-- 个人中心-个人信息 -->
         <activity
             android:name=".activities.UserInfoActivity"
             android:launchMode="singleTop"
             android:configChanges="orientation|keyboardHidden"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait"/>
             <!-- 个人中心-宿舍住址 -->
         <activity
             android:name=".activities.UserRoomAddressActivity"
             android:launchMode="singleTop"
             android:configChanges="orientation|keyboardHidden"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait"/>
         <!-- 关于 -->
         <activity
             android:name=".activities.AboutActivity"
             android:launchMode="singleTop"
             android:configChanges="orientation|keyboardHidden"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait"/>
         <!-- 设置 -->
         <activity
             android:name=".activities.SettingsActivity"
             android:launchMode="singleTop"
             android:configChanges="orientation|keyboardHidden"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait"/>
         
         <!-- AndroidPN Service -->
         <service

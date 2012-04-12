@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <include layout="@layout/actionbar"/>
+    
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:fadeScrollbars="true"
+        android:scrollbarFadeDuration="2"
+        android:scrollbars="vertical">
+    <LinearLayout
+        style="@style/FormWrapper">
+        <!-- 标题 -->
+        <EditText
+            android:id="@+id/life_gdufslife_title"
+            style="@style/FormItem"
+            android:hint="@string/life_gdufslife_title"/>
+        <TextView
+            android:id="@+id/life_gdufslife_title_label"
+            style="@style/FormLabel"
+            android:text="@string/life_gdufslife_title_label"/>
+        
+        <!-- 内容 -->
+        <EditText
+            android:id="@+id/life_gdufslife_content"
+            style="@style/FormItem"
+            android:inputType="textMultiLine"
+            android:minLines="3"
+            android:gravity="top"
+            android:hint="@string/life_gdufslife_content"/>
+        <TextView
+            android:id="@+id/life_gdufslife_content_label"
+            style="@style/FormLabel"
+            android:text="@string/life_gdufslife_content_label"/>
+        
+        <!-- 邮箱 -->
+        <EditText
+            android:id="@+id/life_gdufslife_email"
+            style="@style/FormItem"
+            android:inputType="textEmailAddress"
+            android:hint="@string/life_gdufslife_email"/>
+        <TextView
+            android:id="@+id/life_gdufslife_email_label"
+            style="@style/FormLabel"
+            android:text="@string/life_gdufslife_email_label"/>
+        
+        <!-- 校区 -->
+        <Spinner
+            android:id="@+id/life_gdufslife_campus"
+            style="@style/FormItem"
+            android:entries="@array/life_gdufslife_campus"
+            android:alwaysDrawnWithCache="true"
+            android:prompt="@string/life_gdufslife_campus_prompt"/>
+        <TextView
+            android:id="@+id/life_gdufslife_campus_label"
+            style="@style/FormLabel"
+            android:text="@string/life_gdufslife_campus_label"/>
+        
+        <!-- 区域 -->
+        <Spinner
+            android:id="@+id/life_gdufslife_type"
+            style="@style/FormItem"
+            android:entries="@array/life_gdufslife_type"
+            android:alwaysDrawnWithCache="true"
+            android:prompt="@string/life_gdufslife_type_prompt"/>
+        <TextView
+            android:id="@+id/life_gdufslife_type_label"
+            style="@style/FormLabel"
+            android:text="@string/life_gdufslife_type_label"/>
+        
+        <LinearLayout
+            style="@style/FormItem"
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/life_gdufslife_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/cancel"/>
+            <Button
+                android:id="@+id/life_gdufslife_submit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/submit"/>
+        </LinearLayout>
+    </LinearLayout>
+    </ScrollView>
+</LinearLayout>
