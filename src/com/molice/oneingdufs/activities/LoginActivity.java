@@ -15,6 +15,7 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -73,23 +74,12 @@ public class LoginActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-				String username = login_username.getText().toString();
-				String password = login_password.getText().toString();
-				if(!username.equals("") && username.equals(storager.get("username", "")) && password.equals(storager.get("password", ""))) {
-					// 登录成功
-					storager.set("isLogin", true).save();
-					Toast.makeText(LoginActivity.this, "欢迎回来，" + storager.get("username", ""), Toast.LENGTH_LONG).show();
-					// 返回到某个Activity
-					callActivityAfterLogin("success");
-				} else {
-					// 登录失败
-					Toast.makeText(LoginActivity.this, "登录失败，请检查用户名、密码，或者重新注册", Toast.LENGTH_LONG).show();
-				}
 				JSONObject data = new JSONObject();
 				try {
 					data.putOpt("username", login_username.getText().toString());
 					data.putOpt("password", login_password.getText().toString());
 				} catch (Exception e) {
+					Log.d("JSON异常", "LoginActivity#submit, e=" + e.toString());
 				}
 				new HttpConnectionUtils(connectionHandler, storager).post(ProjectConstants.URL.login, data);
 			}
@@ -172,9 +162,10 @@ public class LoginActivity extends Activity {
 				intent = new Intent(getApplicationContext(), (Class<?>) extras.get("onLoginFailedActivity"));
 				startActivity(intent);
 			}
+		} else {
+			//因为MainActivity的launchMode="singleTop"，所以不能再重新启动一个，否则会生成两个MainActivity实例
+			//startActivity(new Intent(getApplicationContext(), MainActivity.class));
 		}
-		intent = new Intent(getApplicationContext(), MainActivity.class);
-		startActivity(intent);
 		finish();
 	}
 	

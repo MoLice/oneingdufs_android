@@ -50,6 +50,8 @@ public class ProjectConstants {
 		public final static String life_roomAddress = "/life/roomaddress/";
 		/** 获取校园卡数据*/
 		public final static String life_card = "/life/card/";
+		/** 后勤留言*/
+		public final static String life_gdufslife = "/life/gdufslife/";
 		
 		// 在校学习
 		/** 获取课表数据*/

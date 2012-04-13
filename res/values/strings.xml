@@ -151,10 +151,10 @@
     <string name="life_gdufslife_campus_label">请选择你所在的校区</string>
     <string name="life_gdufslife_campus_error">请选择你所在的校区</string>
     <string name="life_gdufslife_campus_prompt">请选择校区</string>
-    <string name="life_gdufslife_type">区域</string>
-    <string name="life_gdufslife_type_label">请选择留言内容所属区域类型</string>
-    <string name="life_gdufslife_type_error">请选择留言内容所属区域类型</string>
-    <string name="life_gdufslife_type_prompt">请选择校区</string>
+    <string name="life_gdufslife_types">区域</string>
+    <string name="life_gdufslife_types_label">请选择留言内容所属区域类型</string>
+    <string name="life_gdufslife_types_error">请选择留言内容所属区域类型</string>
+    <string name="life_gdufslife_types_prompt">请选择校区</string>
 
     <!-- 公共消息 -->
     <!-- 失物招领 -->

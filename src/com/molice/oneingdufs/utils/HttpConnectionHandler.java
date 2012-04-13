@@ -101,6 +101,7 @@ public class HttpConnectionHandler extends Handler {
 		if(progressDialog != null && progressDialog.isShowing()) {
 			progressDialog.dismiss();
 		}
+		Log.d("测试看看", "HttpConnectionHandler#onError, e=" + e.toString());
 		Toast.makeText(context, "网络连接错误，" + e.toString(), Toast.LENGTH_LONG).show();
 		Log.d("网络连接错误", "HttpConnectionHanlder#onError, e=" + e.toString());
 		if(e instanceof SocketException)

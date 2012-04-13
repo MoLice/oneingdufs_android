@@ -62,15 +62,15 @@
         
         <!-- 区域 -->
         <Spinner
-            android:id="@+id/life_gdufslife_type"
+            android:id="@+id/life_gdufslife_types"
             style="@style/FormItem"
-            android:entries="@array/life_gdufslife_type"
+            android:entries="@array/life_gdufslife_types"
             android:alwaysDrawnWithCache="true"
-            android:prompt="@string/life_gdufslife_type_prompt"/>
+            android:prompt="@string/life_gdufslife_types_prompt"/>
         <TextView
             android:id="@+id/life_gdufslife_type_label"
             style="@style/FormLabel"
-            android:text="@string/life_gdufslife_type_label"/>
+            android:text="@string/life_gdufslife_types_label"/>
         
         <LinearLayout
             style="@style/FormItem"

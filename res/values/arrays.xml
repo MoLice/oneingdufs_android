@@ -79,7 +79,7 @@
         <item>南校</item>
         <item>北校</item>
     </string-array>
-    <string-array name="life_gdufslife_type">
+    <string-array name="life_gdufslife_types">
         <item>宿舍</item>
         <item>教学</item>
         <item>饭堂</item>

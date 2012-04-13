@@ -6,6 +6,8 @@ import org.json.JSONObject;
 import com.molice.oneingdufs.R;
 import com.molice.oneingdufs.layouts.ActionBarController;
 import com.molice.oneingdufs.utils.FormValidator;
+import com.molice.oneingdufs.utils.HttpConnectionHandler;
+import com.molice.oneingdufs.utils.HttpConnectionUtils;
 import com.molice.oneingdufs.utils.ProjectConstants;
 import com.molice.oneingdufs.utils.SharedPreferencesStorager;
 
@@ -57,7 +59,7 @@ public class LifeGdufsLifeActivity extends Activity{
 		form.put(FormValidator.createInputData(R.id.life_gdufslife_content, "content", R.id.life_gdufslife_content_label, "^.{4,}$", R.string.life_gdufslife_content_label, R.string.life_gdufslife_content_error));
 		form.put(FormValidator.createInputData(R.id.life_gdufslife_email, "email", R.id.life_gdufslife_email_label, "^([\\w\\d_\\.-]+)@([\\w\\d_-]+\\.)+\\w{2,4}$", R.string.life_gdufslife_email_label, R.string.life_gdufslife_email_error));
 		form.put(FormValidator.createInputData(R.id.life_gdufslife_campus, "campus", R.id.life_gdufslife_campus_label, "^.{1,}$", R.string.life_gdufslife_campus_label, R.string.life_gdufslife_campus_error));
-		form.put(FormValidator.createInputData(R.id.life_gdufslife_type, "type", R.id.life_gdufslife_type_label, "^.{1,}$", R.string.life_gdufslife_type_label, R.string.life_gdufslife_type_error));
+		form.put(FormValidator.createInputData(R.id.life_gdufslife_types, "types", R.id.life_gdufslife_type_label, "^.{1,}$", R.string.life_gdufslife_types_label, R.string.life_gdufslife_types_error));
 		// 表单name在这里被setTag
 		validator = new FormValidator(this, form);
 		// 开启失去焦点时自动验证
@@ -75,8 +77,7 @@ public class LifeGdufsLifeActivity extends Activity{
 						} catch (Exception e) {
 							Log.d("JSON错误", "LifeGdufsLifeActivity#submit, e=" + e.toString());
 						}
-						Toast.makeText(LifeGdufsLifeActivity.this, "成功提交留言，请等待回复", Toast.LENGTH_SHORT).show();
-						finish();
+						new HttpConnectionUtils(connectionHandler, storager).post(ProjectConstants.URL.life_gdufslife, data);
 					} else {
 						ProjectConstants.alertDialog(LifeGdufsLifeActivity.this, "输入错误", "请按照提示修改", true);
 					}
@@ -104,4 +105,21 @@ public class LifeGdufsLifeActivity extends Activity{
     	}
     	return super.onKeyDown(keyCode, event);
     }
+    
+    private HttpConnectionHandler connectionHandler = new HttpConnectionHandler(this) {
+    	@Override
+    	protected void onSucceed(JSONObject result) {
+    		super.onSucceed(result);
+			Toast.makeText(LifeGdufsLifeActivity.this, "成功提交留言，请等待回复", Toast.LENGTH_SHORT).show();
+			finish();
+    	}
+    	@Override
+    	protected void onFailed(JSONObject result) {
+    		super.onFailed(result);
+    		if(result.has("formErrors")) {
+    			validator.updateFormMessageFromServer(result.optJSONObject("formErrors"));
+    			Toast.makeText(LifeGdufsLifeActivity.this, "表单验证失败，请根据提醒修改", Toast.LENGTH_SHORT).show();
+    		}
+    	}
+    };
 }

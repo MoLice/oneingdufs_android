@@ -16,7 +16,7 @@ public final class R {
         /**  后勤留言 
          */
         public static final int life_gdufslife_campus=0x7f060008;
-        public static final int life_gdufslife_type=0x7f060009;
+        public static final int life_gdufslife_types=0x7f060009;
         /**  订水桶数 
          */
         public static final int life_water_number=0x7f060005;
@@ -145,8 +145,8 @@ public final class R {
         public static final int life_gdufslife_submit=0x7f0b0039;
         public static final int life_gdufslife_title=0x7f0b002e;
         public static final int life_gdufslife_title_label=0x7f0b002f;
-        public static final int life_gdufslife_type=0x7f0b0036;
         public static final int life_gdufslife_type_label=0x7f0b0037;
+        public static final int life_gdufslife_types=0x7f0b0036;
         public static final int life_water_cancel=0x7f0b003f;
         public static final int life_water_number=0x7f0b003b;
         public static final int life_water_number_label=0x7f0b003c;
@@ -339,10 +339,10 @@ public final class R {
         public static final int life_gdufslife_title=0x7f09006c;
         public static final int life_gdufslife_title_error=0x7f09006e;
         public static final int life_gdufslife_title_label=0x7f09006d;
-        public static final int life_gdufslife_type=0x7f090079;
-        public static final int life_gdufslife_type_error=0x7f09007b;
-        public static final int life_gdufslife_type_label=0x7f09007a;
-        public static final int life_gdufslife_type_prompt=0x7f09007c;
+        public static final int life_gdufslife_types=0x7f090079;
+        public static final int life_gdufslife_types_error=0x7f09007b;
+        public static final int life_gdufslife_types_label=0x7f09007a;
+        public static final int life_gdufslife_types_prompt=0x7f09007c;
         /**  校园生活 
          */
         public static final int life_roomAddress=0x7f090056;
