@@ -1,5 +1,7 @@
 package com.molice.oneingdufs.utils;
 
+import com.molice.oneingdufs.activities.SettingsActivity;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -29,7 +31,9 @@ public class ProjectConstants {
 	public static final class URL {
 		// global 全局
 		/** 服务器地址，可在应用设置界面里更改*/
-		public static String host = "http://10.0.2.2:8000/api";
+		public static String getHost(Context context) {
+			return SettingsActivity.getHostUrl(context);
+		}
 		/** 获取csrftoken*/
 		public final static String getCsrftoken = "/getcsrftoken/";
 		/** 发送消息到另外一个用户*/
@@ -142,7 +146,6 @@ public class ProjectConstants {
 	 */
 	public static int getPxFromDip(Context context, int dip) {
 		int densityDpi = context.getResources().getDisplayMetrics().densityDpi;
-		Log.d("单位换算","ProjectConstants#getPxFromDip, dip=" + String.valueOf(dip) + ", px=" + String.valueOf(dip * densityDpi / 160));
 		return (int) (dip * densityDpi / 160);
 	}
 }

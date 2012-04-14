@@ -24,6 +24,7 @@ import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Handler;
@@ -49,6 +50,11 @@ public class HttpConnectionUtils implements Runnable {
 	public static final int STATUS_TIMEOUT = 3;
 	public static final int STATUS_ERROR = 4;
 	public static final int STATUS_COMPLETE = 5;
+	public static final int STATUS_NOCSRFTOKEN = 6;
+	
+	public static final int ACTION_SHOWDIALOG = 10;
+	public static final int ACTION_CHANGEDIALOG = 11;
+	public static final int ACTION_DISMISSDIALOG = 12;
 
 	private static final int GET = 0;
 	private static final int POST = 1;
@@ -59,16 +65,20 @@ public class HttpConnectionUtils implements Runnable {
 	private String url;
 	private int method;
 	private Handler handler;
+	private Context context;
 	private JSONObject data;
 
 	private HttpClient httpClient;
 	private SharedPreferencesStorager storager;
 	private String csrftoken;
 
-	public HttpConnectionUtils(Handler handler, SharedPreferencesStorager storager) {
+	public HttpConnectionUtils(Handler handler, Context context) {
 		this.handler = handler;
-		this.storager = storager;
-		this.csrftoken = getCsrfToken();
+		this.context = context;
+		this.storager = new SharedPreferencesStorager(context);
+		//因为getCsrfToken()方法中也需要弹出窗口，所以需要在多线程下运行，否则因为主UI阻塞所以无法显示弹出窗口
+		//因此把this.csrftoken的初始化放在run()开头。
+		//this.csrftoken = getCsrfToken();
 	}
 
 	public void create(int method, String url, JSONObject data) {
@@ -101,6 +111,12 @@ public class HttpConnectionUtils implements Runnable {
 
 	@Override
 	public void run() {
+		this.csrftoken = getCsrfToken();
+		if(csrftoken.equals("")) {
+			handler.sendMessage(Message.obtain(handler, STATUS_NOCSRFTOKEN));
+			return;
+		}
+		
 		httpClient = new DefaultHttpClient();
 		// 设置连接参数
 		HttpConnectionParams.setConnectionTimeout(httpClient.getParams(), TIMEOUT);
@@ -110,7 +126,7 @@ public class HttpConnectionUtils implements Runnable {
 		
 		// 检查url是站内地址或是站外地址，若以http://开头则是站外地址，直接返回，否则是站内地址，自动补充http://+域名
 		if(!url.startsWith("http://"))
-			url = ProjectConstants.URL.host + url;
+			url = ProjectConstants.URL.getHost(context) + url;
 		
 		try {
 			HttpResponse response = null;
@@ -278,26 +294,59 @@ public class HttpConnectionUtils implements Runnable {
 	}
 	
 	/**
+	 * TODO 增加错误提醒，因为在这里发起的HTTP请求的各种状态转换是没有提醒的。
 	 * 检查本地存储中是否有csrftoken，如果有则直接提取并返回，如果没有则发送GET /getcsrftoken/，从服务端返回的Set-Cookie头部中提取出csrftoken值<br />
 	 * 如果在此过程中出错，则返回""，因此必须对返回的值进行!=""判断
 	 * @return csrftoken值
 	 */
 	public String getCsrfToken() {
 		if(!storager.has("csrftoken")) {
-			HttpGet httpGet = new HttpGet(ProjectConstants.URL.host + ProjectConstants.URL.getCsrftoken);
+			JSONObject msg = new JSONObject();
 			try {
-				HttpResponse response = new DefaultHttpClient().execute(httpGet);
+				msg.putOpt("title", "配置网络");
+				msg.putOpt("msg", "设置参数中...");
+			} catch (Exception e) {
+				Log.d("JSON异常", "HttpConnectionUtils#getCsrfToken, e=" + e.toString());
+			}
+			handler.sendMessage(Message.obtain(handler, ACTION_SHOWDIALOG, msg));
+			
+			HttpClient client = new DefaultHttpClient();
+			// 设置连接参数
+			HttpConnectionParams.setConnectionTimeout(client.getParams(), TIMEOUT);
+			HttpConnectionParams.setSoTimeout(client.getParams(), TIMEOUT_SOCKET);
+			HttpProtocolParams.setContentCharset(client.getParams(), HTTP.UTF_8);
+			HttpProtocolParams.setUserAgent(client.getParams(), storager.get("baseInfo", "app_version=OneInGDUFS"));
+			HttpGet httpGet = new HttpGet(ProjectConstants.URL.getHost(context) + ProjectConstants.URL.getCsrftoken);
+			Log.d("看设置是否改变host", "HttpConnectionUtils#getCsrfToken, host=" + ProjectConstants.URL.getHost(context));
+			try {
+				HttpResponse response = client.execute(httpGet);
 				if(response.getStatusLine().getStatusCode() == 200) {
+					// 成功
 					csrftoken = cookiesToJSON(response.getHeaders("Set-Cookie")[0].getValue()).optString("csrftoken", "");
 					storager.set("csrftoken", csrftoken).save();
+					handler.sendMessage(Message.obtain(handler, ACTION_DISMISSDIALOG, null));
+					return csrftoken;
 				} else {
+					// 状态码错误
 					Log.d("status", String.valueOf(response.getStatusLine().getStatusCode()));
-					return "";
+					msg.putOpt("title", "配置网络");
+					msg.putOpt("msg", "请求错误，错误码" + String.valueOf(response.getStatusLine().getStatusCode()));
+					handler.sendMessage(Message.obtain(handler, ACTION_CHANGEDIALOG, msg));
 				}
+			} catch (ConnectTimeoutException e) {
+				Log.d("请求超时", "HttpConnectionUtils#getCsrfToken, e=" + e.toString());
+				handler.sendMessage(Message.obtain(handler, HttpConnectionUtils.STATUS_TIMEOUT, client));
 			} catch (Exception e) {
 				Log.d("请求异常", TAG + ", getCsrfToken, e=" + e.toString());
-				return "";
+				try {
+					msg.putOpt("title", "配置网络");
+					msg.putOpt("msg", "请求异常，e=" + e.toString());
+					handler.sendMessage(Message.obtain(handler, ACTION_CHANGEDIALOG, msg));
+				} catch(Exception e2) {
+				}
 			}
+			return "";
+			//handler.sendMessage(Message.obtain(handler, ACTION_DISMISSDIALOG, null));
 		}
 
 		return storager.get("csrftoken", "");

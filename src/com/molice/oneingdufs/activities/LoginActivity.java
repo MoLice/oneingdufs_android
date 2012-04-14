@@ -81,7 +81,7 @@ public class LoginActivity extends Activity {
 				} catch (Exception e) {
 					Log.d("JSON“Ï≥£", "LoginActivity#submit, e=" + e.toString());
 				}
-				new HttpConnectionUtils(connectionHandler, storager).post(ProjectConstants.URL.login, data);
+				new HttpConnectionUtils(connectionHandler, LoginActivity.this).post(ProjectConstants.URL.login, data);
 			}
 		});
 		

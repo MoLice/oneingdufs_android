@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.molice.oneingdufs"
-    android:versionCode="20"
-    android:versionName="0.85" >
+    android:versionCode="24"
+    android:versionName="0.88" >
 
     <application
-        android:icon="@drawable/ic_launcher"
+        android:icon="@drawable/icon"
         android:label="@string/app_name"
         android:theme="@style/gdufsTheme">
         <activity
@@ -65,6 +65,13 @@
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"/>
         <!-- 公共消息 Common -->
+            <!-- 校历 -->
+        <activity
+            android:name=".activities.CommonCalendarActivity"
+            android:launchMode="singleTop"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait"/>
+            <!-- 失物招领 -->
         <activity
             android:name=".activities.CommonLostActivity"
             android:launchMode="singleTop"

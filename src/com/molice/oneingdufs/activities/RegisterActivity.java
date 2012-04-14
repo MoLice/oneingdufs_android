@@ -13,7 +13,6 @@ import com.molice.oneingdufs.utils.ProjectConstants;
 import com.molice.oneingdufs.utils.SharedPreferencesStorager;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
@@ -89,14 +88,14 @@ public class RegisterActivity extends Activity {
 						} catch (Exception e) {
 							Log.d("JSON错误", "RegisterActivity, e=" + e.toString());
 						}
-						new HttpConnectionUtils(connectionHandler, storager).post(ProjectConstants.URL.register, input);
+						new HttpConnectionUtils(connectionHandler, RegisterActivity.this).post(ProjectConstants.URL.register, input);
 					} else {
 						Log.d("表单验证", "失败");
 						ProjectConstants.alertDialog(RegisterActivity.this, "输入错误", "请按照提示修改", true);
 					}
 				} else {
 					// 提示没有改动
-					Toast.makeText(RegisterActivity.this, "无修改", Toast.LENGTH_SHORT);
+					Toast.makeText(RegisterActivity.this, "无修改", Toast.LENGTH_SHORT).show();
 				}
 			}
 		});
@@ -124,9 +123,9 @@ public class RegisterActivity extends Activity {
 			.set("sessionid", result.optString("sessionid"))
 			.set("isLogin", true)
 			.save();
-			// 跳转到MainActivity
-			startActivity(new Intent(getApplicationContext(), MainActivity.class));
-			Toast.makeText(RegisterActivity.this, "欢迎你的到来，" + result.optString("username"), Toast.LENGTH_SHORT).show();
+			// 跳转到MainActivity，因为MainActivity的launchMode="singleTop"，所以为了避免同时生成两个MainActivity，就只需finish()即可
+			//startActivity(new Intent(getApplicationContext(), MainActivity.class));
+			Toast.makeText(RegisterActivity.this, "欢迎你，" + result.optString("username"), Toast.LENGTH_SHORT).show();
 			finish();
     	}
     	@Override

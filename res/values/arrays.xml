@@ -69,9 +69,9 @@
         <item>oneingdufs.sinaapp.com</item>
     </string-array>
     <string-array name="settings_host_value">
-        <item>0</item>
-        <item>1</item>
-        <item>2</item>
+        <item>http://10.0.2.2:8000/api</item>
+        <item>http://192.168.0.11:8000/api</item>
+        <item>http://oneingdufs.sinaapp.com/api</item>
     </string-array>
     
     <!-- 后勤留言 -->

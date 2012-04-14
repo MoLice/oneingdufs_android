@@ -1,12 +1,8 @@
 package com.molice.oneingdufs.activities;
 
-import org.json.JSONObject;
-
 import android.app.Activity;
-import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,8 +14,6 @@ import android.widget.TextView;
 import com.molice.oneingdufs.R;
 import com.molice.oneingdufs.layouts.ActionBarController;
 import com.molice.oneingdufs.layouts.AppMenu;
-import com.molice.oneingdufs.utils.HttpConnectionHandler;
-import com.molice.oneingdufs.utils.HttpConnectionUtils;
 import com.molice.oneingdufs.utils.SharedPreferencesStorager;
 
 /**
@@ -62,7 +56,6 @@ public class UserHomeActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				//startActivity(new Intent(getApplicationContext(), UserInfoActivity.class));
-				new HttpConnectionUtils(connectionHandler, storager).post("/test/", new JSONObject());
 			}
 		});
 	}
@@ -93,10 +86,4 @@ public class UserHomeActivity extends Activity {
     	}
     	return super.onPrepareOptionsMenu(menu);
     }
-    private HttpConnectionHandler connectionHandler = new HttpConnectionHandler(this) {
-    	@Override
-    	protected void onSucceed(JSONObject result) {
-    		super.onSucceed(result);
-    	}
-    };
 }

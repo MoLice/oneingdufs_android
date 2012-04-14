@@ -77,7 +77,7 @@ public class LifeGdufsLifeActivity extends Activity{
 						} catch (Exception e) {
 							Log.d("JSON错误", "LifeGdufsLifeActivity#submit, e=" + e.toString());
 						}
-						new HttpConnectionUtils(connectionHandler, storager).post(ProjectConstants.URL.life_gdufslife, data);
+						new HttpConnectionUtils(connectionHandler, LifeGdufsLifeActivity.this).post(ProjectConstants.URL.life_gdufslife, data);
 					} else {
 						ProjectConstants.alertDialog(LifeGdufsLifeActivity.this, "输入错误", "请按照提示修改", true);
 					}

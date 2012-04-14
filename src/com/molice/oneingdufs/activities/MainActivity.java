@@ -79,7 +79,7 @@ public class MainActivity extends Activity {
         // 添加公共消息
         addDashboardPart(R.string.dashboard_common, new Object[][] {
         		// 校历
-        		{null, R.string.dashboard_calendar, null},
+        		{null, R.string.dashboard_calendar, CommonCalendarActivity.class},
         		// 常用电话
         		{null, R.string.dashboard_telephones, null},
         		// 活动讲座
@@ -101,7 +101,6 @@ public class MainActivity extends Activity {
             // 将ActionBar右边的操作按钮设置为登录按钮
             View wrapper = ActionBarController.setActionBarButtons(this, new int[] {R.layout.actionbar_buttons_login});
             ImageButton actionbar_login = (ImageButton) wrapper.findViewById(R.id.actionbar_login);
-            Log.d("看按钮是否存在", "MainActivity#onResume, ImageButton=" + actionbar_login.getMeasuredHeight());
             actionbar_login.setOnClickListener(new OnClickListener() {
     			@Override
     			public void onClick(View v) {

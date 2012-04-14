@@ -67,7 +67,7 @@ public class LifeCardActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				// 发送网络请求，更新数据
-				new HttpConnectionUtils(connectionHandler, storager).get(ProjectConstants.URL.life_card, null);
+				new HttpConnectionUtils(connectionHandler, LifeCardActivity.this).get(ProjectConstants.URL.life_card, null);
 			}
 		});
         
@@ -94,7 +94,7 @@ public class LifeCardActivity extends Activity {
     	// 先检查是否有不存在的字段，若有则发送请求
     	for(int i=0; i<length; i++) {
     		if(!storager.has(itemsId[i])) {
-    			new HttpConnectionUtils(connectionHandler, storager).get(ProjectConstants.URL.life_card, null);
+    			new HttpConnectionUtils(connectionHandler, LifeCardActivity.this).get(ProjectConstants.URL.life_card, null);
     			return false;
     		}
     	}

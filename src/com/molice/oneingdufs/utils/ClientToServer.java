@@ -38,6 +38,7 @@ import com.molice.oneingdufs.interfaces.OnHttpRequestListener;
  */
 public class ClientToServer implements IClientToServer {
 	public DefaultHttpClient client;
+	private Context context;
 	private HttpParams httpParams;
 	private OnHttpRequestListener requestListener;
 	private SharedPreferencesStorager storager;
@@ -47,6 +48,7 @@ public class ClientToServer implements IClientToServer {
 	 * @param context 因为要生成SharedPreferencesStorager对象，所以需要传入Context
 	 */
 	public ClientToServer(Context context) {
+		this.context = context;
 		this.client = new DefaultHttpClient();
 		this.requestListener = null;
 		this.httpParams = new BasicHttpParams();
@@ -117,7 +119,7 @@ public class ClientToServer implements IClientToServer {
 	public void get(String url, JSONObject data, int requestCode) {
 		// 如果是相对地址，自动添加上域名
 		if(!url.startsWith("http://")) {
-			url = ProjectConstants.URL.host + url;
+			url = ProjectConstants.URL.getHost(context) + url;
 		}
 		// 如果需要传参，则将参数添加到url尾部
 		if(data != null) {
@@ -178,7 +180,7 @@ public class ClientToServer implements IClientToServer {
 	public void post(String url, JSONObject data, int requestCode) {
 		// 如果是相对地址，自动添加上域名
 		if(!url.startsWith("http://")) {
-			url = ProjectConstants.URL.host + url;
+			url = ProjectConstants.URL.getHost(context) + url;
 		}
 		HttpPost httpPost = new HttpPost(url);
 		UrlEncodedFormEntity postData = (UrlEncodedFormEntity) requestDataFormatter("post", data);
@@ -263,7 +265,7 @@ public class ClientToServer implements IClientToServer {
 	@Override
 	public String getCsrfToken() {
 		if(!storager.has("csrftoken")) {
-			HttpGet httpGet = new HttpGet(ProjectConstants.URL.host + ProjectConstants.URL.getCsrftoken);
+			HttpGet httpGet = new HttpGet(ProjectConstants.URL.getHost(context) + ProjectConstants.URL.getCsrftoken);
 			try {
 				HttpResponse response = client.execute(httpGet);
 				if(response.getStatusLine().getStatusCode() == 200) {

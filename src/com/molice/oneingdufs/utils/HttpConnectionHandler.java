@@ -26,6 +26,8 @@ public class HttpConnectionHandler extends Handler {
 	private Context context;
 	private ProgressDialog progressDialog;
 	
+	private ProgressDialog actionProgressDialog;
+	
 	private HttpRequestBase currentMethod;
 	
 	public HttpConnectionHandler(Context context) {
@@ -37,8 +39,7 @@ public class HttpConnectionHandler extends Handler {
 	 */
 	protected void onStart(HttpRequestBase method) {
 		this.currentMethod = method;
-		progressDialog = ProgressDialog.show(context, "请等待...", "网络连接中...", true);
-		progressDialog.setCancelable(true);
+		progressDialog = ProgressDialog.show(context, "请等待...", "网络连接中...", true, true);
 		
 		// 如果在请求过程中使用返回键关闭对话框，则中断请求
 		progressDialog.setOnCancelListener(new OnCancelListener() {
@@ -118,6 +119,31 @@ public class HttpConnectionHandler extends Handler {
 		httpClient.getConnectionManager().shutdown();
 	}
 	
+	protected void onNoCsrfToken() {
+		Log.d("context", "HttpConnectionHandler#onNoCsrfToken, context=" + context.toString());
+		Toast.makeText(context, "设置参数失败，操作中断", Toast.LENGTH_SHORT).show();
+	}
+	
+	protected void actionShowDialog(JSONObject msg) {
+		actionProgressDialog = ProgressDialog.show(context, msg.optString("title"), msg.optString("msg"), true, true);
+		Log.d("测试", "HttpConnectionHandler#actionShowDialog, actionProgressDialog=" + actionProgressDialog.toString() + ", isShowing=" + String.valueOf(actionProgressDialog.isShowing()));
+	}
+	protected void actionChangeDialog(JSONObject msg) {
+		if(actionProgressDialog != null && actionProgressDialog.isShowing()) {
+			actionProgressDialog.setTitle(msg.optString("title"));
+			actionProgressDialog.setMessage(msg.optString("msg"));
+		}
+	}
+	protected void actionDismissDialog(String toast) {
+		if(actionProgressDialog != null && actionProgressDialog.isShowing()) {
+			actionProgressDialog.dismiss();
+		}
+		Log.d("测试", "toast=" + toast);
+		if(!toast.equals("null") && !toast.equals("")) {
+			Toast.makeText(context, toast, Toast.LENGTH_SHORT).show();
+		}
+	}
+	
 	@Override
 	public void handleMessage(Message message) {
 		switch(message.what) {
@@ -147,6 +173,21 @@ public class HttpConnectionHandler extends Handler {
 		case HttpConnectionUtils.STATUS_COMPLETE:
 			// 请求结束
 			onComplete((HttpClient) message.obj);
+			break;
+		case HttpConnectionUtils.STATUS_NOCSRFTOKEN:
+			// 发送请求前检查csrftoken不通过，不发起请求
+			onNoCsrfToken();
+			break;
+		case HttpConnectionUtils.ACTION_SHOWDIALOG:
+			// 打开一个对话框
+			actionShowDialog((JSONObject) message.obj);
+			break;
+		case HttpConnectionUtils.ACTION_CHANGEDIALOG:
+			actionChangeDialog((JSONObject) message.obj);
+			break;
+		case HttpConnectionUtils.ACTION_DISMISSDIALOG:
+			// 关闭已打开的对话框
+			actionDismissDialog(String.valueOf(message.obj));
 			break;
 		}
 	}

@@ -23,12 +23,13 @@
 	        android:textColor="@color/gdufs_blue"
 	        android:text="One in GDUFS" />
 	    <TextView
+	        android:id="@+id/about_version"
 	        android:layout_width="fill_parent"
 	        android:layout_height="fill_parent"
 	        android:paddingRight="7dip"
 	        android:gravity="right"
 	        android:textSize="10sp"
-	        android:text="version 0.80"/>
+	        android:text="0.80"/>
     </LinearLayout>
     
     <TextView
@@ -37,7 +38,7 @@
         android:layout_alignParentBottom="true"
         android:paddingBottom="10dip"
         android:gravity="center"
-        android:textSize="10sp"
+        android:textSize="11sp"
         android:text="sf.molice@gmail.com"/>
 
 </RelativeLayout>

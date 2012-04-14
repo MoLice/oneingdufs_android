@@ -27,6 +27,10 @@
 |- Syllabus 我的课表
     |- ~Time 几点到几点
     |- ~Day 星期几
+|- Calendar 校历
+    |- ~Col 星期列
+|- Tab
+    |- Wrapper 包含所有Tab的LinearLayout
 -->
     <style name="ActionBarCompat">
         <item name="android:layout_width">fill_parent</item>
@@ -198,5 +202,60 @@
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_weight">1</item>
+    </style>
+    
+    <!-- Calendar 校历 -->
+        <!-- 星期列 -->
+    <style name="CalendarCol">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">fill_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:paddingTop">1dip</item>
+        <item name="android:paddingLeft">1dip</item>
+        <item name="android:background">@color/blue_light</item>
+    </style>
+    <style name="CalendarDay">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginBottom">1dip</item>
+        <item name="android:paddingTop">6dip</item>
+        <item name="android:paddingBottom">6dip</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@color/window_background</item>
+        <item name="android:text">1</item>
+    </style>
+    
+    <!-- Tab 标签切换 -->
+    <style name="TabWrapper">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:gravity">center</item>
+    </style>
+    <style name="TabItem">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:paddingLeft">20dip</item>
+        <item name="android:paddingRight">20dip</item>
+    </style>
+    <style name="TabItemText">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">fill_parent</item>
+        <item name="android:paddingBottom">3dip</item>
+        <item name="android:textColor">@color/black_light</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+    <style name="TabItemLine">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">2dip</item>
+        <item name="android:background">@color/black_light</item>
+    </style>
+    <style name="TabItemTextCurrent" parent="@style/TabItemText">
+        <item name="android:textColor">@color/green</item>
+    </style>
+    <style name="TabItemLineCurrent" parent="@style/TabItemLine">
+        <item name="android:background">@color/green</item>
     </style>
 </resources>

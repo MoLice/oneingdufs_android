@@ -157,6 +157,9 @@
     <string name="life_gdufslife_types_prompt">请选择校区</string>
 
     <!-- 公共消息 -->
+    <!-- 校历 -->
+    <string name="common_calendar">校历</string>
+    
     <!-- 失物招领 -->
     <string name="common_lost_pickup_picture_label">点击可为物品拍照，方便失主辨认</string>
     <string name="common_lost_pickup_tag">标签</string>

@@ -1,7 +1,6 @@
 package com.molice.oneingdufs.activities;
 
 import com.molice.oneingdufs.R;
-import com.molice.oneingdufs.utils.ProjectConstants;
 
 import android.content.Context;
 import android.content.res.Configuration;
@@ -55,18 +54,15 @@ public class SettingsActivity extends PreferenceActivity {
 	 * @param value
 	 */
 	private void setHostUrlSummaryByValue(Preference host, String value) {
-		if(value.equals("0")) {
+		if(value.contains("10.0.2.2")) {
 			// 模拟器
 			host.setSummary("连接到10.0.2.2:8000");
-			ProjectConstants.URL.host = "http://10.0.2.2:8000/api";
-		} else if(value.equals("1")) {
+		} else if(value.contains("192.168.0.11")) {
 			// 真机（局域网）
 			host.setSummary("连接到192.168.0.11:8000");
-			ProjectConstants.URL.host = "http://192.168.0.11:8000/api";
-		} else if(value.equals("2")) {
+		} else if(value.contains("sinaapp")) {
 			// 真机（公网）
 			host.setSummary("连接到oneingdufs.sinaapp.com");
-			ProjectConstants.URL.host = "http://oneingdufs.sinaapp.com/api";
 		}
 	}
 	
@@ -80,6 +76,6 @@ public class SettingsActivity extends PreferenceActivity {
 	}
 	
 	public static String getHostUrl(Context context) {
-		return PreferenceManager.getDefaultSharedPreferences(context).getString("settings_debug_host", "0");
+		return PreferenceManager.getDefaultSharedPreferences(context).getString("settings_debug_host", "http://10.0.2.2:8000/api");
 	}
 }

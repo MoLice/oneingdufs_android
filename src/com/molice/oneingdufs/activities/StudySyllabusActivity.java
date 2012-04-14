@@ -166,7 +166,7 @@ public class StudySyllabusActivity extends Activity {
     	storager.del("study_syllabus").save();
     	if(storager.get("study_syllabus", "").equals("")) {
     		// 本地不存在课表数据，需要发送请求到服务端
-    		new HttpConnectionUtils(connectionHandler, storager).get(ProjectConstants.URL.study_syllabus, null);
+    		new HttpConnectionUtils(connectionHandler, this).get(ProjectConstants.URL.study_syllabus, null);
     		return false;
     	} else {
     		// 本地存在课表数据，直接提取并显示

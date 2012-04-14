@@ -15,6 +15,6 @@
             android:dialogTitle="选择服务器地址"
             android:entries="@array/settings_host_url"
             android:entryValues="@array/settings_host_value"
-            android:defaultValue="0"/>
+            android:defaultValue="http://10.0.2.2:8000/api"/>
     </PreferenceCategory>
 </PreferenceScreen>
