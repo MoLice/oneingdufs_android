@@ -1,20 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
-    <CheckBoxPreference
-        android:key="settings_notification"
-        android:title="消息通知"
-        android:summaryOn="接收消息通知"
-        android:summaryOff="不接收消息通知"
-        android:defaultValue="false"/>
-    <PreferenceCategory
-        android:title="调试">
+
+    <PreferenceCategory android:title="消息通知" >
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="settings_notification_enabled"
+            android:summaryOff="不接收"
+            android:summaryOn="接收"
+            android:title="是否接收消息通知" />
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="settings_notification_vibrate"
+            android:summaryOff="收到时不振动"
+            android:summaryOn="收到时振动"
+            android:title="收到消息时振动" />
+
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="settings_notification_sound"
+            android:summaryOff="收到时不播放"
+            android:summaryOn="收到时播放"
+            android:title="收到消息时播放铃声" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="调试" >
+
         <ListPreference
-            android:key="settings_debug_host"
-            android:title="选择服务器地址"
-            android:summary="不同平台需设置不同的服务器地址"
+            android:defaultValue="http://10.0.2.2:8000/api"
             android:dialogTitle="选择服务器地址"
             android:entries="@array/settings_host_url"
             android:entryValues="@array/settings_host_value"
-            android:defaultValue="http://10.0.2.2:8000/api"/>
+            android:key="settings_debug_host"
+            android:summary="不同平台需设置不同的服务器地址"
+            android:title="选择服务器地址" />
     </PreferenceCategory>
+
 </PreferenceScreen>

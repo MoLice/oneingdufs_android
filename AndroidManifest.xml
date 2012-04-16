@@ -108,6 +108,12 @@
             android:launchMode="singleTop"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"/>
+        <!-- 显示推送消息 -->
+        <activity
+            android:name=".activities.NotificationActivity"
+            android:launchMode="singleTop"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait"/>
         
         <!-- AndroidPN Service -->
         <service

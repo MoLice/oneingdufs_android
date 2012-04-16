@@ -69,7 +69,7 @@ public class Logout {
 			// 注销成功，清除用户数据
 			storager.del("sessionid").set("isLogin", false).save();
 			// 关闭后台Service
-			if (SettingsActivity.getNotification(context))
+			if (SettingsActivity.getNotificationEnabled(context))
 				new ServiceManager(context).stopService();
 			Toast.makeText(context, result.optString("resultMsg"),
 					Toast.LENGTH_SHORT).show();

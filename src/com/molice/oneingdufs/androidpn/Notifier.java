@@ -17,6 +17,8 @@ package com.molice.oneingdufs.androidpn;
 
 import java.util.Random;
 
+import com.molice.oneingdufs.activities.NotificationActivity;
+import com.molice.oneingdufs.activities.SettingsActivity;
 import com.molice.oneingdufs.utils.SharedPreferencesStorager;
 
 import android.app.Notification;
@@ -62,20 +64,20 @@ public class Notifier {
         Log.d(LOGTAG, "notificationMessage=" + message);
         Log.d(LOGTAG, "notificationUri=" + uri);
 
-        if (isNotificationEnabled()) {
+        if (SettingsActivity.getNotificationEnabled(context)) {
             // Show the toast
-            if (isNotificationToastEnabled()) {
-                Toast.makeText(context, message, Toast.LENGTH_LONG).show();
-            }
+//            if (isNotificationToastEnabled()) {
+//                Toast.makeText(context, message, Toast.LENGTH_LONG).show();
+//            }
 
             // Notification
             Notification notification = new Notification();
             notification.icon = getNotificationIcon();
-            notification.defaults = Notification.DEFAULT_LIGHTS;
-            if (isNotificationSoundEnabled()) {
+//            notification.defaults = Notification.DEFAULT_LIGHTS;
+            if (SettingsActivity.getNotificationSound(context)) {
                 notification.defaults |= Notification.DEFAULT_SOUND;
             }
-            if (isNotificationVibrateEnabled()) {
+            if (SettingsActivity.getNotificationVibrate(context)) {
                 notification.defaults |= Notification.DEFAULT_VIBRATE;
             }
             notification.flags |= Notification.FLAG_AUTO_CANCEL;
@@ -100,17 +102,17 @@ public class Notifier {
             //            }
 
             Intent intent = new Intent(context,
-                    NotificationDetailsActivity.class);
+                    NotificationActivity.class);
             intent.putExtra(Constants.NOTIFICATION_ID, notificationId);
             intent.putExtra(Constants.NOTIFICATION_API_KEY, apiKey);
             intent.putExtra(Constants.NOTIFICATION_TITLE, title);
             intent.putExtra(Constants.NOTIFICATION_MESSAGE, message);
             intent.putExtra(Constants.NOTIFICATION_URI, uri);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            intent.setFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-            intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//            intent.setFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
+//            intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+//            intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+//            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
             PendingIntent contentIntent = PendingIntent.getActivity(context, 0,
                     intent, PendingIntent.FLAG_UPDATE_CURRENT);
@@ -156,22 +158,4 @@ public class Notifier {
     private int getNotificationIcon() {
         return sharedPrefs.get(Constants.NOTIFICATION_ICON, 0);
     }
-
-    private boolean isNotificationEnabled() {
-        return sharedPrefs.get(Constants.SETTINGS_NOTIFICATION_ENABLED,
-                true);
-    }
-
-    private boolean isNotificationSoundEnabled() {
-        return sharedPrefs.get(Constants.SETTINGS_SOUND_ENABLED, true);
-    }
-
-    private boolean isNotificationVibrateEnabled() {
-        return sharedPrefs.get(Constants.SETTINGS_VIBRATE_ENABLED, true);
-    }
-
-    private boolean isNotificationToastEnabled() {
-        return sharedPrefs.get(Constants.SETTINGS_TOAST_ENABLED, false);
-    }
-
 }

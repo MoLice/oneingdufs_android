@@ -89,7 +89,7 @@ public class MainActivity extends Activity {
         });
         
         // Æô¶¯AndroidPN·þÎñ
-        if(SettingsActivity.getNotification(this))
+        if(SettingsActivity.getNotificationEnabled(this))
         	startNotificationService();
     }
     
@@ -158,7 +158,7 @@ public class MainActivity extends Activity {
      */
     private void startNotificationService() {
     	ServiceManager serviceManager = new ServiceManager(this);
-    	serviceManager.setNotificationIcon(R.drawable.ic_launcher);
+    	serviceManager.setNotificationIcon(R.drawable.icon);
     	serviceManager.startService();
     }
 }

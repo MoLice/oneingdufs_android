@@ -1,8 +1,11 @@
 package com.molice.oneingdufs.utils;
 
+import java.util.List;
+
 import com.molice.oneingdufs.activities.SettingsActivity;
 
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.Context;
@@ -147,5 +150,23 @@ public class ProjectConstants {
 	public static int getPxFromDip(Context context, int dip) {
 		int densityDpi = context.getResources().getDisplayMetrics().densityDpi;
 		return (int) (dip * densityDpi / 160);
+	}
+	/**
+	 * 判断某个服务是否正在运行
+	 * @param context
+	 * @param serviceName 服务全称，如oneingdufs.androidpn.service
+	 * @return
+	 */
+	public static boolean isServiceRunning(Context context, String serviceName) {
+		ActivityManager manager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+		List<ActivityManager.RunningServiceInfo> serviceList = manager.getRunningServices(30);
+		int length = serviceList.size();
+		if(length <= 0)
+			return false;
+		for(int i=0; i<length; i++) {
+			if(serviceList.get(i).service.getClassName().equals(serviceName))
+				return true;
+		}
+		return false;
 	}
 }

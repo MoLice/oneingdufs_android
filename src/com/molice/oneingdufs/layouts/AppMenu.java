@@ -114,7 +114,7 @@ public class AppMenu {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						Activity activity = (Activity) context;
-						if(SettingsActivity.getNotification(activity))
+						if(SettingsActivity.getNotificationEnabled(activity))
 							new ServiceManager(activity).stopService();
 						activity.finish();
 						System.exit(0);

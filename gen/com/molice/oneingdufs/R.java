@@ -248,15 +248,16 @@ public final class R {
         public static final int life_water=0x7f030010;
         public static final int login=0x7f030011;
         public static final int main=0x7f030012;
-        public static final int numberpicker=0x7f030013;
-        public static final int register=0x7f030014;
-        public static final int study_syllabus=0x7f030015;
-        public static final int study_syllabus_class=0x7f030016;
-        public static final int timepicker=0x7f030017;
-        public static final int user_home=0x7f030018;
-        public static final int user_info=0x7f030019;
-        public static final int user_roomaddress=0x7f03001a;
-        public static final int user_title=0x7f03001b;
+        public static final int notification=0x7f030013;
+        public static final int numberpicker=0x7f030014;
+        public static final int register=0x7f030015;
+        public static final int study_syllabus=0x7f030016;
+        public static final int study_syllabus_class=0x7f030017;
+        public static final int timepicker=0x7f030018;
+        public static final int user_home=0x7f030019;
+        public static final int user_info=0x7f03001a;
+        public static final int user_roomaddress=0x7f03001b;
+        public static final int user_title=0x7f03001c;
     }
     public static final class raw {
         public static final int oneingdufs=0x7f050000;
