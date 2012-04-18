@@ -17,6 +17,7 @@ package com.molice.oneingdufs.androidpn;
 
 import java.util.Properties;
 
+import com.molice.oneingdufs.utils.ProjectConstants;
 import com.molice.oneingdufs.utils.SharedPreferencesStorager;
 
 import android.app.Activity;
@@ -90,15 +91,23 @@ public final class ServiceManager {
     }
 
     public void startService() {
-        Thread serviceThread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                Intent intent = NotificationService.getIntent();
-                context.startService(intent);
-            }
-        });
-        serviceThread.start();
+    	if(!ProjectConstants.isServiceRunning(context, NotificationService.SERVICE_NAME)) {
+	        Thread serviceThread = new Thread(new Runnable() {
+	            @Override
+	            public void run() {
+	                Intent intent = NotificationService.getIntent();
+	                context.startService(intent);
+	            }
+	        });
+	        serviceThread.start();
+    	} else {
+    		Log.d("启动APN服务", "ServiceManger#startService, 服务已存在，检查是否处于成功连接状态...");
+    	}
     }
+    
+    // TODO 添加一个方法，用于在切换Activity时检查XMPP连接是否正常，如果不正常（如服务器宕机），则中断当前服务并重新启动
+    // getConnection.isConnected()
+    
 
     public void stopService() {
         Intent intent = NotificationService.getIntent();

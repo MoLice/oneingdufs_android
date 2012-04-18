@@ -15,6 +15,9 @@
  */
 package com.molice.oneingdufs.androidpn;
 
+import com.molice.oneingdufs.utils.ProjectConstants;
+
+import android.content.Context;
 import android.util.Log;
 
 /** 
@@ -27,11 +30,13 @@ public class ReconnectionThread extends Thread {
     private static final String LOGTAG = LogUtil
             .makeLogTag(ReconnectionThread.class);
 
+    private Context context;
     private final XmppManager xmppManager;
 
     private int waiting;
 
-    ReconnectionThread(XmppManager xmppManager) {
+    ReconnectionThread(Context context, XmppManager xmppManager) {
+    	this.context = context;
         this.xmppManager = xmppManager;
         this.waiting = 0;
     }
@@ -39,6 +44,8 @@ public class ReconnectionThread extends Thread {
     public void run() {
         try {
             while (!isInterrupted()) {
+            	if(ProjectConstants.isServiceRunning(context, NotificationService.SERVICE_NAME))
+            		break;
                 Log.d(LOGTAG, "Trying to reconnect in " + waiting()
                         + " seconds");
                 Thread.sleep((long) waiting() * 1000L);

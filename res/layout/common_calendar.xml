@@ -40,6 +40,7 @@
     <!-- 日期表格 -->
 
     <LinearLayout
+        android:id="@+id/common_calendar_weekcolwrapper"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"

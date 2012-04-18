@@ -34,10 +34,6 @@ import org.jivesoftware.smack.packet.IQ;
 import org.jivesoftware.smack.packet.Packet;
 import org.jivesoftware.smack.packet.Registration;
 import org.jivesoftware.smack.provider.ProviderManager;
-import org.json.JSONObject;
-
-import com.molice.oneingdufs.utils.ClientToServer;
-import com.molice.oneingdufs.utils.ProjectConstants;
 import com.molice.oneingdufs.utils.SharedPreferencesStorager;
 
 import android.content.Context;
@@ -104,7 +100,7 @@ public class XmppManager {
 
         handler = new Handler();
         taskList = new ArrayList<Runnable>();
-        reconnection = new ReconnectionThread(this);
+        reconnection = new ReconnectionThread(context, this);
     }
 
     public Context getContext() {
@@ -139,6 +135,10 @@ public class XmppManager {
 
         };
         addTask(runnable);
+    }
+    
+    public Thread getReconnectionThread() {
+    	return reconnection;
     }
 
     public XMPPConnection getConnection() {
@@ -441,10 +441,10 @@ public class XmppManager {
                     xmppManager.getConnection().login(
                             xmppManager.getUsername(),
                             xmppManager.getPassword(), XMPP_RESOURCE_NAME);
-                    if(sharedPrefs.has("isLogin") && sharedPrefs.get("isLogin", false)) {
-                    	// 用户已登录但XMPP需要重连，则在登录状态下更新XMPP用户名
-                    	updateAPNUsername(xmppManager);
-                    }
+//                    if(sharedPrefs.has("isLogin") && sharedPrefs.get("isLogin", false)) {
+//                    	// 用户已登录但XMPP需要重连，则在登录状态下更新XMPP用户名
+//                    	updateAPNUsername(xmppManager);
+//                    }
                     Log.d(LOGTAG, "Loggedn in successfully");
 
                     // connection listener
@@ -492,15 +492,15 @@ public class XmppManager {
         }
     }
     
-    private void updateAPNUsername(XmppManager xmppManager) {
-    	ClientToServer client = new ClientToServer(context);
-    	JSONObject data = new JSONObject();
-    	try {
-			data.putOpt("username", xmppManager.getUsername());
-		} catch (Exception e) {
-			Log.e("异常", "XmppManager.updateAPNUsername, e=" + e.toString());
-		}
-    	client.post(ProjectConstants.URL.updateApnUsername, data, 0);
-    }
+//    private void updateAPNUsername(XmppManager xmppManager) {
+//    	ClientToServer client = new ClientToServer(context);
+//    	JSONObject data = new JSONObject();
+//    	try {
+//			data.putOpt("username", xmppManager.getUsername());
+//		} catch (Exception e) {
+//			Log.e("异常", "XmppManager.updateAPNUsername, e=" + e.toString());
+//		}
+//    	client.post(ProjectConstants.URL.updateApnUsername, data, 0);
+//    }
 
 }

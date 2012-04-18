@@ -234,6 +234,8 @@ public class NotificationService extends Service {
         unregisterNotificationReceiver();
         unregisterConnectivityReceiver();
         xmppManager.disconnect();
+        xmppManager.getTaskList().clear();
+        xmppManager.getFutureTask().cancel(true);
         executorService.shutdown();
     }
 
@@ -255,7 +257,6 @@ public class NotificationService extends Service {
                     && task != null) {
                 result = notificationService.getExecutorService().submit(task);
             }
-            Log.d("333TaskSubmitter#submit", "result=" + result.toString());
             return result;
         }
 
