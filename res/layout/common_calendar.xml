@@ -6,187 +6,27 @@
 
     <include layout="@layout/actionbar" />
 
-    <!-- 月份 -->
+    <!-- 月份标签卡 -->
 
-    <LinearLayout style="@style/TabWrapper"
-        android:paddingTop="10dip"
-        android:paddingBottom="20dip">
-
-        <LinearLayout style="@style/TabItem" >
-            <TextView style="@style/TabItemTextCurrent"
-                android:text="3月"/>
-            <View style="@style/TabItemLineCurrent"/>
-        </LinearLayout>
-
-        <LinearLayout style="@style/TabItem" >
-            <TextView style="@style/TabItemText"
-                android:text="4月"/>
-            <View style="@style/TabItemLine"/>
-        </LinearLayout>
-        
-        <LinearLayout style="@style/TabItem" >
-            <TextView style="@style/TabItemText"
-                android:text="5月"/>
-            <View style="@style/TabItemLine"/>
-        </LinearLayout>
-        
-        <LinearLayout style="@style/TabItem" >
-            <TextView style="@style/TabItemText"
-                android:text="6月"/>
-            <View style="@style/TabItemLine"/>
-        </LinearLayout>
+    <LinearLayout
+        android:id="@+id/common_calendar_tab"
+        style="@style/TabWrapper"
+        android:paddingBottom="20dip"
+        android:paddingTop="10dip" >
     </LinearLayout>
 
     <!-- 日期表格 -->
 
-    <LinearLayout
-        android:id="@+id/common_calendar_weekcolwrapper"
+    <GridView
+        android:id="@+id/common_calendar_grid"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:weightSum="8" >
-
-        <!-- 周次 -->
-
-        <LinearLayout style="@style/CalendarCol" >
-
-            <TextView
-                style="@style/CalendarDay"
-                android:text="周" />
-
-            <TextView style="@style/CalendarDay" />
-
-            <TextView style="@style/CalendarDay" />
-
-            <TextView style="@style/CalendarDay" />
-
-            <TextView style="@style/CalendarDay" />
-
-            <TextView style="@style/CalendarDay" />
-        </LinearLayout>
-
-        <LinearLayout style="@style/CalendarCol" >
-
-            <TextView
-                style="@style/CalendarDay"
-                android:text="日" />
-
-            <TextView style="@style/CalendarDay" />
-
-            <TextView style="@style/CalendarDay" />
-
-            <TextView style="@style/CalendarDay" />
-
-            <TextView style="@style/CalendarDay" />
-
-            <TextView style="@style/CalendarDay" />
-        </LinearLayout>
-
-        <LinearLayout style="@style/CalendarCol" >
-
-            <TextView
-                style="@style/CalendarDay"
-                android:text="一" />
-
-            <TextView style="@style/CalendarDay" />
-
-            <TextView style="@style/CalendarDay" />
-
-            <TextView style="@style/CalendarDay" />
-
-            <TextView style="@style/CalendarDay" />
-
-            <TextView style="@style/CalendarDay" />
-        </LinearLayout>
-
-        <LinearLayout style="@style/CalendarCol" >
-
-            <TextView
-                style="@style/CalendarDay"
-                android:text="二" />
-
-            <TextView style="@style/CalendarDay" />
-
-            <TextView style="@style/CalendarDay" />
-
-            <TextView style="@style/CalendarDay" />
-
-            <TextView style="@style/CalendarDay" />
-
-            <TextView style="@style/CalendarDay" />
-        </LinearLayout>
-
-        <LinearLayout style="@style/CalendarCol" >
-
-            <TextView
-                style="@style/CalendarDay"
-                android:text="三" />
-
-            <TextView style="@style/CalendarDay" />
-
-            <TextView style="@style/CalendarDay" />
-
-            <TextView style="@style/CalendarDay" />
-
-            <TextView style="@style/CalendarDay" />
-
-            <TextView style="@style/CalendarDay" />
-        </LinearLayout>
-
-        <LinearLayout style="@style/CalendarCol" >
-
-            <TextView
-                style="@style/CalendarDay"
-                android:text="四" />
-
-            <TextView style="@style/CalendarDay" />
-
-            <TextView style="@style/CalendarDay" />
-
-            <TextView style="@style/CalendarDay" />
-
-            <TextView style="@style/CalendarDay" />
-
-            <TextView style="@style/CalendarDay" />
-        </LinearLayout>
-
-        <LinearLayout style="@style/CalendarCol" >
-
-            <TextView
-                style="@style/CalendarDay"
-                android:text="五" />
-
-            <TextView style="@style/CalendarDay" />
-
-            <TextView style="@style/CalendarDay" />
-
-            <TextView style="@style/CalendarDay" />
-
-            <TextView style="@style/CalendarDay" />
-
-            <TextView style="@style/CalendarDay" />
-        </LinearLayout>
-
-        <LinearLayout
-            style="@style/CalendarCol"
-            android:paddingRight="1dip" >
-
-            <TextView
-                style="@style/CalendarDay"
-                android:text="六" />
-
-            <TextView style="@style/CalendarDay" />
-
-            <TextView style="@style/CalendarDay" />
-
-            <TextView style="@style/CalendarDay" />
-
-            <TextView style="@style/CalendarDay" />
-
-            <TextView style="@style/CalendarDay" />
-        </LinearLayout>
-        <!-- 周日 -->
-    </LinearLayout>
+        android:gravity="center"
+        android:horizontalSpacing="1dip"
+        android:verticalSpacing="4dip"
+        android:listSelector="@android:color/transparent"
+        android:numColumns="8"
+        android:stretchMode="columnWidth"/>
 
     <!-- 详情说明 -->
 
@@ -196,6 +36,7 @@
         android:orientation="vertical" >
 
         <TextView
+            android:id="@+id/common_calendar_details"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
@@ -203,8 +44,7 @@
             android:paddingLeft="20dip"
             android:paddingRight="20dip"
             android:paddingTop="20dip"
-            android:text="1、2月26日学生报到，2月27日开始上课。
-2、3月8日下午停课，女教工放假半天。" />
+            android:text="" />
     </LinearLayout>
 
 </LinearLayout>

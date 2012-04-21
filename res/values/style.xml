@@ -215,15 +215,22 @@
         <item name="android:paddingLeft">1dip</item>
         <item name="android:background">@color/blue_light</item>
     </style>
-    <style name="CalendarDay">
-        <item name="android:layout_width">fill_parent</item>
-        <item name="android:layout_height">wrap_content</item>
+    <style name="CalendarItem">
         <item name="android:layout_marginBottom">1dip</item>
         <item name="android:paddingTop">6dip</item>
         <item name="android:paddingBottom">6dip</item>
         <item name="android:gravity">center</item>
+        <item name="android:layout_weight">1</item>
         <item name="android:background">@color/window_background</item>
         <item name="android:text">1</item>
+    </style>
+    <style name="CalendarWeek" parent="@style/CalendarItem">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+    <style name="CalendarDay" parent="@style/CalendarItem">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
     </style>
     
     <!-- Tab 标签切换 -->
@@ -237,8 +244,8 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:orientation">vertical</item>
-        <item name="android:paddingLeft">20dip</item>
-        <item name="android:paddingRight">20dip</item>
+        <item name="android:paddingLeft">10dip</item>
+        <item name="android:paddingRight">10dip</item>
     </style>
     <style name="TabItemText">
         <item name="android:layout_width">wrap_content</item>

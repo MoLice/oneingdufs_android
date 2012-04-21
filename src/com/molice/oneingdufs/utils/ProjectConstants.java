@@ -25,6 +25,16 @@ import android.util.Log;
 public class ProjectConstants {
 	public final static String IMAGE_PATH = "image/*";
 	
+	// 公共消息-校历
+	public static final class COMMON {
+		public final static int CALENDAR_STARTYEAR = 2012;
+		public final static int CALENDAR_STARTMONTH = 1;
+		public final static int CALENDAR_STARTDAY = 26;
+		public final static int CALENDAR_ENDYEAR = 2012;
+		public final static int CALENDAR_ENDMONTH = 6;
+		public final static int CALENDAR_ENDDAY = 14;
+	}
+	
 	/**
 	 * 系统使用到的url，除了host，其他地址开头结尾均要添加斜杠/
 	 * 
