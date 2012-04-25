@@ -59,7 +59,7 @@ public class CalendarAdapter extends BaseAdapter {
 		day.setGravity(Gravity.CENTER);
 		if(msg != null) {
 			day.setTag(msg);
-			day.setBackgroundColor(context.getResources().getColor(R.color.green));
+			day.setBackgroundColor(context.getResources().getColor(R.color.green_light));
 		} else {
 			day.setTag(null);
 			day.setBackgroundColor(Color.TRANSPARENT);

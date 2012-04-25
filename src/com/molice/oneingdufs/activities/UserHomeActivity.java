@@ -1,11 +1,9 @@
 package com.molice.oneingdufs.activities;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -13,7 +11,6 @@ import android.widget.TextView;
 
 import com.molice.oneingdufs.R;
 import com.molice.oneingdufs.layouts.ActionBarController;
-import com.molice.oneingdufs.layouts.AppMenu;
 import com.molice.oneingdufs.utils.SharedPreferencesStorager;
 
 /**
@@ -24,12 +21,17 @@ import com.molice.oneingdufs.utils.SharedPreferencesStorager;
  * @date 2012-3-28
  */
 public class UserHomeActivity extends Activity {
+	private final static int BTN_INFO = 0;
+	private final static int BTN_MESSAGE = 1;
+	private final static int BTN_TODO = 2;
+	
 	private Button user_info;
+	private Button user_message;
+	private Button user_todo;
 	
 	private TextView username;
 	private TextView studentId;
 	private SharedPreferencesStorager storager;
-	private AppMenu appMenu;
 	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,52 +40,48 @@ public class UserHomeActivity extends Activity {
         // 设置标题
         ActionBarController.setTitle(this, R.string.user_home_title);
         
+        storager = new SharedPreferencesStorager(this);
+        
         user_info = (Button) findViewById(R.id.user_home_info);
+        user_info.setTag(BTN_INFO);
+        user_message = (Button) findViewById(R.id.user_home_message);
+        user_message.setTag(BTN_MESSAGE);
+        user_todo = (Button) findViewById(R.id.user_home_todo);
+        user_todo.setTag(BTN_TODO);
+        // 设置按钮的点击跳转
+        user_info.setOnClickListener(listener);
+        user_message.setOnClickListener(listener);
+        user_todo.setOnClickListener(listener);
         
         // 设置用户名和学号
         username = (TextView) findViewById(R.id.user_username);
         studentId = (TextView) findViewById(R.id.user_studentId);
-        
-        storager = new SharedPreferencesStorager(this);
-        appMenu = new AppMenu(this);
-        
         username.setText(storager.get("username", ""));
         studentId.setText(storager.get("studentId", ""));
-        
-        // 设置按钮的点击跳转
-        user_info.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				//startActivity(new Intent(getApplicationContext(), UserInfoActivity.class));
-			}
-		});
 	}
     @Override
     public void onConfigurationChanged(Configuration config) {
         super.onConfigurationChanged(config);
     }
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-    	appMenu.onCreateOptionsMenu(menu);
-    	return super.onCreateOptionsMenu(menu);
-    }
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-    	Log.d("MainActivity", "onOptionsItemSelected被调用");
-    	return appMenu.onOptionsItemSelected(item);
-    }
-    @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-    	if(storager.get("isLogin", false)) {
-    		// 显示登录组，隐藏未登录组
-    		menu.setGroupVisible(AppMenu.NOTLOGIN, false);
-    		menu.setGroupVisible(AppMenu.ISLOGIN, true);
-    	} else {
-    		// 显示未登录组，隐藏登录组
-    		menu.setGroupVisible(AppMenu.NOTLOGIN, true);
-    		menu.setGroupVisible(AppMenu.ISLOGIN, false);
-    	}
-    	return super.onPrepareOptionsMenu(menu);
-    }
+    
+    private OnClickListener listener = new OnClickListener() {
+		@Override
+		public void onClick(View v) {
+			if(v.getTag() != null) {
+				int tag = Integer.parseInt(String.valueOf(v.getTag()));
+				switch (tag) {
+				case BTN_INFO:
+					startActivity(new Intent(getApplicationContext(), UserInfoActivity.class));
+					break;
+				case BTN_MESSAGE:
+					startActivity(new Intent(getApplicationContext(), MessageActivity.class));
+					break;
+				case BTN_TODO:
+					break;
+				default:
+					break;
+				}
+			}
+		}
+	};
 }

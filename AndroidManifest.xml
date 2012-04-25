@@ -13,6 +13,7 @@
             android:launchMode="singleTop"
             android:alwaysRetainTaskState="true"
             android:name=".activities.MainActivity"
+            android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait">
             <intent-filter >
                 <action android:name="android.intent.action.MAIN" />
@@ -108,9 +109,16 @@
             android:launchMode="singleTop"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"/>
-        <!-- 显示推送消息 -->
+        <!-- 个人消息 -->
+            <!-- 消息列表 -->
         <activity
-            android:name=".activities.NotificationActivity"
+            android:name=".activities.MessageActivity"
+            android:launchMode="singleTop"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait"/>
+            <!-- 查看消息详情 -->
+        <activity
+            android:name=".activities.MessageDetailActivity"
             android:launchMode="singleTop"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"/>

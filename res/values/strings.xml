@@ -172,4 +172,8 @@
     <string name="common_lost_pickup_explain">*提交后，失主将会通过本软件与你联系，这不会泄露你的任何个人信息</string>
     <string name="common_lost_lost_byDatetime">时间</string>
     <string name="common_lost_lost_byTag">标签</string>
+    
+    <!-- 通知列表 -->
+    <string name="message">消息中心</string>
+    <string name="message_detail">查看消息</string>
 </resources>

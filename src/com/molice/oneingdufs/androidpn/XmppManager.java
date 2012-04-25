@@ -304,8 +304,9 @@ public class XmppManager {
                 // Create the configuration for this new connection
                 ConnectionConfiguration connConfig = new ConnectionConfiguration(
                         xmppHost, xmppPort);
-                // connConfig.setSecurityMode(SecurityMode.disabled);
-                connConfig.setSecurityMode(SecurityMode.required);
+                // 如果出现No response from the server，则要disabled
+                 connConfig.setSecurityMode(SecurityMode.disabled);
+//                connConfig.setSecurityMode(SecurityMode.required);
                 connConfig.setSASLAuthenticationEnabled(false);
                 connConfig.setCompressionEnabled(false);
 
@@ -430,7 +431,6 @@ public class XmppManager {
 
         public void run() {
             Log.i(LOGTAG, "LoginTask.run()...");
-            Log.d("5555LoginTask#run()", "进入LoginTask#run()");
 
             if (!xmppManager.isAuthenticated()) {
                 Log.d(LOGTAG, "username=" + username);
