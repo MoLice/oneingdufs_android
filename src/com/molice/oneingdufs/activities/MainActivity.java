@@ -41,7 +41,7 @@ public class MainActivity extends Activity {
         setContentView(R.layout.main);
         
         // 设置标题为第几周
-        ActionBarController.setTitle(this, "12周");
+        ActionBarController.setTitle(this, CommonCalendarActivity.getCurrentWeekThisTerm());
         
         // 获取R.layout.main中的主容器LinearLayout，用于addDashboardPart引用
         main_wrapper =(LinearLayout) findViewById(R.id.main_wrapper);

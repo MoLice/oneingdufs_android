@@ -28,8 +28,18 @@ public class CommonCalendarActivity extends Activity {
 	private static Calendar FIRST_DAY_OF_TERM;
 	private static Calendar LAST_DAY_OF_TERM;
 	private int totalWeeksOfTerm;
+	/**
+	 * 当前显示的月份的第一天，而不是当前实际月份的第一天
+	 */
 	private Calendar firstday;
+	/**
+	 * 当前显示的月份的最后一天，而不是当前实际月份的最后一天
+	 */
 	private Calendar lastday;
+	/**
+	 * 今天 TODO 在日历上标志今天；根据今天，设置默认显示的月份；提供一个方法计算MainActivity顶部的第几周
+	 */
+	private Calendar today;
 
 	private GridView grid;
 	private ArrayList<String> gridItemText;
@@ -73,7 +83,7 @@ public class CommonCalendarActivity extends Activity {
 		setContentView(R.layout.common_calendar);
 
 		// 设置标题
-		ActionBarController.setTitle(this, R.string.common_calendar);
+		ActionBarController.setTitle(this, getCurrentWeekThisTerm());
 
 		FIRST_DAY_OF_TERM = getFirstDayThisTerm();
 		LAST_DAY_OF_TERM = getLastDayThisTerm();
@@ -85,17 +95,19 @@ public class CommonCalendarActivity extends Activity {
 		tabColor = getResources().getColor(R.color.black_light);
 		tabColorCurrent = getResources().getColor(R.color.green);
 		details = (TextView) findViewById(R.id.common_calendar_details);
+		today = Calendar.getInstance();
+		
 		
 		try {
-			importantDays = new JSONObject("{\"2\":{\"26\":\"学生报到\",\"27\":\"正式上课\",\"details\":\"2月26日学生报到，2月27日开始上课。\"},\"3\":{\"8\":\"妇女节，下午停课\",\"details\":\"3月8日下午停课，女教工放假半天。\"},\"4\":{\"2\":\"2-4日清明节放假\",\"3\":\"2-4日清明节放假\",\"4\":\"2-4日清明节放假\",\"29\":\"4月29至5月1日，五一放假\",\"30\":\"4月29至5月1日，五一放假\",\"details\":\"2至4日清明节放假调休\"},\"5\":{\"1\":\"4月29至5月1日，五一放假\",\"4\":\"五四青年节，下午停课\",\"7\":\"7-11日毕业班考试\",\"8\":\"7-11日毕业班考试\",\"9\":\"7-11日毕业班考试\",\"10\":\"7-11日毕业班考试\",\"11\":\"7-11日毕业班考试\",\"details\":\"1、4月29至5月1日劳动节放假调休。\\n2、5月4日下午停课，组织活动庆祝青年节。\\n3、5月7日至11日毕业班考试。\"},\"6\":{\"22\":\"22-24日，端午节放假\",\"23\":\"22-24日，端午节放假\",\"24\":\"22-24日，端午节放假\",\"details\":\"1、22至24日端午节放假公休。\\n2、第十八周体育课、全人通识教育选修课、通选课、辅修课期末考试。\\n3、25至28日研究生、本科生毕业典礼暨学位授予仪式。27至30日办理毕业离校手续。\"},\"7\":{\"14\":\"2012年7月14日至8月31日放假，9月2日老生报到，3日开始上课，9月9日新生报到\",\"details\":\"7月1至13日期末复习考试\"}}");
+			importantDays = new JSONObject(ProjectConstants.COMMON.CALENDAR_IMPORTANTDAY);
 		} catch (Exception e) {
 			Log.d("JSON异常", "CommonCalendarActivity#importantDays, e=" + e.toString());
 		}
 		
 		grid.setOnItemClickListener(itemClickListener);
-		setMonthTab(ProjectConstants.COMMON.CALENDAR_STARTMONTH, ProjectConstants.COMMON.CALENDAR_ENDMONTH, ProjectConstants.COMMON.CALENDAR_STARTMONTH);
-		setMonthDetails(ProjectConstants.COMMON.CALENDAR_STARTMONTH);
-		setGridViewData(ProjectConstants.COMMON.CALENDAR_STARTMONTH);
+		setMonthTab(ProjectConstants.COMMON.CALENDAR_STARTMONTH, ProjectConstants.COMMON.CALENDAR_ENDMONTH, today.get(Calendar.MONTH));
+		setMonthDetails(today.get(Calendar.MONTH));
+		setGridViewData(today.get(Calendar.MONTH));
 	}
 	
 	/**
@@ -174,8 +186,6 @@ public class CommonCalendarActivity extends Activity {
 	 * @param month 显示哪个月份的日历
 	 */
 	private void setGridViewData(int month) {
-		// 清空数据
-		grid.setAdapter(new CalendarAdapter(this, new String[] {}, null));
 		daysMsg = new JSONObject();
 		
 		firstday = getFirstday(month);
@@ -205,10 +215,16 @@ public class CommonCalendarActivity extends Activity {
 			}
 		}
 
-		grid.setAdapter(new CalendarAdapter(this, gridItemText
-				.toArray(new String[] {}), daysMsg));
+		// 清空数据
+		grid.setAdapter(new CalendarAdapter(this, month, new String[] {}, null));
+		// 设置最新数据
+		grid.setAdapter(new CalendarAdapter(this, month, gridItemText.toArray(new String[] {}), daysMsg));
 	}
 	
+	/**
+	 * 设置视图下方的每月详情说明
+	 * @param month 月份，从0开始
+	 */
 	private void setMonthDetails(int month) {
 		month++;
 		JSONObject m = importantDays.optJSONObject(String.valueOf(month));
@@ -242,6 +258,9 @@ public class CommonCalendarActivity extends Activity {
 			} catch (Exception e) {
 				Log.d("JSON异常", "CommonCalendarActivity#getCurrentItemText, e=" + e.toString());
 			}
+		}
+		if(lastday.get(Calendar.MONTH) == today.get(Calendar.MONTH) && day == today.get(Calendar.DAY_OF_MONTH)) {
+			// TODO 当前单元格为今天日期，判断是否已经被添加
 		}
 		return String.valueOf(day);
 	}
@@ -307,5 +326,25 @@ public class CommonCalendarActivity extends Activity {
 	@Override
 	public void onConfigurationChanged(Configuration config) {
 		super.onConfigurationChanged(config);
+	}
+	
+	/**
+	 * 获取当前第几周
+	 * @return 如果未开学或已放假，则返回空字符串；否则返回"第n周"，如"第12周"
+	 */
+	public static String getCurrentWeekThisTerm() {
+		Calendar today = Calendar.getInstance();
+		
+		Calendar firstday = Calendar.getInstance();
+		firstday.set(ProjectConstants.COMMON.CALENDAR_STARTYEAR, ProjectConstants.COMMON.CALENDAR_STARTMONTH, ProjectConstants.COMMON.CALENDAR_STARTDAY);
+		
+		Calendar lastday = Calendar.getInstance();
+		lastday.set(ProjectConstants.COMMON.CALENDAR_ENDYEAR, ProjectConstants.COMMON.CALENDAR_ENDMONTH, ProjectConstants.COMMON.CALENDAR_ENDDAY);
+		
+		if(today.after(lastday) || today.before(firstday)) {
+			return "";
+		}
+		
+		return "第" + String.valueOf(today.get(Calendar.WEEK_OF_YEAR) - firstday.get(Calendar.WEEK_OF_YEAR) + 1) + "周";
 	}
 }

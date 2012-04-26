@@ -70,9 +70,9 @@ public class MessageActivity extends Activity{
     Handler handler = new Handler() {
     	private ProgressDialog progressDialog;
     	
-//    	private void onBeforeStart() {
-//        	progressDialog = ProgressDialog.show(MessageActivity.this, null, "请稍等...", true, true);
-//        }
+    	private void onBeforeStart() {
+        	progressDialog = ProgressDialog.show(MessageActivity.this, null, "请稍等...", true, true);
+        }
     	
     	private void onStart() {
         	if(progressDialog != null && progressDialog.isShowing()) {
@@ -133,7 +133,7 @@ public class MessageActivity extends Activity{
     		switch (message.what) {
 			case ONBEFORESTART:
 				// 开始读取前，弹出onProgressDialog
-//				onBeforeStart();
+				onBeforeStart();
 				break;
 			case ONSTART:
 				// 开始读取
