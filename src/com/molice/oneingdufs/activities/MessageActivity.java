@@ -63,7 +63,7 @@ public class MessageActivity extends Activity{
 				long id) {
 			Intent intent = new Intent(getApplicationContext(), MessageDetailActivity.class);
 			intent.putExtra("data", ((ViewHolder) view.getTag()).data.toString());
-			startActivity(intent);
+			startActivityForResult(intent, 0);
 		}
 	};
     
