@@ -12,6 +12,7 @@ import com.molice.oneingdufs.utils.ProjectConstants;
 
 import android.app.Activity;
 import android.content.res.Configuration;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -141,6 +142,7 @@ public class CommonCalendarActivity extends Activity {
 		if(current) {
 			// 设置当前tab的额外属性
 			tabText.setTextColor(tabColorCurrent);
+			tabText.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
 			line.setBackgroundColor(tabColorCurrent);
 		}
 		
@@ -155,14 +157,19 @@ public class CommonCalendarActivity extends Activity {
 		public void onClick(View v) {
 			// 清除所有item的样式
 			int length = tabs.length;
+			TextView itemText;
 			for(int i=0; i<length; i++) {
-				((TextView) tabs[i].getChildAt(0)).setTextColor(tabColor);
+				itemText = ((TextView) tabs[i].getChildAt(0));
+				itemText.setTextColor(tabColor);
+				itemText.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
 				tabs[i].getChildAt(1).setBackgroundColor(tabColor);
 			}
 			// 设置被点击item的样式
 			int month = Integer.parseInt(String.valueOf(v.getTag()));
 			LinearLayout tabItem = (LinearLayout) v;
-			((TextView) tabItem.getChildAt(0)).setTextColor(tabColorCurrent);
+			itemText = ((TextView) tabItem.getChildAt(0));
+			itemText.setTextColor(tabColorCurrent);
+			itemText.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
 			tabItem.getChildAt(1).setBackgroundColor(tabColorCurrent);
 			// 改变日期内容
 			setGridViewData(month);

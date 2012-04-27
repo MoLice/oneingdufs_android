@@ -62,6 +62,8 @@ public class ProjectConstants {
 		public final static String register = "/home/register/";
 		/** 退出登陆*/
 		public final static String logout = "/home/logout/";
+		/** 我的资料*/
+		public final static String home_info = "/home/info/";
 		
 		// 校园生活
 		/** 更新宿舍地址*/
@@ -74,6 +76,13 @@ public class ProjectConstants {
 		// 在校学习
 		/** 获取课表数据*/
 		public final static String study_syllabus = "/study/syllabus/";
+		
+		// 消息
+		public final static String message_send = "/message/";
+	}
+	
+	public static class VALUE {
+		public final static String USER_INFO_PREFIX = "user_info_";
 	}
 	
 	// 方便调用的静态方法

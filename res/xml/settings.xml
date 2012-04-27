@@ -4,7 +4,7 @@
     <PreferenceCategory android:title="消息通知" >
 
         <CheckBoxPreference
-            android:defaultValue="true"
+            android:defaultValue="false"
             android:key="settings_notification_enabled"
             android:summaryOff="不接收"
             android:summaryOn="接收"
@@ -27,14 +27,28 @@
 
     <PreferenceCategory android:title="调试" >
 
-        <ListPreference
+        <!--<ListPreference
             android:defaultValue="http://10.0.2.2:8000/api"
             android:dialogTitle="选择服务器地址"
             android:entries="@array/settings_host_url"
             android:entryValues="@array/settings_host_value"
             android:key="settings_debug_host"
             android:summary="不同平台需设置不同的服务器地址"
-            android:title="选择服务器地址" />
+            android:title="选择服务器地址" />-->
+        <EditTextPreference
+            android:key="settings_debug_host"
+            android:summary="不同平台需设置不同的服务器地址"
+            android:title="输入服务器地址"
+            android:dialogTitle="输入服务器地址"
+            android:dialogMessage="http://10.0.2.2:8000/api&#x000A;http://oneingdufs.sinaapp.com/api"
+            android:defaultValue="http://10.0.2.2:8000/api"/>
+        <EditTextPreference
+            android:key="settings_debug_apn"
+            android:summary="不同平台需设置不同的服务器地址"
+            android:title="输入推送服务器地址"
+            android:dialogTitle="输入推送服务器地址"
+            android:dialogMessage="不带协议头，如10.0.2.2、192.168.0.238"
+            android:defaultValue="10.0.2.2"/>
     </PreferenceCategory>
 
 </PreferenceScreen>

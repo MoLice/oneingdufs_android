@@ -14,7 +14,7 @@ import com.molice.oneingdufs.layouts.ActionBarController;
 import com.molice.oneingdufs.utils.SharedPreferencesStorager;
 
 /**
- * 个人中心首页，提供到个人信息、消息中心、我的日程、账号关联的链接<br/>
+ * 个人中心首页，提供到我的资料、消息中心、我的日程、账号关联的链接<br/>
  * R.layout.user_home
  * 
  * @author MoLice (sf.molice@gmail.com)

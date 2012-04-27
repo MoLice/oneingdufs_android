@@ -117,7 +117,6 @@ public class RegisterActivity extends Activity {
     	@Override
     	protected void onSucceed(JSONObject result) {
     		super.onSucceed(result);
-    		// TODO 这里将直接使用LoginActivity登录成功时的代码
 			storager
 			.set("username", result.optString("username"))
 			.set("sessionid", result.optString("sessionid"))

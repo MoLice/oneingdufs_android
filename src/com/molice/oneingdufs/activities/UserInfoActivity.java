@@ -6,13 +6,14 @@ import org.json.JSONObject;
 import com.molice.oneingdufs.R;
 import com.molice.oneingdufs.layouts.ActionBarController;
 import com.molice.oneingdufs.utils.FormValidator;
+import com.molice.oneingdufs.utils.HttpConnectionHandler;
+import com.molice.oneingdufs.utils.HttpConnectionUtils;
 import com.molice.oneingdufs.utils.ProjectConstants;
 import com.molice.oneingdufs.utils.SharedPreferencesStorager;
 
 import android.app.Activity;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -22,7 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 /**
- * 用户中心-个人信息视图<br />
+ * 用户中心-我的资料视图<br />
  * R.layout.user_info
  */
 public class UserInfoActivity extends Activity {
@@ -72,7 +73,7 @@ public class UserInfoActivity extends Activity {
 		// 开启失去焦点时自动验证
 		validator.addOnFocusChangeValidate();
 		// 从本地存储中恢复数据
-		validator.setInputFromLocalStorage("user_info_");
+		validator.setInputFromLocalStorage(ProjectConstants.VALUE.USER_INFO_PREFIX);
 		// 因为恢复数据了，所以要重新更新oriInputsValue
 		validator.updateOriInputsValue();
 
@@ -91,12 +92,7 @@ public class UserInfoActivity extends Activity {
 					if(validator.isFormCorrect()) {
 						// 验证通过，发送请求，保存到本地
 						JSONObject input = validator.getInput();
-						// 更新输入值
-						validator.updateOriInputsValue();
-						// 保存数据到本地
-						validator.setInputToLocalStorager("user_info_");
-						Toast.makeText(UserInfoActivity.this, "个人信息已保存", Toast.LENGTH_SHORT).show();
-						Log.d("UserInfo验证通过", input.toString());
+						new HttpConnectionUtils(handler, UserInfoActivity.this).post(ProjectConstants.URL.home_info, input);
 					} else {
 						ProjectConstants.alertDialog(UserInfoActivity.this, "输入错误", "请按照提示修改", true);
 					}
@@ -124,4 +120,24 @@ public class UserInfoActivity extends Activity {
     	}
     	return super.onKeyDown(keyCode, event);
     }
+    public void storageInfoData(SharedPreferencesStorager storager, JSONObject data) {
+    	String[] keys = {"email", "truename", "telnum", "cornet", "qq"};
+    	for (int i = 0; i < keys.length; i++) {
+			if(!data.optString(keys[i], "").equals("")) {
+				storager.set(ProjectConstants.VALUE.USER_INFO_PREFIX + keys[i], data.optString(keys[i]));
+			}
+		}
+    	storager.save();
+    }
+    private HttpConnectionHandler handler = new HttpConnectionHandler(this) {
+    	@Override
+    	protected void onSucceed(JSONObject result) {
+    		super.onSucceed(result);
+			// 更新输入值
+			validator.updateOriInputsValue();
+    		// 将数据存储到本地（因为保存成功时后台不会返回最新数据）
+			validator.setInputToLocalStorager(ProjectConstants.VALUE.USER_INFO_PREFIX);
+			Toast.makeText(UserInfoActivity.this, "资料保存成功", Toast.LENGTH_SHORT).show();
+    	}
+    };
 }

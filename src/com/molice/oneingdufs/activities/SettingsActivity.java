@@ -34,7 +34,7 @@ public class SettingsActivity extends PreferenceActivity {
 		
 		onNotificationSettingChange(SettingsActivity.getNotificationEnabled(this));
 		// 根据选择的平台的不同，显示不同的提示文字
-		onHostSettingChange(findPreference("settings_debug_host"), SettingsActivity.getHostUrl(this));
+//		onHostSettingChange(findPreference("settings_debug_host"), SettingsActivity.getHostUrl(this));
 		
 		findPreference("settings_notification_enabled").setOnPreferenceChangeListener(changeListener);
 		findPreference("settings_debug_host").setOnPreferenceChangeListener(changeListener);
@@ -47,7 +47,7 @@ public class SettingsActivity extends PreferenceActivity {
 			if(key.equals("settings_notification_enabled")) {
 				return onNotificationSettingChange((Boolean) newValue);
 			} else if(key.equals("settings_debug_host")) {
-				return onHostSettingChange(preference, String.valueOf(newValue));
+//				return onHostSettingChange(preference, String.valueOf(newValue));
 			}
 			return true;
 		}
@@ -56,7 +56,7 @@ public class SettingsActivity extends PreferenceActivity {
 	private boolean onNotificationSettingChange(boolean newValue) {
 		// 是否接受通知
 		if(newValue) {
-			if(ProjectConstants.isServiceRunning(SettingsActivity.this, NotificationService.SERVICE_NAME)) {
+			if(ProjectConstants.isServiceRunning(this, NotificationService.SERVICE_NAME)) {
 				notification_vibrate.setEnabled(true);
 				notification_sound.setEnabled(true);
 				return false;
@@ -69,7 +69,7 @@ public class SettingsActivity extends PreferenceActivity {
 				return true;
 			}
 		} else {
-			if(ProjectConstants.isServiceRunning(SettingsActivity.this, NotificationService.SERVICE_NAME)) {
+			if(ProjectConstants.isServiceRunning(this, NotificationService.SERVICE_NAME)) {
 				new ServiceManager(SettingsActivity.this).stopService();
 				notification_vibrate.setEnabled(false);
 				notification_sound.setEnabled(false);
@@ -140,5 +140,13 @@ public class SettingsActivity extends PreferenceActivity {
 	 */
 	public static String getHostUrl(Context context) {
 		return PreferenceManager.getDefaultSharedPreferences(context).getString("settings_debug_host", "http://10.0.2.2:8000/api");
+	}
+	/**
+	 * 获取消息推送服务器连接域名
+	 * @param context
+	 * @return 不包含http://协议头，也不包含端口号。默认值"10.0.2.2"
+	 */
+	public static String getApnHostUrl(Context context) {
+		return PreferenceManager.getDefaultSharedPreferences(context).getString("settings_debug_apn", "10.0.2.2");
 	}
 }

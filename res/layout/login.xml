@@ -14,7 +14,6 @@
         <EditText
             android:id="@+id/login_username"
             style="@style/FormItem"
-            android:inputType="textPersonName"
             android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_"
             android:hint="@string/login_username" />
 

@@ -71,13 +71,13 @@
     
     <!-- 用户中心-个人中心 -->
     <string name="user_home_title">个人中心</string>
-    <string name="user_home_info">个人信息</string>
+    <string name="user_home_info">我的资料</string>
     <string name="user_home_message">消息中心</string>
     <string name="user_home_todo">我的日程</string>
     <string name="user_home_relativeId">账号关联</string>
     
-    <!-- 用户中心-个人信息 -->
-    <string name="user_info_title">个人信息</string>
+    <!-- 用户中心-我的资料 -->
+    <string name="user_info_title">我的资料</string>
     <string name="user_info_email">example@example.com</string>
     <string name="user_info_email_label">你的常用邮箱</string>
     <string name="user_info_email_error">不是合法的邮箱地址</string>
@@ -176,4 +176,15 @@
     <!-- 通知列表 -->
     <string name="message">消息中心</string>
     <string name="message_detail">查看消息</string>
+    <!-- 发送消息 -->
+    <string name="message_send">发送消息</string>
+    <string name="message_send_username">用户昵称</string>
+    <string name="message_send_username_label">要发送到的用户账号昵称</string>
+    <string name="message_send_username_error">不是合法的昵称</string>
+    <string name="message_send_title">标题</string>
+    <string name="message_send_title_label">消息标题</string>
+    <string name="message_send_title_error">消息标题不能为空</string>
+    <string name="message_send_content">消息正文</string>
+    <string name="message_send_content_label">消息正文</string>
+    <string name="message_send_content_error">正文不能为空</string>
 </resources>

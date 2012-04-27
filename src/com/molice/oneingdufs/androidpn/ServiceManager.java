@@ -17,6 +17,7 @@ package com.molice.oneingdufs.androidpn;
 
 import java.util.Properties;
 
+import com.molice.oneingdufs.activities.SettingsActivity;
 import com.molice.oneingdufs.utils.ProjectConstants;
 import com.molice.oneingdufs.utils.SharedPreferencesStorager;
 
@@ -74,7 +75,8 @@ public final class ServiceManager {
 
         props = loadProperties();
         apiKey = props.getProperty("apiKey", "1234567890");
-        xmppHost = props.getProperty("xmppHost", "10.0.2.2");
+//        xmppHost = props.getProperty("xmppHost", "10.0.2.2");
+        xmppHost = SettingsActivity.getApnHostUrl(context);
         xmppPort = props.getProperty("xmppPort", "5222");
         Log.i(LOGTAG, "apiKey=" + apiKey);
         Log.i(LOGTAG, "xmppHost=" + xmppHost);

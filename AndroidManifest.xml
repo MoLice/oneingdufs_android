@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.molice.oneingdufs"
     android:versionCode="24"
-    android:versionName="0.88" >
+    android:versionName="0.90" >
 
     <application
         android:icon="@drawable/icon"
@@ -85,7 +85,7 @@
             android:launchMode="singleTask"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"/>
-            <!-- 个人中心-个人信息 -->
+            <!-- 个人中心-我的资料 -->
         <activity
             android:name=".activities.UserInfoActivity"
             android:launchMode="singleTop"
@@ -113,6 +113,12 @@
             <!-- 消息列表 -->
         <activity
             android:name=".activities.MessageActivity"
+            android:launchMode="singleTop"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait"/>
+            <!-- 发送消息 -->
+        <activity
+            android:name=".activities.MessageSendActivity"
             android:launchMode="singleTop"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"/>

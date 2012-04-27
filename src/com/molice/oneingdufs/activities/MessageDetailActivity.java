@@ -7,6 +7,7 @@ import com.molice.oneingdufs.androidpn.Constants;
 import com.molice.oneingdufs.layouts.ActionBarController;
 import com.molice.oneingdufs.utils.DatabaseHelper;
 import com.molice.oneingdufs.utils.DatabaseHelper.DB;
+import com.molice.oneingdufs.utils.SharedPreferencesStorager;
 
 import android.app.Activity;
 import android.content.ContentValues;
@@ -22,7 +23,8 @@ import android.widget.TextView;
  * 'title': 'from=MoLice;date=应用服务器当前时间;type=上面的type值;title=消息标题;', # 这些字段在Android客户端进行解析<br/>
  * 'message': '消息正文'<br/>
  * <br/>
- * 当从本Activity按Back键返回时，会强制返回到所有消息列表
+ * 当从本Activity按Back键返回时，会强制返回到所有消息列表<br/>
+ * 如果未登录状态收到消息，则不进行存储
  * 
  * @author MoLice (sf.molice@gmail.com)
  * @date 2012-4-24
@@ -73,7 +75,7 @@ public class MessageDetailActivity extends Activity {
         	date.setText(data.optString("date"));
         	content.setText(data.optString("content"));
         	
-        	if(getIntent().getBooleanExtra("fromNotification", false)) {
+        	if(new SharedPreferencesStorager(this).get("isLogin", false) && getIntent().getBooleanExtra("fromNotification", false)) {
 	        	// 把本条消息存入数据库
 	        	ContentValues message = new ContentValues();
 	        	message.put("id", data.optString("id"));
@@ -95,7 +97,9 @@ public class MessageDetailActivity extends Activity {
     public boolean onKeyDown(int keyCode, KeyEvent event) {
 		// 当按Back键时，判断当前Activity是否从列表调用，如果是则什么都不做。如果不是（也即是从Notification调用），则按Back应该返回message列表
 		if(keyCode == KeyEvent.KEYCODE_BACK) {
-			if(getCallingActivity() == null) {
+			// 如果从状态栏的Notification启动，则这里会为null
+			if(getCallingActivity() == null && new SharedPreferencesStorager(this).get("isLogin", false)) {
+				// 必须先finish()，再启动MessageActivity，否则无法利用MessageActivity的singleTop效果
 				finish();
 				startActivity(new Intent(getApplicationContext(), MessageActivity.class));
 			}

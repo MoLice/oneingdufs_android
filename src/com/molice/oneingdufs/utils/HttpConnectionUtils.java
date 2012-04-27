@@ -1,6 +1,7 @@
 package com.molice.oneingdufs.utils;
 
 import java.io.IOException;
+import java.net.SocketTimeoutException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
@@ -177,6 +178,9 @@ public class HttpConnectionUtils implements Runnable {
 		} catch (ConnectTimeoutException e) {
 			// 广播“请求超时”
 			handler.sendMessage(Message.obtain(handler, HttpConnectionUtils.STATUS_TIMEOUT));
+		} catch (SocketTimeoutException e) {
+			// 广播“请求超时”
+			handler.sendMessage(Message.obtain(handler, HttpConnectionUtils.STATUS_TIMEOUT));
 		} catch (Exception e) {
 			// 广播“请求出错”
 			handler.sendMessage(Message.obtain(handler, HttpConnectionUtils.STATUS_ERROR, e));
@@ -213,9 +217,10 @@ public class HttpConnectionUtils implements Runnable {
 		} else {
 			result = new JSONObject();
 			try {
-			result.putOpt("success", false);
-			result.putOpt("resultMsg", String.valueOf(response.getStatusLine().getStatusCode()));
-			handler.sendMessage(Message.obtain(handler, STATUS_FAILED, result));
+				Log.d("请求状态码错误", "HttpConnectionUtils#processResponse, " + EntityUtils.toString(response.getEntity()));
+				result.putOpt("success", false);
+				result.putOpt("resultMsg", String.valueOf(response.getStatusLine().getStatusCode()));
+				handler.sendMessage(Message.obtain(handler, STATUS_FAILED, result));
 			} catch(Exception e) {
 				Log.d("JSON异常", TAG + ", processResponse, e=" + e.toString());
 			}

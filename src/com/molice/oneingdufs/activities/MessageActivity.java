@@ -13,6 +13,7 @@ import android.os.Message;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -33,6 +34,7 @@ public class MessageActivity extends Activity{
 	final static int ONSUCCESS = 2;
 	final static int ONCOMPLETE = 3;
 	
+	private TextView sendMessage;
 	private ListView list;
 	private JSONObject[] data;
 	
@@ -42,6 +44,8 @@ public class MessageActivity extends Activity{
 		setContentView(R.layout.message);
 		
 		ActionBarController.setTitle(this, R.string.message);
+		sendMessage = (TextView)(ActionBarController.setActionBarButtons(this, new int[] {R.layout.actionbar_buttons_message}).findViewById(R.id.actionbar_message));
+		sendMessage.setOnClickListener(clickListener);
 		
 		list = (ListView) findViewById(R.id.message_list);
 	}
@@ -56,6 +60,13 @@ public class MessageActivity extends Activity{
     public void onConfigurationChanged(Configuration config) {
         super.onConfigurationChanged(config);
     }
+    
+    OnClickListener clickListener = new OnClickListener() {
+		@Override
+		public void onClick(View v) {
+			startActivity(new Intent(getApplicationContext(), MessageSendActivity.class));
+		}
+	};
     
     OnItemClickListener listener = new OnItemClickListener() {
 		@Override
@@ -81,6 +92,7 @@ public class MessageActivity extends Activity{
         	DatabaseHelper helper = new DatabaseHelper(MessageActivity.this);
         	if(!helper.isTableExist(DB.MESSAGE)) {
         		handler.sendMessage(Message.obtain(handler, ONCOMPLETE));
+        		helper.close();
         		return;
         	}
         	Cursor cursor = helper.getReadableDatabase().query(DB.MESSAGE, null, null, null, null, null, null);
@@ -89,6 +101,8 @@ public class MessageActivity extends Activity{
         		if(progressDialog != null && progressDialog.isShowing()) {
         			progressDialog.dismiss();
         		}
+        		helper.closeAll();
+        		cursor.close();
         		return;
         	}
         	
@@ -182,7 +196,7 @@ public class MessageActivity extends Activity{
 				holder.up = (LinearLayout) convertView.findViewById(R.id.message_item_up);
 				holder.title = (TextView) convertView.findViewById(R.id.message_item_title);
 				holder.content = (TextView) convertView.findViewById(R.id.message_item_content);
-				holder.time = (TextView) convertView.findViewById(R.id.message_item_time);
+				holder.date = (TextView) convertView.findViewById(R.id.message_item_time);
 				holder.data = items[position];
 				convertView.setTag(holder);
 			} else {
@@ -190,7 +204,7 @@ public class MessageActivity extends Activity{
 			}
 			holder.title.setText(items[position].optString("title", "（无标题）"));
 			holder.content.setText(items[position].optString("content", "无内容"));
-			holder.time.setText(items[position].optString("time", "2012-04-24"));
+			holder.date.setText(items[position].optString("date", "2012-04-24"));
 			
 			LayoutParams params1 = new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
 			LayoutParams params2 = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.FILL_PARENT, 1);
@@ -207,7 +221,7 @@ public class MessageActivity extends Activity{
 		LinearLayout up;
 		TextView title;
 		TextView content;
-		TextView time;
+		TextView date;
 		JSONObject data;
 	}
 }

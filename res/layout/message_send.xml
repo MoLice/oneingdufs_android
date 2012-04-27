@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <include layout="@layout/actionbar"/>
+
+    <LinearLayout
+        style="@style/FormWrapper">
+        <EditText
+            android:id="@+id/message_send_title"
+            style="@style/FormItem"
+            android:hint="@string/message_send_title"/>
+        <TextView
+            android:id="@+id/message_send_title_label"
+            style="@style/FormLabel"
+            android:text="@string/message_send_title_label"/>
+        
+        <EditText
+            android:id="@+id/message_send_username"
+            style="@style/FormItem"
+            android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_"
+            android:hint="@string/message_send_username"/>
+        <TextView
+            android:id="@+id/message_send_username_label"
+            style="@style/FormLabel"
+            android:text="@string/message_send_username_label"/>
+        
+        <EditText
+            android:id="@+id/message_send_content"
+            style="@style/FormItem"
+            android:inputType="textMultiLine"
+            android:gravity="top"
+            android:minLines="3"
+            android:hint="@string/message_send_content"/>
+        <TextView
+            android:id="@+id/message_send_content_label"
+            style="@style/FormLabel"
+            android:text="@string/message_send_content_label"/>
+        
+        <LinearLayout
+            style="@style/FormItem"
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/message_send_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/cancel"/>
+            <Button
+                android:id="@+id/message_send_submit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/submit"/>
+        </LinearLayout>"
+    </LinearLayout>
+</LinearLayout>

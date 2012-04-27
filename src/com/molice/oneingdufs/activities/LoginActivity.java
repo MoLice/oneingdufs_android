@@ -174,10 +174,20 @@ public class LoginActivity extends Activity {
 		protected void onSucceed(JSONObject result) {
 			// TODO 登录成功，将返回的所有用户数据存储到sqlite，以便应用在切换Activity时不用每次都从服务器请求最新数据
 			super.onSucceed(result);
+			JSONObject user_info = result.optJSONObject("user_info");
+			JSONObject user_roomaddress = result.optJSONObject("user_roomaddress");
 			storager
-			.set("username", result.optString("username"))
-			.set("sessionid", result.optString("sessionid"))
 			.set("isLogin", true)
+			.set("sessionid", result.optString("sessionid"))
+			.set("username", result.optString("username"))
+			.set("studentId", result.optString("studentId"))
+			.set("user_info_email", user_info.optString("email", ""))
+			.set("user_info_truename", user_info.optString("truename", ""))
+			.set("user_info_phone", user_info.optString("phone", ""))
+			.set("user_info_cornet", user_info.optString("cornet", ""))
+			.set("user_info_qq", user_info.optString("qq", ""))
+			.set("user_roomaddress_building", user_roomaddress.optString("building", ""))
+			.set("user_roomaddress_room", user_roomaddress.optString("room", ""))
 			.save();
 			// 返回到某个Activity
 			callActivityAfterLogin("success");
