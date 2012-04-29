@@ -82,24 +82,24 @@ public class SettingsActivity extends PreferenceActivity {
 		}
 	}
 	
-	/**
-	 * 根据当前值来改变显示的提示文字
-	 * @param host
-	 * @param value
-	 */
-	private boolean onHostSettingChange(Preference host, String value) {
-		if(value.contains("10.0.2.2")) {
-			// 模拟器
-			host.setSummary("连接到10.0.2.2:8000");
-		} else if(value.contains("192.168.0.11")) {
-			// 真机（局域网）
-			host.setSummary("连接到192.168.0.11:8000");
-		} else if(value.contains("sinaapp")) {
-			// 真机（公网）
-			host.setSummary("连接到oneingdufs.sinaapp.com");
-		}
-		return true;
-	}
+//	/**
+//	 * 根据当前值来改变显示的提示文字
+//	 * @param host
+//	 * @param value
+//	 */
+//	private boolean onHostSettingChange(Preference host, String value) {
+//		if(value.contains("10.0.2.2")) {
+//			// 模拟器
+//			host.setSummary("连接到10.0.2.2:8000");
+//		} else if(value.contains("192.168.0.11")) {
+//			// 真机（局域网）
+//			host.setSummary("连接到192.168.0.11:8000");
+//		} else if(value.contains("sinaapp")) {
+//			// 真机（公网）
+//			host.setSummary("连接到oneingdufs.sinaapp.com");
+//		}
+//		return true;
+//	}
 	
 	@Override
     public void onConfigurationChanged(Configuration config) {

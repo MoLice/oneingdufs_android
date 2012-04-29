@@ -77,6 +77,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		return editor.delete(table, col + "=?", new String[] {value}) > 0;
 	}
 	
+	public long updateOrInsert(String table, ContentValues values, String col, String value) {
+		if(get(table, col, value) != null) {
+			return update(table, values, col, value);
+		}
+		return insert(table, values);
+	}
+	
 	public void closeAll() {
 		close();
 		editor.close();
@@ -106,18 +113,28 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 			try {
 				if(table.equals(DB.MESSAGE)) {
 					editor.execSQL(DB.CREATE_TABLE_MESSAGE);
+					return true;
 				}
-				return true;
+				if(table.equals(DB.GROUP)) {
+					editor.execSQL(DB.CREATE_TABLE_GROUP);
+					return true;
+				}
 			} catch (Exception e) {
 				Log.d("数据库-创建表异常", "DatabaseHelper#createTableIfNotExist, table=" + table + ", e=" + e.toString());
 				return false;
 			}
+			return false;
 		}
 		return true;
 	}
 	
 	public static class DB {
+		// 消息表
 		public final static String MESSAGE = "message";
-		public final static String CREATE_TABLE_MESSAGE = "CREATE TABLE " + MESSAGE + " (id text not null, title text not null, _from text not null, content text not null, date text not null);";
+		public final static String CREATE_TABLE_MESSAGE = "CREATE TABLE " + MESSAGE + " (id int(11) not null, title varchar(20) not null, _from varchar(30) not null, content text not null, date text not null);";
+		
+		// 群组表
+		public final static String GROUP = "user_group";
+		public final static String CREATE_TABLE_GROUP = "CREATE TABLE " + GROUP + " (id int(11) not null, name varchar(20) not null, member text not null, timestamp char(19));";
 	}
 }

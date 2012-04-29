@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.molice.oneingdufs"
     android:versionCode="24"
-    android:versionName="0.90" >
+    android:versionName="0.95" >
 
     <application
         android:icon="@drawable/icon"
@@ -94,6 +94,12 @@
             <!-- 个人中心-宿舍住址 -->
         <activity
             android:name=".activities.UserRoomAddressActivity"
+            android:launchMode="singleTop"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait"/>
+        	<!-- 我的团体 -->
+        <activity
+            android:name=".activities.UserGroupActivity"
             android:launchMode="singleTop"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"/>

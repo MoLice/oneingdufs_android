@@ -73,7 +73,7 @@ public class MainActivity extends Activity {
         		// 图书馆
         		{R.drawable.ic_library, R.string.dashboard_library, null},
         		// 我的班级
-        		{R.drawable.ic_class, R.string.dashboard_class, null},
+        		{R.drawable.ic_class, R.string.dashboard_group, UserGroupActivity.class},
         });
         
         // 添加公共消息

@@ -17,7 +17,8 @@ import android.util.Log;
 import android.widget.Toast;
 
 /**
- * 对{@link HttpConnectionUtils}的不同处理阶段进行监听控制。通过继承本类并重写不同的监听句柄，可自定义各请求阶段的处理逻辑。
+ * 对{@link HttpConnectionUtils}的不同处理阶段进行监听控制。通过继承本类并重写不同的监听句柄，可自定义各请求阶段的处理逻辑。<br/>
+ * <strong>注意！！！如果生成实例的类不是Activity的子类，则需要用内部类的声明方式（参考{@link Logout}）</strong>
  * 
  * @author MoLice (sf.molice@gmail.com)
  * @date 2012-4-9
@@ -31,6 +32,7 @@ public class HttpConnectionHandler extends Handler {
 	private HttpRequestBase currentMethod;
 	
 	public HttpConnectionHandler(Context context) {
+		Log.d("看看Context", "HttpConnectionHandler, context=" + context);
 		this.context = context;
 	}
 	

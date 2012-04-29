@@ -109,6 +109,7 @@ public final class R {
     }
     public static final class id {
         public static final int about_version=0x7f0b0000;
+        public static final int action=0x7f0b0083;
         public static final int actionbar=0x7f0b0001;
         public static final int actionbar_buttonWrapper=0x7f0b0003;
         public static final int actionbar_currentActivity=0x7f0b0002;
@@ -231,6 +232,7 @@ public final class R {
         public static final int study_syllabus_line5=0x7f0b0077;
         public static final int study_syllabus_line6=0x7f0b0078;
         public static final int study_syllabus_line7=0x7f0b0079;
+        public static final int text=0x7f0b0082;
         public static final int timepick_wapper=0x7f0b007b;
         public static final int timepicker_plus1=0x7f0b007e;
         public static final int timepicker_plus2=0x7f0b0081;
@@ -238,32 +240,32 @@ public final class R {
         public static final int timepicker_sub2=0x7f0b007f;
         public static final int timepicker_time1=0x7f0b007d;
         public static final int timepicker_time2=0x7f0b0080;
-        public static final int user_home_class=0x7f0b0085;
-        public static final int user_home_info=0x7f0b0082;
-        public static final int user_home_message=0x7f0b0083;
-        public static final int user_home_todo=0x7f0b0084;
-        public static final int user_info_cancel=0x7f0b0090;
-        public static final int user_info_cornet=0x7f0b008c;
-        public static final int user_info_cornet_label=0x7f0b008d;
-        public static final int user_info_email=0x7f0b0086;
-        public static final int user_info_email_label=0x7f0b0087;
-        public static final int user_info_phone=0x7f0b008a;
-        public static final int user_info_phone_label=0x7f0b008b;
-        public static final int user_info_qq=0x7f0b008e;
-        public static final int user_info_qq_label=0x7f0b008f;
-        public static final int user_info_submit=0x7f0b0091;
-        public static final int user_info_truename=0x7f0b0088;
-        public static final int user_info_truename_label=0x7f0b0089;
-        public static final int user_roomaddress_building=0x7f0b0092;
-        public static final int user_roomaddress_building_label=0x7f0b0093;
-        public static final int user_roomaddress_cancel=0x7f0b0098;
-        public static final int user_roomaddress_layer=0x7f0b0094;
-        public static final int user_roomaddress_layer_label=0x7f0b0095;
-        public static final int user_roomaddress_room=0x7f0b0096;
-        public static final int user_roomaddress_room_label=0x7f0b0097;
-        public static final int user_roomaddress_submit=0x7f0b0099;
-        public static final int user_studentId=0x7f0b009b;
-        public static final int user_username=0x7f0b009a;
+        public static final int user_home_class=0x7f0b0087;
+        public static final int user_home_info=0x7f0b0084;
+        public static final int user_home_message=0x7f0b0085;
+        public static final int user_home_todo=0x7f0b0086;
+        public static final int user_info_cancel=0x7f0b0092;
+        public static final int user_info_cornet=0x7f0b008e;
+        public static final int user_info_cornet_label=0x7f0b008f;
+        public static final int user_info_email=0x7f0b0088;
+        public static final int user_info_email_label=0x7f0b0089;
+        public static final int user_info_phone=0x7f0b008c;
+        public static final int user_info_phone_label=0x7f0b008d;
+        public static final int user_info_qq=0x7f0b0090;
+        public static final int user_info_qq_label=0x7f0b0091;
+        public static final int user_info_submit=0x7f0b0093;
+        public static final int user_info_truename=0x7f0b008a;
+        public static final int user_info_truename_label=0x7f0b008b;
+        public static final int user_roomaddress_building=0x7f0b0094;
+        public static final int user_roomaddress_building_label=0x7f0b0095;
+        public static final int user_roomaddress_cancel=0x7f0b009a;
+        public static final int user_roomaddress_layer=0x7f0b0096;
+        public static final int user_roomaddress_layer_label=0x7f0b0097;
+        public static final int user_roomaddress_room=0x7f0b0098;
+        public static final int user_roomaddress_room_label=0x7f0b0099;
+        public static final int user_roomaddress_submit=0x7f0b009b;
+        public static final int user_studentId=0x7f0b009d;
+        public static final int user_username=0x7f0b009c;
     }
     public static final class layout {
         public static final int about=0x7f030000;
@@ -296,10 +298,13 @@ public final class R {
         public static final int study_syllabus_class=0x7f03001b;
         public static final int tab_item=0x7f03001c;
         public static final int timepicker=0x7f03001d;
-        public static final int user_home=0x7f03001e;
-        public static final int user_info=0x7f03001f;
-        public static final int user_roomaddress=0x7f030020;
-        public static final int user_title=0x7f030021;
+        public static final int user_group=0x7f03001e;
+        public static final int user_group_childlayout=0x7f03001f;
+        public static final int user_group_grouplayout=0x7f030020;
+        public static final int user_home=0x7f030021;
+        public static final int user_info=0x7f030022;
+        public static final int user_roomaddress=0x7f030023;
+        public static final int user_title=0x7f030024;
     }
     public static final class raw {
         public static final int oneingdufs=0x7f050000;
@@ -330,7 +335,6 @@ public final class R {
         public static final int dashboard_activity=0x7f090016;
         public static final int dashboard_calendar=0x7f090010;
         public static final int dashboard_card=0x7f09000d;
-        public static final int dashboard_class=0x7f090017;
         /**  公共消息 
          */
         public static final int dashboard_common=0x7f09000f;
@@ -340,6 +344,7 @@ public final class R {
         public static final int dashboard_default=0x7f090008;
         public static final int dashboard_fix=0x7f09000c;
         public static final int dashboard_gdufslife=0x7f09000e;
+        public static final int dashboard_group=0x7f090017;
         public static final int dashboard_library=0x7f090015;
         /**  校园生活 
          */

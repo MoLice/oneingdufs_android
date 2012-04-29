@@ -10,15 +10,12 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import com.molice.oneingdufs.R;
-import com.molice.oneingdufs.layouts.CheckBoxLister;
 import com.molice.oneingdufs.utils.PhotoSelector;
-import com.molice.oneingdufs.utils.SharedPreferencesStorager;
 
 import android.app.AlertDialog;
 import android.app.TabActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.DialogInterface.OnDismissListener;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
@@ -28,7 +25,6 @@ import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -41,10 +37,6 @@ public class CommonLostActivity extends TabActivity {
 	private TabHost tabHost;
 	
 	private ImageView add_pic;
-	private EditText tag;
-	private Button tag_btn;
-	private CheckBoxLister checkBoxLister;
-	private AlertDialog dialog;
 	private PhotoSelector photo;
 	private Bitmap picture;
 	private Button cancel;
@@ -85,8 +77,6 @@ public class CommonLostActivity extends TabActivity {
 		// 初始化Tab1
 		add_pic = (ImageView) findViewById(R.id.common_lost_pickup_picture);
 		// 添加标签
-		tag = (EditText) findViewById(R.id.common_lost_pickup_tag);
-		tag_btn = (Button) findViewById(R.id.common_lost_pickup_tag_btn);
 		photo = new PhotoSelector(this);
 		photo.setXYProportion(4, 3);
 		

@@ -67,6 +67,8 @@ public class ProjectConstants {
 		public final static String logout = "/home/logout/";
 		/** 我的资料*/
 		public final static String home_info = "/home/info/";
+		/** 我的团体*/
+		public final static String home_group = "/home/group/";
 		
 		// 校园生活
 		/** 更新宿舍地址*/
