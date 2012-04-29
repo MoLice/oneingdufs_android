@@ -87,10 +87,25 @@ public final class R {
         public static final int btn_attention_sel=0x7f020005;
         public static final int btn_email=0x7f020006;
         public static final int btn_refresh=0x7f020007;
-        public static final int ic_launcher=0x7f020008;
-        public static final int icon=0x7f020009;
-        public static final int icon_login=0x7f02000a;
-        public static final int logo=0x7f02000b;
+        public static final int ic_activity=0x7f020008;
+        public static final int ic_calendar=0x7f020009;
+        public static final int ic_card=0x7f02000a;
+        public static final int ic_class=0x7f02000b;
+        public static final int ic_fix=0x7f02000c;
+        public static final int ic_gdufslife=0x7f02000d;
+        public static final int ic_launcher=0x7f02000e;
+        public static final int ic_library=0x7f02000f;
+        public static final int ic_lost=0x7f020010;
+        public static final int ic_syllabus=0x7f020011;
+        public static final int ic_tab_lost=0x7f020012;
+        public static final int ic_tab_lost_cur=0x7f020013;
+        public static final int ic_tab_pickup=0x7f020014;
+        public static final int ic_tab_pickup_cur=0x7f020015;
+        public static final int ic_telephones=0x7f020016;
+        public static final int ic_water=0x7f020017;
+        public static final int icon=0x7f020018;
+        public static final int icon_login=0x7f020019;
+        public static final int logo=0x7f02001a;
     }
     public static final class id {
         public static final int about_version=0x7f0b0000;
@@ -465,7 +480,7 @@ public final class R {
         public static final int user_info_qq_error=0x7f090049;
         public static final int user_info_qq_label=0x7f090048;
         public static final int user_info_submit=0x7f09004b;
-        /**  用户中心-个人信息 
+        /**  用户中心-我的资料 
          */
         public static final int user_info_title=0x7f09003a;
         public static final int user_info_truename=0x7f09003e;

@@ -83,10 +83,12 @@ public class RegisterActivity extends Activity {
 					if(validator.isFormCorrect()) {
 						JSONObject input = validator.getInput();
 						// 添加XMPP用户名
-						try {
-							input.putOpt("apn_username", storager.get(Constants.XMPP_USERNAME, ""));
-						} catch (Exception e) {
-							Log.d("JSON错误", "RegisterActivity, e=" + e.toString());
+						if(SettingsActivity.getNotificationEnabled(RegisterActivity.this)) {
+							try {
+								input.putOpt("apn_username", storager.get(Constants.XMPP_USERNAME, ""));
+							} catch (Exception e) {
+								Log.d("JSON错误", "RegisterActivity, e=" + e.toString());
+							}
 						}
 						new HttpConnectionUtils(connectionHandler, RegisterActivity.this).post(ProjectConstants.URL.register, input);
 					} else {

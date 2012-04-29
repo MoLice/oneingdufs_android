@@ -2,7 +2,10 @@ package com.molice.oneingdufs.utils;
 
 import java.util.List;
 
+import org.json.JSONObject;
+
 import com.molice.oneingdufs.activities.SettingsActivity;
+import com.molice.oneingdufs.androidpn.Constants;
 
 import android.app.Activity;
 import android.app.ActivityManager;
@@ -189,4 +192,30 @@ public class ProjectConstants {
 		}
 		return false;
 	}
+	
+    /**
+     * 将当前手机的APN用户名更新到服务器，与当前登录用户绑定。前提是已登录且开启消息推送<br/>
+     * 在登录、注册、注销时，都会更新apn_username
+     * @param context
+     */
+    public static void updateAPNUsername(Context context) {
+    	SharedPreferencesStorager sharedPrefs = new SharedPreferencesStorager(context);
+    	if(sharedPrefs.get("isLogin", false) && SettingsActivity.getNotificationEnabled(context)) {
+        	JSONObject data = new JSONObject();
+        	try {
+    			data.putOpt("username", sharedPrefs.get(Constants.XMPP_USERNAME, ""));
+    		} catch (Exception e) {
+    			Log.e("异常", "XmppManager.updateAPNUsername, e=" + e.toString());
+    		}
+        	new HttpConnectionUtils(new HttpConnectionHandler(context) {
+            	@Override
+            	protected void onSucceed(JSONObject result) {
+            		super.onSucceed(result);
+            		Log.d("更新APN用户名", "ProjectConstants#updateAPNUsername");
+            	}
+            }, context).post(ProjectConstants.URL.updateApnUsername, data);
+    	} else {
+    		Log.d("无需更新APN用户名", "ProjectConstants#updateAPNUsername，未登录或未开启消息功能");
+    	}
+    }
 }

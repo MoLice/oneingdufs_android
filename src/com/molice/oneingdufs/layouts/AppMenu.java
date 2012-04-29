@@ -38,7 +38,6 @@ public class AppMenu {
 	private final int mSetting = 1;// 软件设置 
 	private final int mLogout = 2;// 退出登录
 	private final int mAbout = 3;// 关于
-	private final int mHelpUs = 4;// 反馈
 	private final int mClose = 5;// 退出软件
 	private final int mRegister = 6;// 注册
 	private final int mLogin = 7;// 登录
@@ -58,28 +57,24 @@ public class AppMenu {
 		menu.add(ISLOGIN, mLogout, 2, R.string.menu_logout);
 		// 关于
 		menu.add(ISLOGIN, mAbout, 3, R.string.menu_about);
-		// 反馈
-		menu.add(ISLOGIN, mHelpUs, 4, R.string.menu_helpus);
 		// 退出软件
-		menu.add(ISLOGIN, mClose, 5, R.string.menu_close);
+		menu.add(ISLOGIN, mClose, 4, R.string.menu_close);
 		
 		// 未登录组
-		// 注册
-		menu.add(NOTLOGIN, mRegister, 0, R.string.menu_register);
 		// 登录
-		menu.add(NOTLOGIN, mLogin, 1, R.string.menu_login);
+		menu.add(NOTLOGIN, mLogin, 0, R.string.menu_login);
 		// 软件设置
-		menu.add(NOTLOGIN, mSetting, 2, R.string.menu_setting);
+		menu.add(NOTLOGIN, mSetting, 1, R.string.menu_setting);
+		// 注册
+		menu.add(NOTLOGIN, mRegister, 2, R.string.menu_register);
 		// 关于
 		menu.add(NOTLOGIN, mAbout, 3, R.string.menu_about);
-		// 反馈
-		menu.add(NOTLOGIN, mHelpUs, 4, R.string.menu_helpus);
 		// 退出
-		menu.add(NOTLOGIN, mClose, 5, R.string.menu_close);
+		menu.add(NOTLOGIN, mClose, 4, R.string.menu_close);
 		
 		// 调试用，清空存储数据
-		menu.add(ISLOGIN, mClearData, 6, "清空用户数据");
-		menu.add(NOTLOGIN, mClearData, 6, "清空用户数据");
+		menu.add(ISLOGIN, mClearData, 5, "清空用户数据");
+		menu.add(NOTLOGIN, mClearData, 5, "清空用户数据");
 	}
 	
 	public boolean onOptionsItemSelected(MenuItem item) {
@@ -101,9 +96,6 @@ public class AppMenu {
 		case mAbout:
 			// 关于
 			context.startActivity(new Intent(context.getApplicationContext(), AboutActivity.class));
-			break;
-		case mHelpUs:
-			// 反馈
 			break;
 		case mClose:
 			// 退出软件

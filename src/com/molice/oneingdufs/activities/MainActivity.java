@@ -57,35 +57,35 @@ public class MainActivity extends Activity {
         // 添加校园生活
         addDashboardPart(R.string.dashboard_life, new Object[][] {
         		// 订水
-        		{null, R.string.dashboard_water, LifeWaterActivity.class},
+        		{R.drawable.ic_water, R.string.dashboard_water, LifeWaterActivity.class},
         		// 报修
-        		{null, R.string.dashboard_fix, LifeFixActivity.class},
+        		{R.drawable.ic_fix, R.string.dashboard_fix, LifeFixActivity.class},
         		// 校园卡
-        		{null, R.string.dashboard_card, LifeCardActivity.class},
+        		{R.drawable.ic_card, R.string.dashboard_card, LifeCardActivity.class},
         		// 后勤留言
-        		{null, R.string.dashboard_gdufslife, LifeGdufsLifeActivity.class}
+        		{R.drawable.ic_gdufslife, R.string.dashboard_gdufslife, LifeGdufsLifeActivity.class}
         });
         
         // 添加在校学习
         addDashboardPart(R.string.dashboard_study, new Object[][] {
         		// 我的课表
-        		{null, R.string.dashboard_syllabus, StudySyllabusActivity.class},
+        		{R.drawable.ic_syllabus, R.string.dashboard_syllabus, StudySyllabusActivity.class},
         		// 图书馆
-        		{null, R.string.dashboard_library, null},
+        		{R.drawable.ic_library, R.string.dashboard_library, null},
         		// 我的班级
-        		{null, R.string.dashboard_class, null},
+        		{R.drawable.ic_class, R.string.dashboard_class, null},
         });
         
         // 添加公共消息
         addDashboardPart(R.string.dashboard_common, new Object[][] {
         		// 校历
-        		{null, R.string.dashboard_calendar, CommonCalendarActivity.class},
+        		{R.drawable.ic_calendar, R.string.dashboard_calendar, CommonCalendarActivity.class},
         		// 常用电话
-        		{null, R.string.dashboard_telephones, null},
+        		{R.drawable.ic_telephones, R.string.dashboard_telephones, null},
         		// 活动讲座
-        		{null, R.string.dashboard_activity, null},
+        		{R.drawable.ic_activity, R.string.dashboard_activity, null},
         		// 失物招领
-        		{null, R.string.dashboard_lost, CommonLostActivity.class},
+        		{R.drawable.ic_lost, R.string.dashboard_lost, CommonLostActivity.class},
         });
         
         // 启动AndroidPN服务

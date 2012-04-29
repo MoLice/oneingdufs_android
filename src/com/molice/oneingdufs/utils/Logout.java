@@ -44,7 +44,7 @@ public class Logout {
 		sureLogout.setButton("ÍË³ö", new OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				new HttpConnectionUtils(connectionHandler, context).get(
+				new HttpConnectionUtils(connectionHandler, context).post(
 						ProjectConstants.URL.logout, null);
 			}
 		});

@@ -163,7 +163,6 @@ public class StudySyllabusActivity extends Activity {
      * @return 如果本地存储已经有，则返回true，否则返回false
      */
     private boolean checkLocalSyllabus() {
-    	storager.del("study_syllabus").save();
     	if(storager.get("study_syllabus", "").equals("")) {
     		// 本地不存在课表数据，需要发送请求到服务端
     		new HttpConnectionUtils(connectionHandler, this).get(ProjectConstants.URL.study_syllabus, null);

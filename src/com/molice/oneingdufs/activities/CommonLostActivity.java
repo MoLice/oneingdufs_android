@@ -70,11 +70,11 @@ public class CommonLostActivity extends TabActivity {
 		LayoutInflater.from(this).inflate(R.layout.common_lost, tabHost.getTabContentView(), true);
 		// tab1：拾获物品登记
 		tabHost.addTab(tabHost.newTabSpec("pickup")
-				.setIndicator("拾获登记")
+				.setIndicator("拾获登记", getResources().getDrawable(R.drawable.ic_tab_lost_cur))
 				.setContent(R.id.common_lost_pickup));
 		// tab2：捡到物品公布
 		tabHost.addTab(tabHost.newTabSpec("lost")
-				.setIndicator("失物招领")
+				.setIndicator("失物招领", getResources().getDrawable(R.drawable.ic_tab_pickup))
 				.setContent(R.id.common_lost_lost));
 		tabHost.setOnTabChangedListener(new OnTabChangeListener() {
 			@Override

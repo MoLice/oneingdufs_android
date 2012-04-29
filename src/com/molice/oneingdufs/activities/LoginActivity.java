@@ -3,6 +3,7 @@ package com.molice.oneingdufs.activities;
 import org.json.JSONObject;
 
 import com.molice.oneingdufs.R;
+import com.molice.oneingdufs.androidpn.Constants;
 import com.molice.oneingdufs.layouts.ActionBarController;
 import com.molice.oneingdufs.utils.HttpConnectionHandler;
 import com.molice.oneingdufs.utils.HttpConnectionUtils;
@@ -78,6 +79,9 @@ public class LoginActivity extends Activity {
 				try {
 					data.putOpt("username", login_username.getText().toString());
 					data.putOpt("password", login_password.getText().toString());
+					if(SettingsActivity.getNotificationEnabled(LoginActivity.this)) {
+						data.putOpt("apn_username", storager.get(Constants.XMPP_USERNAME, ""));
+					}
 				} catch (Exception e) {
 					Log.d("JSON“Ï≥£", "LoginActivity#submit, e=" + e.toString());
 				}
