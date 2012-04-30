@@ -32,7 +32,6 @@ public class HttpConnectionHandler extends Handler {
 	private HttpRequestBase currentMethod;
 	
 	public HttpConnectionHandler(Context context) {
-		Log.d("¿´¿´Context", "HttpConnectionHandler, context=" + context);
 		this.context = context;
 	}
 	

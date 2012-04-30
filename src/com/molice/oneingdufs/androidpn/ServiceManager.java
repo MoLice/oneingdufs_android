@@ -103,7 +103,7 @@ public final class ServiceManager {
 	        });
 	        serviceThread.start();
     	} else {
-    		Log.d("启动APN服务", "ServiceManger#startService, 服务已存在，检查是否处于成功连接状态...");
+    		Log.d("启动APN服务", "ServiceManger#startService, 服务已存在，TODO:检查是否处于成功连接状态...");
     	}
     }
     

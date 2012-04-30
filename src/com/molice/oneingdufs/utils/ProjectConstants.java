@@ -16,6 +16,7 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.pm.PackageManager;
 import android.os.Build;
+import android.os.Looper;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 
@@ -201,6 +202,8 @@ public class ProjectConstants {
      * @param context
      */
     public static void updateAPNUsername(Context context) {
+    	// 在Thread内再开启一个Handler，需要在方法前添加Looper.prepare()，否则会异常
+    	Looper.prepare();
     	SharedPreferencesStorager sharedPrefs = new SharedPreferencesStorager(context);
     	if(sharedPrefs.get("isLogin", false) && SettingsActivity.getNotificationEnabled(context)) {
         	JSONObject data = new JSONObject();
