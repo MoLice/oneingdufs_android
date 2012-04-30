@@ -58,11 +58,13 @@ public class MessageDetailActivity extends Activity {
 	@Override
     public void onResume() {
 		super.onResume();
+		Log.d("心心onResume", "MessageDetailActivity");
 		createDataFromBundle();
 	}
 	
 	private void createDataFromBundle() {
 		String extra = getIntent().getStringExtra("data");
+		Log.d("心心extra", "MessageDetailActivity#createDataFromBundle, extra=" + extra);
         if(!extra.equals("")) {
         	JSONObject data = null;
         	try {

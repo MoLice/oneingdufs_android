@@ -131,7 +131,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	public static class DB {
 		// 消息表
 		public final static String MESSAGE = "message";
-		public final static String CREATE_TABLE_MESSAGE = "CREATE TABLE " + MESSAGE + " (id int(11) not null, title varchar(20) not null, _from varchar(30) not null, content text not null, date text not null);";
+		public final static String CREATE_TABLE_MESSAGE = "CREATE TABLE " + MESSAGE + " (id char(8) not null, title varchar(20) not null, _from varchar(30) not null, content text not null, date text not null);";
 		
 		// 群组表
 		public final static String GROUP = "user_group";

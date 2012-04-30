@@ -104,6 +104,7 @@ public class Notifier {
 
             Intent intent = new Intent(context,
                     MessageDetailActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
             JSONObject data = formatMetaFromTitle(title);
             try {
 				data.putOpt("id", notificationId);
@@ -119,7 +120,7 @@ public class Notifier {
 //            intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
 //            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
-            PendingIntent contentIntent = PendingIntent.getActivity(context, 0,
+            PendingIntent contentIntent = PendingIntent.getActivity(context, random.nextInt(),
                     intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
             notification.setLatestEventInfo(context, data.optString("title"), message,

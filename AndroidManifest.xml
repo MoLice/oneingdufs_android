@@ -131,7 +131,7 @@
             <!-- 查看消息详情 -->
         <activity
             android:name=".activities.MessageDetailActivity"
-            android:launchMode="singleTop"
+            android:launchMode="standard"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"/>
         

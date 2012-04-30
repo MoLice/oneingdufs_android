@@ -6,6 +6,12 @@
 
     <include layout="@layout/actionbar"/>
 
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:fadeScrollbars="true"
+        android:scrollbarFadeDuration="2"
+        android:scrollbars="vertical">
     <LinearLayout
         style="@style/FormWrapper">
         <EditText
@@ -56,4 +62,5 @@
                 android:text="@string/submit"/>
         </LinearLayout>"
     </LinearLayout>
+    </ScrollView>
 </LinearLayout>
